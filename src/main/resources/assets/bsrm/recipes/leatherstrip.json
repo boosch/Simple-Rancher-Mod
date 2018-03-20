@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group":"saddle",
+  "ingredients": [
+    {
+      "item":"minecraft:leather"
+    }
+  ],
+  "result":{
+    "item":"bsrm:leatherstrip",
+    "count": 3
+  }
+}

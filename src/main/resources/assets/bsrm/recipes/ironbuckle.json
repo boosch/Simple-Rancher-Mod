@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group":"saddle",
+  "ingredients": [
+    {
+      "item":"minecraft:iron_ingot"
+    }
+  ],
+  "result":{
+    "item":"bsrm:ironbuckle",
+    "count": 4
+  }
+}

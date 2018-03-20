@@ -1,0 +1,59 @@
+How to get the core up and running (REF:  https://mcforge.readthedocs.io/en/latest/gettingstarted/ )
+    0. Expand the gradle toolkit, and refresh the gradle project
+    1. Create packages
+        a. com.{username}.{modname}
+        b. com.{username}.{modname}.proxy
+    2. Create classes
+        a. in the modname package, create the {ModName} class - this is the core mod file for the class.
+        b. in the modname package, create util package, and create the Reference class - this is how the mod & forge mod loader know where things are
+        c. in the proxy package, create the CommonProxy interface - this separates code which runs on the server vs the client by providing a common interface.
+        d. in the proxy package, create both ClientProxy and ServerProxy classes, implementing CommonProxy
+    3. Link your classes via the reference class
+        a. in the reference class, create the following:
+            public static final String MOD_ID = "{modid}";
+            public static final String NAME = "{The Mod Name}";
+            public static final String VERSION = "{theMod.Version}";
+            public static final String ACCEPTED_VERSIONS = "[Single.Minecraft.version]"; or "(multiple,minecraft,versions)""
+            public static final String CLIENT_PROXY_CLASS = "com.boosch.simplerancher.proxy.ClientProxy";
+            public static final String SERVER_PROXY_CLASS = "com.boosch.simplerancher.proxy.ServerProxy";
+    4. Annotate your core mod class so the forge mod loader can find it and interact with it
+        a. Add just before your main class: @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION, acceptedMinecraftVersions = Reference.ACCEPTED_VERSIONS)
+        b. Add the following members and annotations into the class
+            i. @Instance
+               public static SimpleRancher instance;
+            ii. @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
+                public static CommonProxy proxy;
+        c. Add the following methods and annotations into the class
+            i. @Mod.EventHandler
+               public void preInit(FMLPreInitializationEvent event)
+            ii. @Mod.EventHandler
+                public void Init(FMLInitializationEvent event)
+            iii. @Mod.EventHandler
+                 public void postInit(FMLPostInitializationEvent event)
+    5. Update mcmod.info
+
+
+
+How to create an item:
+    1. Create Package resources.assets.{modid}.lang
+       Create Package resources.assets.{modid}.models.item
+       Create Package resources.assets.{modid}.textures.items
+       Create Package init
+       Create Package items
+    2.  Create ModItems class in init package
+    3.  Create {modname}ItemBase class in items package
+    4.  Create Item{Itemname} class within items package - extends {modname}ItemBase
+    5.  Declare each moditem in ModItems:      public static SimpleRancherItemBase ironbuckle = new SimpleRancherItemBase("ironbuckle").setCreativeTab(CreativeTabs.MISC);
+    6.  Add RegisteryHandlers into the Main Mod class
+        a. define subclass to handle registration events and declare it as the @Mod.EventBusSubscriber (static class, Registration Handler)
+        b. within that class, add annotated @SubscribeEvent public static void registerItems(RegistryEvent.Register<Item> event) {ModItems.register(event.getRegistry())}
+        c. within that class, add annotated @SubscribeEvent public static void registerItems(ModelRegistryEvent event) {ModItems.registerModels();}
+    7.  Add the register and registerModels methods to the ModItems class
+    8. in the register method, call registery.registerAll(); - listing your mod items
+    9. In registerModels, call {itemvariable}.registerItemModel();
+    10. create en_us.lang translation string file in lang package
+        a. populate for each item of the mod via pattern: item.{itemvariablename}.name={ItemsName}
+    11. For each item you have: create {itemname}.json texture map file in the models.item package
+        a. each section will map a texture for each item, the ""layer0": "bsrm:items/ruby"" line will be shaped like "layer0": "{modID}:items/{texturefilenamewithoutextension}""
+    12. For each item you have, add a png to the textures.items package
+

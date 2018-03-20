@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "group":"saddle",
+    "ingredients": [
+      {
+        "item":"bsrm:leatherstrip"
+      },
+      {
+        "item":"bsrm:ironbuckle"
+      },
+      {
+        "item":"bsrm:leatherstrip"
+      }
+    ],
+    "result":{
+      "item":"bsrm:buckledstrap"
+    }
+}
