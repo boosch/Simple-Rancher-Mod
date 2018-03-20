@@ -32,6 +32,40 @@ public class ModItems {
         @Tool pitchfork - increases crop yield when used to break wheat; +dmg to zombies
         @Tool treefellingaxe - cuts whole trees down!
 
+        @Stretch
+        Add magic to the world. Based on Thaumcraft. Stretch goals include...
+        Every item in the game consists of materia
+        @MateriaCommon
+        @MateriaRare
+        @MateriaSpecial
+
+        @AlchemyFurnace - consume fuel & Items to create materia
+        @AlchemyPipe - move materia from source to target
+
+        @AlchemyJarCommon - store materia of a specifc type; pipe interaction
+        @AlchemyJarRare - store rare materia; pipe interaction
+        @AlchemyJarSpecial - store special materia; pipe interaction
+
+        @AlchemyInfuser - restore item durability via materia consumption; pipe fed
+        @AlchemyDuplicator - generates clone of item at cost of materia; pipe fed
+        @AlchemyRefiner - generates one tier higher of materia at cost of materia; pipe interaction
+
+        @HungryChest - consumes any item that touches it, large inventory
+        @MateriaFurnace - consumes items through input, spits out cooked result
+
+        @MommetEnhancer - consume mommet, material, materia to upgrade a mommet
+
+        @MommetInanimate - ITEM ONLY - a craftable companion that can be given a specific task
+                    - Wheat, string, eyes, bones
+        @MommetBase - infuse a MommetInanimate with Common Materia
+        @MommetClay - infuse a MommetBase with Clay and Common Materia
+        @MommetFarm - MommetBase - give hoe, seeds
+        @MommetGatherer - MommetBase - assign to drop location
+        @MommetChopper - MommetBase - give axe
+        @MommetRitualist - MommetClay - give ??? - generates materia
+        @MommetRitualistRare - Mommet??? - give ??? - generates materiaRare
+        @MommetRitualistSpecial - Mommet??? - give ??? - generates materiaSpecial
+
      **/
 
 
