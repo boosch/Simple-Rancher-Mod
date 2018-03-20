@@ -1,3 +1,38 @@
+This mod is intended to add simple ranching tools to Minecraft 1.12.2
+Unmarked entities (no DONE tag) are not yet implemented.
+
+        @Item DONE leatherstripg - component to saddle, buckledstrap,
+        @Item DONE ironbuckle - component to saddle, buckledstrap,
+        @Item DONE buckledstrap - component to saddle,
+
+        @Item toolshaft - component to pitchfork
+        @item pitchforkprongs - component to pitchfork
+
+        @Armor sturdyworkboots - +armor, +movement speed, +blockwalk
+
+        @Tool pitchfork - increases crop yield when used to break wheat; +dmg to zombies
+        @Tool treefellingaxe - cuts whole trees down!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_____________________________________________________________
+BELOW THIS LINE IS THE GENERAL MINECRAFT FORGE MODDER README
+_____________________________________________________________
+
+
 -------------------------------------------
 Source installation information for modders
 -------------------------------------------
