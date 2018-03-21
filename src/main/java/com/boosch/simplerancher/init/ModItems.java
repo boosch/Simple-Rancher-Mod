@@ -69,15 +69,21 @@ public class ModItems {
      **/
 
 
+    //tools and materials
     public static SimpleRancherItemBase ironbuckle = new SimpleRancherItemBase("ironbuckle");//.setCreativeTab(SimpleRancher.creativeTab);
     public static SimpleRancherItemBase leatherstrip = new SimpleRancherItemBase("leatherstrip");//.setCreativeTab(SimpleRancher.creativeTab);
     public static SimpleRancherItemBase buckledstrap = new SimpleRancherItemBase("buckledstrap");//.setCreativeTab(SimpleRancher.creativeTab);
+
+    //ores and other
+    public static SimpleRancherItemBase quartz = new SimpleRancherItemBase("quartz");
 
     public static void register(IForgeRegistry<Item> registry){
         registry.registerAll(
                 ironbuckle,
                 leatherstrip,
-                buckledstrap
+                buckledstrap,
+
+                quartz
         );
 
     }
@@ -86,6 +92,7 @@ public class ModItems {
         ironbuckle.registerItemModel();
         leatherstrip.registerItemModel();
         buckledstrap.registerItemModel();
+        quartz.registerItemModel();
     }
 
 }
