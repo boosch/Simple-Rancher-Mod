@@ -32,6 +32,11 @@ public class ModItems {
         @Tool pitchfork - increases crop yield when used to break wheat; +dmg to zombies
         @Tool treefellingaxe - cuts whole trees down!
 
+        @Block&Ores
+            @Item DONE quartz
+            @Block quartzOre
+            @BlockItem (?) quartz
+
         @Stretch
         Add magic to the world. Based on Thaumcraft. Stretch goals include...
         Every item in the game consists of materia

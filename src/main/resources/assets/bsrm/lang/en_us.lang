@@ -4,6 +4,7 @@ itemGroup.bsrm=Simple Rancher
 # Fluids
 
 # Blocks
+tile.ore_quartz.name=Quartz Ore
 
 # Items
 item.ironbuckle.name=Iron Buckle
