@@ -8,15 +8,15 @@ public class ModRecipes {
     public static void init(){
 
         //allow smelting of QuartzCrystalOre to make QuartzCrystal
-        GameRegistry.addSmelting(ModBlocks.oreQuartzCrystal, new ItemStack(ModItems.quartzCrystal), 0.7f);
+        GameRegistry.addSmelting(ModBlocks.QUARTZ_CRYSTAL_ORE, new ItemStack(ModItems.QUARTZ_CRYSTAL), 0.7f);
 
         //init various oreDict items & blocks
 
         //items
-        ModItems.quartzCrystal.initOreDict();
+        ModItems.QUARTZ_CRYSTAL.initOreDict();
 
         //blocks
-        ModBlocks.oreQuartzCrystal.initOreDict();
+        ModBlocks.QUARTZ_CRYSTAL_ORE.initOreDict();
 
     }
 }

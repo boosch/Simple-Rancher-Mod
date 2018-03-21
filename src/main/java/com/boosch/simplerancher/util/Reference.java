@@ -17,8 +17,8 @@ public class Reference {
 
         OBSIDIANINGOT("obsidianingot", "ItemObsidianingot");
         //BRIDLE("bridle", "ItemBridle");
-        //LEATHERSTRIP("leatherstrip", "ItemLeatherstrip");
-        //IRONBUCKLE("ironbuckle", "ItemIronbuckle");
+        //LEATHERSTRIP("LEATHER_STRIP", "ItemLeatherstrip");
+        //IRONBUCKLE("IRON_BUCKLE", "ItemIronbuckle");
 
 
         private String unlocalizedName;

@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "OO",
+    "OO"
+  ],
+  "key": {
+    "O": {
+      "type": "forge:ore_dict",
+      "ore": "gemQuartz"
+      }
+    },
+  "result": {
+    "item": "minecraft:quartz_block"
+  }
+}

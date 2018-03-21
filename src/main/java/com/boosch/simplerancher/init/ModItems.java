@@ -19,9 +19,9 @@ public class ModItems {
     //Change!
 
     /** I want to make these things
-        @Item DONE leatherstripg - component to saddle, buckledstrap,
-        @Item DONE ironbuckle - component to saddle, buckledstrap,
-        @Item DONE buckledstrap - component to saddle,
+        @Item DONE leatherstripg - component to saddle, BUCKLED_STRAP,
+        @Item DONE IRON_BUCKLE - component to saddle, BUCKLED_STRAP,
+        @Item DONE BUCKLED_STRAP - component to saddle,
 
         @Item toolshaft - component to pitchfork
         @item pitchforkprongs - component to pitchfork
@@ -32,9 +32,9 @@ public class ModItems {
         @Tool treefellingaxe - cuts whole trees down!
 
         @Block&Ores
-            @Item DONE quartzCrystal
+            @Item DONE QUARTZ_CRYSTAL
             @Block quartzOre
-            @BlockItem (?) quartzCrystal
+            @BlockItem (?) QUARTZ_CRYSTAL
 
         @Stretch
         Add magic to the world. Based on Thaumcraft. Stretch goals include...
@@ -74,29 +74,29 @@ public class ModItems {
 
 
     //tools and materials
-    public static SimpleRancherItemBase ironbuckle = new SimpleRancherItemBase("ironbuckle");//.setCreativeTab(SimpleRancher.creativeTab);
-    public static SimpleRancherItemBase leatherstrip = new SimpleRancherItemBase("leatherstrip");//.setCreativeTab(SimpleRancher.creativeTab);
-    public static SimpleRancherItemBase buckledstrap = new SimpleRancherItemBase("buckledstrap");//.setCreativeTab(SimpleRancher.creativeTab);
+    public static SimpleRancherItemBase IRON_BUCKLE = new SimpleRancherItemBase("ironbuckle");//.setCreativeTab(SimpleRancher.creativeTab);
+    public static SimpleRancherItemBase LEATHER_STRIP = new SimpleRancherItemBase("leatherstrip");//.setCreativeTab(SimpleRancher.creativeTab);
+    public static SimpleRancherItemBase BUCKLED_STRAP = new SimpleRancherItemBase("buckledstrap");//.setCreativeTab(SimpleRancher.creativeTab);
 
     //ores and other
-    public static SimpleRancherItemOre quartzCrystal = new SimpleRancherItemOre("quartzcrystal", "gemQuartz");
+    public static SimpleRancherItemOre QUARTZ_CRYSTAL = new SimpleRancherItemOre("quartzcrystal", "gemQuartz");
 
     public static void register(IForgeRegistry<Item> registry){
         registry.registerAll(
-                ironbuckle,
-                leatherstrip,
-                buckledstrap,
+                IRON_BUCKLE,
+                LEATHER_STRIP,
+                BUCKLED_STRAP,
 
-                quartzCrystal
+                QUARTZ_CRYSTAL
         );
 
     }
 
     public static void registerModels(){
-        ironbuckle.registerItemModel();
-        leatherstrip.registerItemModel();
-        buckledstrap.registerItemModel();
-        quartzCrystal.registerItemModel();
+        IRON_BUCKLE.registerItemModel();
+        LEATHER_STRIP.registerItemModel();
+        BUCKLED_STRAP.registerItemModel();
+        QUARTZ_CRYSTAL.registerItemModel();
     }
 
 }
