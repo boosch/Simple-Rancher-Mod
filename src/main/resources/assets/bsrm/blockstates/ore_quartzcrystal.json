@@ -2,7 +2,7 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "all": "bsrm:blocks/ore_quartz"
+      "all": "bsrm:blocks/ore_quartzcrystal"
     }
   },
   "variants": {

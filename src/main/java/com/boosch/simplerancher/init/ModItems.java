@@ -1,9 +1,8 @@
 package com.boosch.simplerancher.init;
 
 
-import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.items.SimpleRancherItemBase;
-import net.minecraft.creativetab.CreativeTabs;
+import com.boosch.simplerancher.items.SimpleRancherItemOre;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -33,9 +32,9 @@ public class ModItems {
         @Tool treefellingaxe - cuts whole trees down!
 
         @Block&Ores
-            @Item DONE quartz
+            @Item DONE quartzCrystal
             @Block quartzOre
-            @BlockItem (?) quartz
+            @BlockItem (?) quartzCrystal
 
         @Stretch
         Add magic to the world. Based on Thaumcraft. Stretch goals include...
@@ -80,7 +79,7 @@ public class ModItems {
     public static SimpleRancherItemBase buckledstrap = new SimpleRancherItemBase("buckledstrap");//.setCreativeTab(SimpleRancher.creativeTab);
 
     //ores and other
-    public static SimpleRancherItemBase quartz = new SimpleRancherItemBase("quartz");
+    public static SimpleRancherItemOre quartzCrystal = new SimpleRancherItemOre("quartzcrystal", "gemQuartz");
 
     public static void register(IForgeRegistry<Item> registry){
         registry.registerAll(
@@ -88,7 +87,7 @@ public class ModItems {
                 leatherstrip,
                 buckledstrap,
 
-                quartz
+                quartzCrystal
         );
 
     }
@@ -97,7 +96,7 @@ public class ModItems {
         ironbuckle.registerItemModel();
         leatherstrip.registerItemModel();
         buckledstrap.registerItemModel();
-        quartz.registerItemModel();
+        quartzCrystal.registerItemModel();
     }
 
 }

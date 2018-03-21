@@ -4,10 +4,10 @@ itemGroup.bsrm=Simple Rancher
 # Fluids
 
 # Blocks
-tile.ore_quartz.name=Quartz Ore
+tile.ore_quartzcrystal.name=Quartz Ore
 
 # Items
 item.ironbuckle.name=Iron Buckle
 item.leatherstrip.name=Leather Strip
 item.buckledstrap.name=Buckled Strap
-item.quartz.name=Quartz Chunk
+item.quartzcrystal.name=Quartz Crystal Chunk

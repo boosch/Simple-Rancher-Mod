@@ -11,25 +11,25 @@ public class ModBlocks {
 
     //these are my custom blocks, much akin to custom items.
     //these are specifically very simple ores & blocks.
-    public static SimpleRancherBlockOre oreQuartz = new SimpleRancherBlockOre("ore_quartz").setCreativeTab(SimpleRancher.creativeTab);
+    public static SimpleRancherBlockOre oreQuartzCrystal = new SimpleRancherBlockOre("ore_quartzcrystal", "oreQuartz").setCreativeTab(SimpleRancher.creativeTab);
 
 
     public static void register(IForgeRegistry<Block> registry){
 
         registry.registerAll(
-                oreQuartz
+                oreQuartzCrystal
         );
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry){
 
         registry.registerAll(
-                oreQuartz.createItemBlock()
+                oreQuartzCrystal.createItemBlock()
         );
     }
 
 
     public static void registerModels(){
-        oreQuartz.registerItemModel(Item.getItemFromBlock(oreQuartz));
+        oreQuartzCrystal.registerItemModel(Item.getItemFromBlock(oreQuartzCrystal));
     }
 }

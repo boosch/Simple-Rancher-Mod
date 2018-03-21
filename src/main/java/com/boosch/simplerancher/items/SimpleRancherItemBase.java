@@ -1,12 +1,8 @@
 package com.boosch.simplerancher.items;
 
 import com.boosch.simplerancher.SimpleRancher;
-import com.boosch.simplerancher.util.Reference;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 
-import java.util.Objects;
 
 public class SimpleRancherItemBase extends Item{
 

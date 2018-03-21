@@ -2,6 +2,7 @@ package com.boosch.simplerancher;
 
 import com.boosch.simplerancher.init.ModBlocks;
 import com.boosch.simplerancher.init.ModItems;
+import com.boosch.simplerancher.init.ModRecipes;
 import com.boosch.simplerancher.proxy.CommonProxy;
 
 import com.boosch.simplerancher.util.Reference;
@@ -47,6 +48,7 @@ public class SimpleRancher {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
 
+        ModRecipes.init();
 
         proxy.init();
     }
