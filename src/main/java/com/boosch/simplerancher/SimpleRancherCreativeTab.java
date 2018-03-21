@@ -7,9 +7,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 
-public class CreativeTabSimpleRancher extends CreativeTabs{
+public class SimpleRancherCreativeTab extends CreativeTabs{
 
-    public CreativeTabSimpleRancher(){
+    public SimpleRancherCreativeTab(){
         super(Reference.MOD_ID);
 
     }
