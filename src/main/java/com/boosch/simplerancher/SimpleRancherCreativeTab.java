@@ -11,6 +11,7 @@ public class SimpleRancherCreativeTab extends CreativeTabs{
 
     public SimpleRancherCreativeTab(){
         super(Reference.MOD_ID);
+        setBackgroundImageName("item_search.png");
 
     }
 
@@ -18,5 +19,10 @@ public class SimpleRancherCreativeTab extends CreativeTabs{
     public ItemStack getTabIconItem(){
 
         return new ItemStack(ModItems.buckledstrap);
+    }
+
+    @Override
+    public boolean hasSearchBar(){
+        return true;
     }
 }
