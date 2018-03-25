@@ -8,8 +8,11 @@ import com.boosch.simplerancher.proxy.CommonProxy;
 import com.boosch.simplerancher.util.Reference;
 import com.boosch.simplerancher.world.ModWorldGen;
 import net.minecraft.block.Block;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -29,11 +32,17 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION, acceptedMinecraftVersions = Reference.ACCEPTED_VERSIONS)
 public class SimpleRancher {
 
-    // ???
     @Instance(Reference.MOD_ID)
     public static SimpleRancher instance;
 
+    //creative tab definition
     public static final SimpleRancherCreativeTab creativeTab = new SimpleRancherCreativeTab();
+
+    //armor materials
+    public static final ItemArmor.ArmorMaterial reinforcedLeatherArmorMaterial = EnumHelper.addArmorMaterial("REINFORCED_LEATHER", Reference.MOD_ID+":reinforced_leather", 7, new int[]{2, 3, 4, 1}, 9, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0F );
+
+
+
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
@@ -63,12 +72,17 @@ public class SimpleRancher {
         proxy.postInit();
     }
 
+
+
+
     /**
      * Registration Handler for Items
      */
 
     @Mod.EventBusSubscriber
     public static class RegistrationHandler {
+
+
 
         @SubscribeEvent
         public static void registerItems(RegistryEvent.Register<Item> event) {

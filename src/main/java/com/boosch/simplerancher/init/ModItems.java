@@ -1,8 +1,12 @@
 package com.boosch.simplerancher.init;
 
 
+import com.boosch.simplerancher.SimpleRancher;
+import com.boosch.simplerancher.items.ItemReinforcedBoots;
+import com.boosch.simplerancher.items.SimpleRancherItemArmor;
 import com.boosch.simplerancher.items.SimpleRancherItemBase;
 import com.boosch.simplerancher.items.SimpleRancherItemOre;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -19,13 +23,14 @@ public class ModItems {
     //Change!
 
     /** I want to make these things
-        @Item DONE leatherstripg - component to saddle, BUCKLED_STRAP,
+        @Item DONE leatherstrip - component to saddle, BUCKLED_STRAP,
         @Item DONE IRON_BUCKLE - component to saddle, BUCKLED_STRAP,
         @Item DONE BUCKLED_STRAP - component to saddle,
 
         @Item toolshaft - component to pitchfork
         @item pitchforkprongs - component to pitchfork
 
+        @ArmorMaterial reinforced_leather - a tougher version of leather armor made by adding straps to leather armor. Slightly stronger than leather, with 1 toughness
         @Armor sturdyworkboots - +armor, +movement speed, +blockwalk
 
         @Tool pitchfork - increases crop yield when used to break wheat; +dmg to zombies
@@ -78,6 +83,9 @@ public class ModItems {
     public static SimpleRancherItemBase LEATHER_STRIP = new SimpleRancherItemBase("leatherstrip");//.setCreativeTab(SimpleRancher.creativeTab);
     public static SimpleRancherItemBase BUCKLED_STRAP = new SimpleRancherItemBase("buckledstrap");//.setCreativeTab(SimpleRancher.creativeTab);
 
+    //armor pieces
+    public static ItemReinforcedBoots REINFORCED_BOOTS = new ItemReinforcedBoots(SimpleRancher.reinforcedLeatherArmorMaterial, "reinforced_leather_boots");
+
     //ores and other
     public static SimpleRancherItemOre QUARTZ_CRYSTAL = new SimpleRancherItemOre("quartzcrystal", "gemQuartz");
 
@@ -87,7 +95,9 @@ public class ModItems {
                 LEATHER_STRIP,
                 BUCKLED_STRAP,
 
-                QUARTZ_CRYSTAL
+                QUARTZ_CRYSTAL,
+
+                REINFORCED_BOOTS
         );
 
     }
@@ -97,6 +107,7 @@ public class ModItems {
         LEATHER_STRIP.registerItemModel();
         BUCKLED_STRAP.registerItemModel();
         QUARTZ_CRYSTAL.registerItemModel();
+        REINFORCED_BOOTS.registerItemModel();
     }
 
 }
