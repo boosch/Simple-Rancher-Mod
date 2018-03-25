@@ -6,6 +6,7 @@ import com.boosch.simplerancher.init.ModRecipes;
 import com.boosch.simplerancher.proxy.CommonProxy;
 
 import com.boosch.simplerancher.util.Reference;
+import com.boosch.simplerancher.world.ModWorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -17,6 +18,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * http://shadowfacts.net/tutorials/forge-modding-112/basic-items/
@@ -43,6 +45,8 @@ public class SimpleRancher {
 
         System.out.println(Reference.NAME + " is loading!");
         proxy.preInit();
+
+        GameRegistry.registerWorldGenerator(new ModWorldGen(),3);
     }
 
     @Mod.EventHandler
