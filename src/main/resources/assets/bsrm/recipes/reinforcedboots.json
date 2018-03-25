@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "saddle",
+  "pattern": [
+    "SBS",
+    "L L"
+  ],
+  "key": {
+    "S": {
+      "item": "bsrm:buckledstrap"
+    },
+    "B": {
+      "item": "minecraft:leather_boots"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "bsrm:reinforced_leather_boots"
+  }
+}
