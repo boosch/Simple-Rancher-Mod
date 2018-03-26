@@ -97,8 +97,15 @@ public class ModItems {
     //armor pieces
     public static ItemReinforcedBoots REINFORCED_BOOTS = new ItemReinforcedBoots(SimpleRancher.reinforcedLeatherArmorMaterial, "reinforced_leather_boots");
 
-    //ores and other
+    //ores
     public static SimpleRancherItemOre QUARTZ_CRYSTAL = new SimpleRancherItemOre("quartzcrystal", "gemQuartz");
+
+
+    //food-ingredients
+    public static SimpleRancherItemBase RAW_DOUGH = new SimpleRancherItemBase("rawdough");
+    public static SimpleRancherItemBase FLOUR = new SimpleRancherItemBase("flour");
+    //foods
+
 
     public static void register(IForgeRegistry<Item> registry){
         registry.registerAll(
@@ -108,7 +115,10 @@ public class ModItems {
 
                 QUARTZ_CRYSTAL,
 
-                REINFORCED_BOOTS
+                REINFORCED_BOOTS,
+
+                RAW_DOUGH,
+                FLOUR
         );
 
     }
@@ -119,6 +129,8 @@ public class ModItems {
         BUCKLED_STRAP.registerItemModel();
         QUARTZ_CRYSTAL.registerItemModel();
         REINFORCED_BOOTS.registerItemModel();
+        RAW_DOUGH.registerItemModel();
+        FLOUR.registerItemModel();
     }
 
 }

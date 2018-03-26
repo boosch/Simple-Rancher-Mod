@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group":"bread",
+  "ingredients": [
+    {
+      "item":"minecraft:egg"
+    },
+    {
+      "item":"bsrm:flour"
+    }
+  ],
+  "result":{
+    "item":"bsrm:rawdough",
+    "count": 2
+  }
+}
