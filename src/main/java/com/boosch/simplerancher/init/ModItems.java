@@ -30,16 +30,27 @@ public class ModItems {
         @Item toolshaft - component to pitchfork
         @item pitchforkprongs - component to pitchfork
 
-        @ArmorMaterial reinforced_leather - a tougher version of leather armor made by adding straps to leather armor. Slightly stronger than leather, with 1 toughness
-        @Armor sturdyworkboots - +armor, +movement speed, +blockwalk
+        @ArmorMaterial DONE reinforced_leather - a tougher version of leather armor made by adding straps to leather armor. Slightly stronger than leather, with 1 toughness
+        @Armor IN_PROGRESS Reinforced Leather Boots - +armor, +movement speed
+        @TODO fix movement speed issue
+        @Armor Reinforced Leather Cap
+        @Armor Reinforced Leather Leggings
+        @Armor Reinforced Leather Chestpiece
+        @TODO check if repairing works for these items
 
         @Tool pitchfork - increases crop yield when used to break wheat; +dmg to zombies
         @Tool treefellingaxe - cuts whole trees down!
 
         @Block&Ores
             @Item DONE QUARTZ_CRYSTAL
-            @Block quartzOre
+            @Block DONE quartzOre
             @BlockItem (?) QUARTZ_CRYSTAL
+
+        @Food Flour - Wheat processes into flour
+        @Food Dough - Flour + Egg = 2x Dough
+        @Food Bread - Cook Dough
+        @Food Gnocci - Potato, Flour, Egg, Bowl (better than steak!)
+
 
         @Stretch
         Add magic to the world. Based on Thaumcraft. Stretch goals include...
