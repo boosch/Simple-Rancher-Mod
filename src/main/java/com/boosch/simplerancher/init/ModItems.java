@@ -46,7 +46,7 @@ public class ModItems {
         @Food DONE Flour - Wheat processes into flour
         @Food DONE Dough - Flour + Egg = 2x Dough
         @Food DONE Bread - Cook Dough
-        @Food Gnocci - Potato, Flour, Egg, Bowl (better than steak!)
+        @Food DONE Gnocci - Potato, Flour, Egg, Bowl (better than steak!)
 
 
         @Stretch

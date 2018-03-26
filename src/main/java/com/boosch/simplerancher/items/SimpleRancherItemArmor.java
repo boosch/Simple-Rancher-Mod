@@ -20,7 +20,8 @@ public class SimpleRancherItemArmor extends ItemArmor {
         this.name = name;
     }
 
-    public void registerItemModel(){//Item item){
+    public void registerItemModel(){
+
         SimpleRancher.proxy.registerItemRenderer(this, 0, name);
     }
 }
