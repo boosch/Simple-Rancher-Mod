@@ -97,7 +97,7 @@ public class ModItems {
     public static ItemReinforcedBoots REINFORCED_BOOTS = new ItemReinforcedBoots(SimpleRancher.reinforcedLeatherArmorMaterial, "reinforced_leather_boots");
 
     //ores
-    public static SimpleRancherItemOre QUARTZ_CRYSTAL = new SimpleRancherItemOre("quartzcrystal", "gemQuartz");
+    //public static SimpleRancherItemOre QUARTZ_CRYSTAL = new SimpleRancherItemOre("quartzcrystal", "gemQuartz");
 
 
     //food-ingredients
@@ -113,7 +113,7 @@ public class ModItems {
                 LEATHER_STRIP,
                 BUCKLED_STRAP,
 
-                QUARTZ_CRYSTAL,
+    //            QUARTZ_CRYSTAL,
 
                 REINFORCED_BOOTS,
 
@@ -125,11 +125,14 @@ public class ModItems {
     }
 
     public static void registerModels(){
+  //    QUARTZ_CRYSTAL.registerItemModel();
+
         IRON_BUCKLE.registerItemModel();
         LEATHER_STRIP.registerItemModel();
         BUCKLED_STRAP.registerItemModel();
-        QUARTZ_CRYSTAL.registerItemModel();
+
         REINFORCED_BOOTS.registerItemModel();
+
         RAW_DOUGH.registerItemModel();
         FLOUR.registerItemModel();
         GNOCCHI.registerItemModel();
