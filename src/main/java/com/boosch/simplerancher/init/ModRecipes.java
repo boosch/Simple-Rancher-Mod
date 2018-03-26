@@ -4,6 +4,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+
+/**
+ * Example of recipes which return items: https://github.com/Choonster-Minecraft-Mods/TestMod3/blob/8c691d6081188f53744c4394078b656847ae6fd6/src/main/java/choonster/testmod3/crafting/recipe/ShapelessCuttingRecipe.java
+ */
+
 public class ModRecipes {
 
     public static void init(){
