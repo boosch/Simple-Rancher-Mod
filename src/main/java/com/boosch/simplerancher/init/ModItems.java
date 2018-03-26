@@ -24,24 +24,26 @@ public class ModItems {
         @Item DONE IRON_BUCKLE - component to saddle, BUCKLED_STRAP,
         @Item DONE BUCKLED_STRAP - component to saddle,
 
-        @Item toolshaft - component to pitchfork
-        @item pitchforkprongs - component to pitchfork
-
         @ArmorMaterial DONE reinforced_leather - a tougher version of leather armor made by adding straps to leather armor. Slightly stronger than leather, with 1 toughness
-        @Armor IN_PROGRESS Reinforced Leather Boots - +armor, +movement speed
+        @TODO @Armor IN_PROGRESS Reinforced Leather Boots - +armor, +movement speed
         @TODO fix movement speed issue
-        @Armor Reinforced Leather Cap
-        @Armor Reinforced Leather Leggings
-        @Armor Reinforced Leather Chestpiece
+        @TODO @Armor Reinforced Leather Cap
+        @TODO @Armor Reinforced Leather Leggings
+        @TODO @Armor Reinforced Leather Chestpiece
         @TODO check if repairing works for these items
 
-        @Tool pitchfork - increases crop yield when used to break wheat; +dmg to zombies
-        @Tool treefellingaxe - cuts whole trees down!
+        @TODO @Tool treefellingaxe - cuts whole trees down!
+
+        @Laquer
+        @TODO add a concept of laquers - dye equivelents for iron armors; parity function with leather dye
+            @TODO @Item laquer - dye for metallic items
+            @TODO @??? Make Iron Armor dye-able
 
         @Block&Ores
             @Item DONE QUARTZ_CRYSTAL
             @Block DONE quartzOre
             @BlockItem (?) QUARTZ_CRYSTAL
+            @TODO remove QUARTZ_CRYSTAL
 
         @Food DONE Flour - Wheat processes into flour
         @Food DONE Dough - Flour + Egg = 2x Dough
