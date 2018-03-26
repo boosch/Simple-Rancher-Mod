@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group":"bread",
+  "ingredients": [
+    {
+      "item":"minecraft:potato"
+    },
+    {
+      "item":"bsrm:rawdough"
+    },
+    {
+      "item":"minecraft:bowl"
+    }
+  ],
+  "result":{
+    "item":"bsrm:gnocchi",
+    "count": 1
+  }
+}

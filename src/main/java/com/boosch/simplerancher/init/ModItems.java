@@ -2,10 +2,7 @@ package com.boosch.simplerancher.init;
 
 
 import com.boosch.simplerancher.SimpleRancher;
-import com.boosch.simplerancher.items.ItemReinforcedBoots;
-import com.boosch.simplerancher.items.SimpleRancherItemArmor;
-import com.boosch.simplerancher.items.SimpleRancherItemBase;
-import com.boosch.simplerancher.items.SimpleRancherItemOre;
+import com.boosch.simplerancher.items.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -46,9 +43,9 @@ public class ModItems {
             @Block DONE quartzOre
             @BlockItem (?) QUARTZ_CRYSTAL
 
-        @Food Flour - Wheat processes into flour
-        @Food Dough - Flour + Egg = 2x Dough
-        @Food Bread - Cook Dough
+        @Food DONE Flour - Wheat processes into flour
+        @Food DONE Dough - Flour + Egg = 2x Dough
+        @Food DONE Bread - Cook Dough
         @Food Gnocci - Potato, Flour, Egg, Bowl (better than steak!)
 
 
@@ -104,8 +101,9 @@ public class ModItems {
     //food-ingredients
     public static SimpleRancherItemBase RAW_DOUGH = new SimpleRancherItemBase("rawdough");
     public static SimpleRancherItemBase FLOUR = new SimpleRancherItemBase("flour");
-    //foods
 
+    //foods
+    public static ItemGnocchi GNOCCHI = new ItemGnocchi();
 
     public static void register(IForgeRegistry<Item> registry){
         registry.registerAll(
@@ -118,7 +116,8 @@ public class ModItems {
                 REINFORCED_BOOTS,
 
                 RAW_DOUGH,
-                FLOUR
+                FLOUR,
+                GNOCCHI
         );
 
     }
@@ -131,6 +130,7 @@ public class ModItems {
         REINFORCED_BOOTS.registerItemModel();
         RAW_DOUGH.registerItemModel();
         FLOUR.registerItemModel();
+        GNOCCHI.registerItemModel();
     }
 
 }
