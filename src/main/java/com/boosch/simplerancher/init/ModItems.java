@@ -50,7 +50,6 @@ public class ModItems {
         @Food DONE Bread - Cook Dough
         @Food DONE Gnocci - Potato, Flour, Egg, Bowl (better than steak!)
 
-
         @Stretch
         Add magic to the world. Based on Thaumcraft. Stretch goals include...
         Every item in the game consists of materia

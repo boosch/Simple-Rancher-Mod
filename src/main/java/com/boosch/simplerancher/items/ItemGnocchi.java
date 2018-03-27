@@ -2,6 +2,7 @@ package com.boosch.simplerancher.items;
 
 import com.boosch.simplerancher.SimpleRancher;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -25,7 +26,11 @@ public class ItemGnocchi extends SimpleRancherItemFood{
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
     {
         super.onItemUseFinish(stack, worldIn, entityLiving);
-        return new ItemStack(Items.BOWL);
+
+        if(entityLiving instanceof EntityPlayer){
+            ((EntityPlayer) entityLiving).inventory.addItemStackToInventory(new ItemStack(Items.BOWL));
+        }
+        return new ItemStack(stack.getItem(), stack.getCount());
     }
 
 }
