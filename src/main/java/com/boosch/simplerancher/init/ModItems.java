@@ -32,7 +32,7 @@ public class ModItems {
 
         @ArmorMaterial DONE reinforced_leather - a tougher version of leather armor made by adding straps to leather armor. Slightly stronger than leather, with 1 toughness
         @Armor DONE Reinforced Leather Boots - +armor, +movement speed
-            @TODO Convert from potion effect to MobAttribute
+            @TODO Convert from potion effect to MobAttribute/EntityModifier
             @TODO Update tooltip for boots to indicate movespeed increase
         @TODO @Armor Reinforced Leather Cap
         @TODO @Armor Reinforced Leather Leggings
