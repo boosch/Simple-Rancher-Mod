@@ -12,7 +12,7 @@ public class ModBlocks {
     //these are specifically very simple ores & blocks.
 
     //my own personal quartz replacement. Unfortunately it does not seem to ordict properly...
-    public static SimpleRancherBlockOre QUARTZ_CRYSTAL_ORE = new SimpleRancherBlockOre("ore_quartzcrystal", "oreQuartz").setCreativeTab(SimpleRancher.creativeTab);
+    public static SimpleRancherBlockOre QUARTZ_CRYSTAL_ORE = new SimpleRancherBlockOre("ore_quartzcrystal", "oreQuartz").setCreativeTab(SimpleRancher.CREATIVE_TAB);
 
 
     public static void register(IForgeRegistry<Block> registry){

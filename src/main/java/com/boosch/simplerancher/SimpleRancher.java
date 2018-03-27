@@ -8,9 +8,11 @@ import com.boosch.simplerancher.proxy.CommonProxy;
 import com.boosch.simplerancher.util.Reference;
 import com.boosch.simplerancher.world.ModWorldGen;
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
@@ -36,10 +38,10 @@ public class SimpleRancher {
     public static SimpleRancher instance;
 
     //creative tab definition
-    public static final SimpleRancherCreativeTab creativeTab = new SimpleRancherCreativeTab();
+    public static final SimpleRancherCreativeTab CREATIVE_TAB = new SimpleRancherCreativeTab();
 
     //armor materials
-    public static final ItemArmor.ArmorMaterial reinforcedLeatherArmorMaterial = EnumHelper.addArmorMaterial("REINFORCED_LEATHER", Reference.MOD_ID+":reinforced_leather", 7, new int[]{2, 3, 4, 1}, 9, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0F );
+    public static final ItemArmor.ArmorMaterial ARMORMAT_REINFORCED_LEATHER = EnumHelper.addArmorMaterial("REINFORCED_LEATHER", Reference.MOD_ID+":reinforced_leather", 7, new int[]{2, 3, 4, 1}, 9, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0F ).setRepairItem(new ItemStack(Items.LEATHER));
 
 
 

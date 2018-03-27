@@ -2,7 +2,6 @@ package com.boosch.simplerancher.items;
 
 import com.boosch.simplerancher.SimpleRancher;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 
 public class SimpleRancherItemArmor extends ItemArmor {
@@ -15,7 +14,7 @@ public class SimpleRancherItemArmor extends ItemArmor {
         setRegistryName(name);
         setUnlocalizedName(name);
 
-        setCreativeTab(SimpleRancher.creativeTab);
+        setCreativeTab(SimpleRancher.CREATIVE_TAB);
 
         this.name = name;
     }

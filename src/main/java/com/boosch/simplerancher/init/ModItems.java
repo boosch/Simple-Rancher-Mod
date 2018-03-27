@@ -3,7 +3,6 @@ package com.boosch.simplerancher.init;
 
 import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.items.*;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -26,17 +25,16 @@ public class ModItems {
 
         @Recipes
             DONE Saddle
-            Iron Horse Armor
-            Gold Horse Armor
-            Diamond Horse Armor
+            DONE Iron Horse Armor
+            DONE Gold Horse Armor
+            DONE Diamond Horse Armor
 
         @ArmorMaterial DONE reinforced_leather - a tougher version of leather armor made by adding straps to leather armor. Slightly stronger than leather, with 1 toughness
         @Armor DONE Reinforced Leather Boots - +armor, +movement speed
-            @TODO Update tooltip for boots to indicate movespeed increase
         @TODO @Armor Reinforced Leather Cap
         @TODO @Armor Reinforced Leather Leggings
         @TODO @Armor Reinforced Leather Chestpiece
-        @TODO check if repairing works for these items
+
 
         @TODO @Tool treefellingaxe - cuts whole trees down!
 
@@ -51,10 +49,11 @@ public class ModItems {
             @BlockItem (?) QUARTZ_CRYSTAL
             @TODO remove QUARTZ_CRYSTAL
 
-        @Food DONE Flour - Wheat processes into flour
-        @Food DONE Dough - Flour + Egg = 2x Dough
-        @Food DONE Bread - Cook Dough
-        @Food DONE Gnocci - Potato, Flour, Egg, Bowl (better than steak!)
+        @Food
+             DONE Flour - Wheat processes into flour
+             DONE Dough - Flour + Egg = 2x Dough
+             DONE Bread - Cook Dough
+             DONE Gnocci - Potato, Flour, Egg, Bowl (better than steak!)
 
         @Stretch
         Add magic to the world. Based on Thaumcraft. Stretch goals include...
@@ -94,12 +93,12 @@ public class ModItems {
 
 
     //tools and materials
-    public static SimpleRancherItemBase IRON_BUCKLE = new SimpleRancherItemBase("ironbuckle");//.setCreativeTab(SimpleRancher.creativeTab);
-    public static SimpleRancherItemBase LEATHER_STRIP = new SimpleRancherItemBase("leatherstrip");//.setCreativeTab(SimpleRancher.creativeTab);
-    public static SimpleRancherItemBase BUCKLED_STRAP = new SimpleRancherItemBase("buckledstrap");//.setCreativeTab(SimpleRancher.creativeTab);
+    public static SimpleRancherItemBase IRON_BUCKLE = new SimpleRancherItemBase("ironbuckle");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
+    public static SimpleRancherItemBase LEATHER_STRIP = new SimpleRancherItemBase("leatherstrip");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
+    public static SimpleRancherItemBase BUCKLED_STRAP = new SimpleRancherItemBase("buckledstrap");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
 
     //armor pieces
-    public static ItemReinforcedBoots REINFORCED_BOOTS = new ItemReinforcedBoots(SimpleRancher.reinforcedLeatherArmorMaterial, "reinforced_leather_boots");
+    public static ItemReinforcedBoots REINFORCED_BOOTS = new ItemReinforcedBoots(SimpleRancher.ARMORMAT_REINFORCED_LEATHER, "reinforced_leather_boots");
 
     //ores
     //public static SimpleRancherItemOre QUARTZ_CRYSTAL = new SimpleRancherItemOre("quartzcrystal", "gemQuartz");

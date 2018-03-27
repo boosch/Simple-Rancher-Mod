@@ -14,7 +14,7 @@ public class SimpleRancherItemBase extends Item{
         setUnlocalizedName(name);
         setRegistryName(name);
 
-        setCreativeTab(SimpleRancher.creativeTab);
+        setCreativeTab(SimpleRancher.CREATIVE_TAB);
 
     }
 

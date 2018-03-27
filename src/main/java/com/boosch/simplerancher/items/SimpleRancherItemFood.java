@@ -14,7 +14,7 @@ public class SimpleRancherItemFood extends ItemFood{
 
         setUnlocalizedName(name);
         setRegistryName(name);
-        setCreativeTab(SimpleRancher.creativeTab);
+        setCreativeTab(SimpleRancher.CREATIVE_TAB);
 
     }
 
