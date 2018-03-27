@@ -24,9 +24,16 @@ public class ModItems {
         @Item DONE IRON_BUCKLE - component to saddle, BUCKLED_STRAP,
         @Item DONE BUCKLED_STRAP - component to saddle,
 
+        @Recipes
+            DONE Saddle
+            Iron Horse Armor
+            Gold Horse Armor
+            Diamond Horse Armor
+
         @ArmorMaterial DONE reinforced_leather - a tougher version of leather armor made by adding straps to leather armor. Slightly stronger than leather, with 1 toughness
-        @TODO @Armor IN_PROGRESS Reinforced Leather Boots - +armor, +movement speed
-        @TODO fix movement speed issue
+        @Armor DONE Reinforced Leather Boots - +armor, +movement speed
+            @TODO Convert from potion effect to MobAttribute
+            @TODO Update tooltip for boots to indicate movespeed increase
         @TODO @Armor Reinforced Leather Cap
         @TODO @Armor Reinforced Leather Leggings
         @TODO @Armor Reinforced Leather Chestpiece
