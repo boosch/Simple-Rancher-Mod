@@ -22,6 +22,9 @@ public class ItemReinforcedBoots extends SimpleRancherItemArmor {
     }
 
 
+
+    //this blows up, but only in multiplayer...
+    /*
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5){
         if(world.isRemote){return;}
@@ -34,6 +37,8 @@ public class ItemReinforcedBoots extends SimpleRancherItemArmor {
             }
         }
     }
+*/
+
 
     /**
      * Gets a map of item attribute modifiers, used by ItemReinforcedBoots to increase movementSpeed.
