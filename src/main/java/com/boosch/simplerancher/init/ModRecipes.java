@@ -22,7 +22,7 @@ public class ModRecipes {
         //init various oreDict items & blocks
 
         //items
-        ModItems.QUARTZ_CRYSTAL.initOreDict();
+        //ModItems.QUARTZ_CRYSTAL.initOreDict();
 
         //blocks
         ModBlocks.QUARTZ_CRYSTAL_ORE.initOreDict();
