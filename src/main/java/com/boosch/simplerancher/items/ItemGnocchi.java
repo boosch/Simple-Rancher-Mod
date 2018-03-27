@@ -28,9 +28,15 @@ public class ItemGnocchi extends SimpleRancherItemFood{
         super.onItemUseFinish(stack, worldIn, entityLiving);
 
         if(entityLiving instanceof EntityPlayer){
-            ((EntityPlayer) entityLiving).inventory.addItemStackToInventory(new ItemStack(Items.BOWL));
+
+            //if there's room in the player's inventory, add a bowl, else, spawn a bowl at the player's feet
+            if( !((EntityPlayer) entityLiving).inventory.addItemStackToInventory(new ItemStack(Items.BOWL))){
+                //hrm... we failed, let's spawn a bowl then... Remember to only spawn it on the server!
+                if(!worldIn.isRemote) entityLiving.entityDropItem(new ItemStack(Items.BOWL),1f);
+            }
         }
-        return new ItemStack(stack.getItem(), stack.getCount());
+
+        return new ItemStack(stack.getItem(), stack.getCount()-1);
     }
 
 }
