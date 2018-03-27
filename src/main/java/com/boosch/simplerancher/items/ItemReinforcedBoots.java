@@ -24,20 +24,20 @@ public class ItemReinforcedBoots extends SimpleRancherItemArmor {
 
 
     //this blows up, but only in multiplayer...
-    /*
+
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5){
         if(world.isRemote){return;}
 
         if(entity instanceof EntityPlayer){
-            ItemStack boots = ((EntityPlayer)entity).inventory.armorItemInSlot(0);
+            ItemStack boots = ((EntityPlayer)entity).getItemStackFromSlot(EntityEquipmentSlot.FEET);//.armorItemInSlot(0);
             if( boots !=null && boots.getItem() instanceof ItemReinforcedBoots){
                 //let's try to apply a movespeed potion
                 ((EntityPlayer) entity).addPotionEffect(new PotionEffect(Potion.getPotionById(1), 1, 1));
             }
         }
     }
-*/
+
 
 
     /**
