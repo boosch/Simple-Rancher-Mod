@@ -2,12 +2,21 @@ package com.boosch.simplerancher.TreeFell;
 
 import net.minecraft.util.math.BlockPos;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Tree {
 
     private Set<BlockPos> treeLogs;
     private Set<BlockPos> treeLeaves;
+    private BlockPos currentPos;
+
+
+    public Tree(){
+
+        treeLogs=new HashSet<>();
+        treeLeaves = new HashSet<>();
+    }
 
     public BlockPos getCurrentPos() {
         return currentPos;
@@ -16,8 +25,6 @@ public class Tree {
     public void setCurrentPos(BlockPos currentPos) {
         this.currentPos = currentPos;
     }
-
-    private BlockPos currentPos;
 
     public Set<BlockPos> getTreeLogs() {
         return treeLogs;
