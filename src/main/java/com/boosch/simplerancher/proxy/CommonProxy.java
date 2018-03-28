@@ -56,8 +56,6 @@ public abstract class CommonProxy {
             this.pos = pos;
             this.logCount=logCount;
             this.axeDurability = axeDurability;
-
-            System.out.println("Hey, the CLIENT started a new player interaction session");
         }
     }
 
@@ -85,8 +83,6 @@ public abstract class CommonProxy {
             ItemStack tool = p.getHeldItemMainhand();
 
             if (tool.getItem() instanceof ItemQuartzEdgedAxe) { //let's be sure they're using our axe!
-
-                event.getEntityPlayer().sendMessage(new TextComponentString("[CLIENT]... Sweet axe!"));
 
                 int axeCurrentDurability = tool.getMaxDamage() - tool.getItemDamage();
                 UUID pid = p.getPersistentID();
@@ -175,6 +171,9 @@ public abstract class CommonProxy {
             }
         }
 
+        /**
+         * These entries exist as debug entries to figure out issues with mod compat.
+         *
         if( isWoodenBlock(event.getWorld(), event.getPos())){
 
             event.getPlayer().sendMessage(new TextComponentString("[CLIENT]Hey, stop that! We need those!  ["+ event.getResult().name() + "] [" +event.getState()+"] ["+event.getPos()+"] blocks!"));
@@ -183,6 +182,7 @@ public abstract class CommonProxy {
             event.getPlayer().sendMessage(new TextComponentString("[CLIENT]It wasn't a log according to our check :("));
 
         }
+         */
     }
 
     /**

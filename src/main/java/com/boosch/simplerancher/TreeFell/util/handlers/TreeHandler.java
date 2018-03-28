@@ -15,25 +15,6 @@ public class TreeHandler {
     private static Map<UUID, Tree> tf_Trees = new HashMap<>();
     private Tree tree;
 
-    /**
-     * A quick iterator to navigate a set of things and provide me the 'last' one
-     * this will be used to iterate the tree and kill the 'furthest' block ?
-     * @param elements
-     * @param <T>
-     * @return lastElement of the set
-     */
-    private static <T> T getLastElement(final Iterable<T> elements){
-
-        final Iterator<T> itr = elements.iterator();
-
-        T lastElement = itr.next();
-
-        while(itr.hasNext()){
-            lastElement = itr.next();
-        }
-
-        return lastElement;
-    }
 
     /**
      * Explores the shape of the tree.
