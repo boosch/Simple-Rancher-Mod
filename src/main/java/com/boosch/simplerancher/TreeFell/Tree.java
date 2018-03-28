@@ -9,6 +9,16 @@ public class Tree {
     private Set<BlockPos> treeLogs;
     private Set<BlockPos> treeLeaves;
 
+    public BlockPos getCurrentPos() {
+        return currentPos;
+    }
+
+    public void setCurrentPos(BlockPos currentPos) {
+        this.currentPos = currentPos;
+    }
+
+    private BlockPos currentPos;
+
     public Set<BlockPos> getTreeLogs() {
         return treeLogs;
     }

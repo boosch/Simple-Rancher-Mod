@@ -2,6 +2,7 @@ package com.boosch.simplerancher.proxy;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -21,4 +22,6 @@ public interface CommonProxy {
 
     public void destroyWoodBlock(BlockEvent.BreakEvent event);
     public void interactWithTree(PlayerInteractEvent event);
+    public void breakingWoodBlock(PlayerEvent.BreakSpeed speed);
+
 }
