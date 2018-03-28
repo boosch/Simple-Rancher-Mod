@@ -81,6 +81,8 @@ public class ClientProxy implements CommonProxy {
             this.pos = pos;
             this.logCount=logCount;
             this.axeDurability = axeDurability;
+
+            System.out.println("Hey, the CLIENT started a new player interaction session");
         }
     }
 
@@ -109,7 +111,7 @@ public class ClientProxy implements CommonProxy {
 
             if (tool.getItem() instanceof ItemQuartzEdgedAxe) { //let's be sure they're using our axe!
 
-                event.getEntityPlayer().sendMessage(new TextComponentString("... Sweet axe!"));
+                event.getEntityPlayer().sendMessage(new TextComponentString("[CLIENT]... Sweet axe!"));
 
                 int axeCurrentDurability = tool.getMaxDamage() - tool.getItemDamage();
                 UUID pid = p.getPersistentID();

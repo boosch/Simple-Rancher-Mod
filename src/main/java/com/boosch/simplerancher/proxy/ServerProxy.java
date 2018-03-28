@@ -69,6 +69,8 @@ public class ServerProxy implements CommonProxy {
             this.pos = pos;
             this.logCount=logCount;
             this.axeDurability = axeDurability;
+
+            System.out.println("Hey, the SERVER started a new player interaction session");
         }
     }
 
@@ -96,7 +98,7 @@ public class ServerProxy implements CommonProxy {
 
             if (tool.getItem() instanceof ItemQuartzEdgedAxe) { //let's be sure they're using our axe!
 
-                //event.getEntityPlayer().sendMessage(new TextComponentString("... Sweet axe!"));
+                event.getEntityPlayer().sendMessage(new TextComponentString("[SERVER?]... Sweet axe!"));
 
                 int axeCurrentDurability = tool.getMaxDamage() - tool.getItemDamage();
                 UUID pid = p.getPersistentID();
@@ -188,10 +190,10 @@ public class ServerProxy implements CommonProxy {
         }
         if( isWoodenBlock(event.getWorld(), event.getPos())){
 
-            event.getPlayer().sendMessage(new TextComponentString("[SERVER]Hey, stop that! We need those!  ["+ event.getResult().name() + "] [" +event.getState()+"] ["+event.getPos()+"] blocks!"));
+            event.getPlayer().sendMessage(new TextComponentString("[SERVER?]Hey, stop that! We need those!  ["+ event.getResult().name() + "] [" +event.getState()+"] ["+event.getPos()+"] blocks!"));
         }
         else{
-            event.getPlayer().sendMessage(new TextComponentString("[SERVER]It wasn't a log according to our check :("));
+            event.getPlayer().sendMessage(new TextComponentString("[SERVER?]It wasn't a log according to our check :("));
 
         }
     }
