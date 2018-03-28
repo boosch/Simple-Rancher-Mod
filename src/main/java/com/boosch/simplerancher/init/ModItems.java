@@ -96,6 +96,7 @@ public class ModItems {
     public static SimpleRancherItemBase IRON_BUCKLE = new SimpleRancherItemBase("ironbuckle");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
     public static SimpleRancherItemBase LEATHER_STRIP = new SimpleRancherItemBase("leatherstrip");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
     public static SimpleRancherItemBase BUCKLED_STRAP = new SimpleRancherItemBase("buckledstrap");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
+    public static ItemQuartzEdgedAxe QUARTZ_EDGED_AXE = new ItemQuartzEdgedAxe();
 
     //armor pieces
     public static ItemReinforcedBoots REINFORCED_BOOTS = new ItemReinforcedBoots(SimpleRancher.ARMORMAT_REINFORCED_LEATHER, "reinforced_leather_boots");
@@ -123,7 +124,9 @@ public class ModItems {
 
                 RAW_DOUGH,
                 FLOUR,
-                GNOCCHI
+                GNOCCHI,
+
+                QUARTZ_EDGED_AXE
         );
 
     }
@@ -140,6 +143,8 @@ public class ModItems {
         RAW_DOUGH.registerItemModel();
         FLOUR.registerItemModel();
         GNOCCHI.registerItemModel();
+
+        QUARTZ_EDGED_AXE.registerItemModel();
     }
 
 }
