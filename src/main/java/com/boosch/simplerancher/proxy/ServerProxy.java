@@ -21,7 +21,7 @@ import java.util.UUID;
 import static net.minecraft.block.Block.getBlockFromName;
 
 //indicates code that should only ever be run on a server
-public class ServerProxy implements CommonProxy {
+public class ServerProxy extends CommonProxy {
 
     @Override
     public void init() {
@@ -53,31 +53,6 @@ public class ServerProxy implements CommonProxy {
      *
      *
      */
-
-    class PlayerInteractionSession{
-        public BlockPos pos;
-        public float logCount;
-        public int axeDurability;
-
-        /**
-         *
-         * @param pos - the position of the block of the interaction
-         * @param logCount - the number of logs to be broken by this interaction
-         * @param axeDurability - the amount of durability.... in the axe? required by the axe?
-         */
-        public PlayerInteractionSession(BlockPos pos, float logCount, int axeDurability){
-            this.pos = pos;
-            this.logCount=logCount;
-            this.axeDurability = axeDurability;
-
-            System.out.println("Hey, the SERVER started a new player interaction session");
-        }
-    }
-
-    public static Map<UUID, Boolean> tf_PlayerPrintNames = new HashMap<>();
-    protected static Map<UUID, PlayerInteractionSession> tf_PlayerData = new HashMap<>();
-    protected TreeHandler treeHandler;
-
 
     @Override
     /**
@@ -143,82 +118,5 @@ public class ServerProxy implements CommonProxy {
         else{return;}
     }
 
-    @Override
-    @SubscribeEvent
-    /**
-     * If the player tries to break a block, check if this player is trying to break a treeblock that we're tracking a session for.
-     * If so, then adjust the breakspeed to match the difficulty of the tree through a linear formula
-     */
-    public void breakingWoodBlock(PlayerEvent.BreakSpeed speed){
-        UUID pid = speed.getEntityPlayer().getPersistentID();
-        if(tf_PlayerData.containsKey(pid)){
-
-            BlockPos pos = tf_PlayerData.get(pid).pos;
-
-            if(pos.equals(speed.getPos()) ){
-                speed.setNewSpeed(speed.getOriginalSpeed() / (tf_PlayerData.get(pid).logCount) / 2.0f);
-            }
-            else{ //revert the breakspeed in case we goofed somehow
-                speed.setNewSpeed(speed.getOriginalSpeed());
-            }
-        }
-    }
-
-    @Override
-    @SubscribeEvent
-    public void destroyWoodBlock(BlockEvent.BreakEvent event){
-
-        EntityPlayer p = event.getPlayer();
-
-        if( tf_PlayerData.containsKey(p.getPersistentID())){
-            BlockPos pos = tf_PlayerData.get(p.getPersistentID()).pos;
-
-            if(pos.equals(event.getPos())){
-                //TODO destroy the tree from the treehandler
-
-                treeHandler.DestroyTree(event.getWorld(), event.getPlayer());
-
-
-                /**
-                 * burst damage the axe based on the size of the tree
-                 */
-                if(!p.isCreative() && p.getHeldItemMainhand().isItemStackDamageable()){
-                    int newAxeDurability = p.getHeldItemMainhand().getItemDamage() + (int)(tf_PlayerData.get(p.getPersistentID()).logCount * 1.5);
-                    p.getHeldItemMainhand().setItemDamage(newAxeDurability);
-                }
-            }
-        }
-        if( isWoodenBlock(event.getWorld(), event.getPos())){
-
-            event.getPlayer().sendMessage(new TextComponentString("[SERVER?]Hey, stop that! We need those!  ["+ event.getResult().name() + "] [" +event.getState()+"] ["+event.getPos()+"] blocks!"));
-        }
-        else{
-            event.getPlayer().sendMessage(new TextComponentString("[SERVER?]It wasn't a log according to our check :("));
-
-        }
-    }
-
-    /**
-     *
-     * @param world - the world that the block exists in
-     * @param blockPos - the position of the block in question
-     * @return
-     */
-    protected static boolean isWoodenBlock(World world, BlockPos blockPos){
-
-        //add any other woodlogblocks to this array to let the quartz-edged-axe chop the whole tree
-        Block[] woodblocks = {
-                getBlockFromName("log"),
-                getBlockFromName("log2")
-        };
-
-        Block ub = world.getBlockState(blockPos).getBlock();
-        for(Block b : woodblocks){
-            if( b == ub )
-                return true;
-        }
-
-        return false;
-    }
 
 }
