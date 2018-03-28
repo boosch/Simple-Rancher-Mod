@@ -81,33 +81,6 @@ public class SimpleRancher {
      * Registration Handler for Items
      */
 
-    @Mod.EventBusSubscriber
-    public static class RegistrationHandler {
-
-
-
-        @SubscribeEvent
-        public static void registerItems(RegistryEvent.Register<Item> event) {
-
-            ModItems.register(event.getRegistry());
-            ModBlocks.registerItemBlocks(event.getRegistry());
-
-        }
-
-        @SubscribeEvent
-        public static void registerItems(ModelRegistryEvent event) {
-
-            ModItems.registerModels();
-            ModBlocks.registerModels();
-        }
-
-        @SubscribeEvent
-        public static void registerBlocks(RegistryEvent.Register<Block> event) {
-
-            ModBlocks.register(event.getRegistry());
-        }
-
-    }
 
 
 }
