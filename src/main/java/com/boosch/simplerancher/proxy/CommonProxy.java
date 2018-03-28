@@ -162,7 +162,6 @@ public abstract class CommonProxy {
             BlockPos pos = tf_PlayerData.get(p.getPersistentID()).pos;
 
             if(pos.equals(event.getPos())){
-                //TODO destroy the tree from the treehandler
 
                 treeHandler.DestroyTree(event.getWorld(), event.getPlayer());
 
@@ -175,6 +174,7 @@ public abstract class CommonProxy {
                 }
             }
         }
+
         if( isWoodenBlock(event.getWorld(), event.getPos())){
 
             event.getPlayer().sendMessage(new TextComponentString("[CLIENT]Hey, stop that! We need those!  ["+ event.getResult().name() + "] [" +event.getState()+"] ["+event.getPos()+"] blocks!"));

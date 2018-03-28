@@ -114,7 +114,9 @@ public class TreeHandler {
                 for(int modZ=-1; modZ<=1; modZ++){
 
                     pos = new BlockPos(currentPos.getX()+modX, currentPos.getY()+modY, currentPos.getZ()+modZ);
-
+                    if( CheckBlock(world, pos, checkedBlocks, logBlock)) {
+                        queuedBlocks.add(pos);
+                    }
                 }
             }
         }
@@ -130,6 +132,7 @@ public class TreeHandler {
 
         if(world.getBlockState(p).getBlock() != logBlock){
             //TODO this is where we could handle leaves!
+            return false;
         }
 
         tree.AddLog(p);
