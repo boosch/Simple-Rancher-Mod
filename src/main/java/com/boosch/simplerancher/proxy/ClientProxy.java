@@ -187,7 +187,7 @@ public class ClientProxy implements CommonProxy {
             if(pos.equals(event.getPos())){
                 //TODO destroy the tree from the treehandler
 
-
+                treeHandler.DestroyTree(event.getWorld(), event.getPlayer());
 
                 /**
                  * burst damage the axe based on the size of the tree
@@ -200,10 +200,10 @@ public class ClientProxy implements CommonProxy {
         }
         if( isWoodenBlock(event.getWorld(), event.getPos())){
 
-            event.getPlayer().sendMessage(new TextComponentString("Hey, stop that! We need those!  ["+ event.getResult().name() + "] [" +event.getState()+"] ["+event.getPos()+"] blocks!"));
+            event.getPlayer().sendMessage(new TextComponentString("[CLIENT]Hey, stop that! We need those!  ["+ event.getResult().name() + "] [" +event.getState()+"] ["+event.getPos()+"] blocks!"));
         }
         else{
-            event.getPlayer().sendMessage(new TextComponentString("It wasn't a log according to our check :("));
+            event.getPlayer().sendMessage(new TextComponentString("[CLIENT]It wasn't a log according to our check :("));
 
         }
     }

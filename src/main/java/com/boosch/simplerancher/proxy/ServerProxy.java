@@ -174,6 +174,7 @@ public class ServerProxy implements CommonProxy {
             if(pos.equals(event.getPos())){
                 //TODO destroy the tree from the treehandler
 
+                treeHandler.DestroyTree(event.getWorld(), event.getPlayer());
 
 
                 /**
@@ -187,10 +188,10 @@ public class ServerProxy implements CommonProxy {
         }
         if( isWoodenBlock(event.getWorld(), event.getPos())){
 
-            event.getPlayer().sendMessage(new TextComponentString("Hey, stop that! We need those!  ["+ event.getResult().name() + "] [" +event.getState()+"] ["+event.getPos()+"] blocks!"));
+            event.getPlayer().sendMessage(new TextComponentString("[SERVER]Hey, stop that! We need those!  ["+ event.getResult().name() + "] [" +event.getState()+"] ["+event.getPos()+"] blocks!"));
         }
         else{
-            event.getPlayer().sendMessage(new TextComponentString("It wasn't a log according to our check :("));
+            event.getPlayer().sendMessage(new TextComponentString("[SERVER]It wasn't a log according to our check :("));
 
         }
     }
