@@ -6,7 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemGnocchi extends SimpleRancherFood {
+public class ItemGnocchi extends SimpleRancherItemFood {
 
     public ItemGnocchi(){
         super(18, 0.18F, false, "gnocchi", "Wait... How did this even get cooked?");

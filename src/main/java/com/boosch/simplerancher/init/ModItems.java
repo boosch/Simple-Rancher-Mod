@@ -38,7 +38,6 @@ public class ModItems {
 
         @Tool quartz_edged_axe - cuts whole trees down!
             @ToolMaterial DONE Quartz_edged - repair with quartz
-            TODO update tooltip for quartz_edged_axe
 
         @Laquer
             TODO add a concept of laquers - dye equivelents for iron armors; parity function with leather dye
@@ -93,9 +92,9 @@ public class ModItems {
 
 
     //tools and materials
-    public static SimpleRancherBase IRON_BUCKLE = new SimpleRancherBase("ironbuckle");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
-    public static SimpleRancherBase LEATHER_STRIP = new SimpleRancherBase("leatherstrip");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
-    public static SimpleRancherBase BUCKLED_STRAP = new SimpleRancherBase("buckledstrap");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
+    public static SimpleRancherItemBase IRON_BUCKLE = new SimpleRancherItemBase("ironbuckle");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
+    public static SimpleRancherItemBase LEATHER_STRIP = new SimpleRancherItemBase("leatherstrip");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
+    public static SimpleRancherItemBase BUCKLED_STRAP = new SimpleRancherItemBase("buckledstrap");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
     public static ItemQuartzEdgedAxe QUARTZ_EDGED_AXE = new ItemQuartzEdgedAxe();
 
     //armor pieces
@@ -106,8 +105,8 @@ public class ModItems {
 
 
     //food-ingredients
-    public static SimpleRancherBase RAW_DOUGH = new SimpleRancherBase("rawdough");
-    public static SimpleRancherBase FLOUR = new SimpleRancherBase("flour");
+    public static SimpleRancherItemBase RAW_DOUGH = new SimpleRancherItemBase("rawdough");
+    public static SimpleRancherItemBase FLOUR = new SimpleRancherItemBase("flour");
 
     //foods
     public static ItemGnocchi GNOCCHI = new ItemGnocchi();

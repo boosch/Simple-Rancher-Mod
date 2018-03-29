@@ -1,45 +1,51 @@
 package com.boosch.simplerancher.items;
 
 import com.boosch.simplerancher.SimpleRancher;
-import net.minecraft.item.ItemFood;
+import net.minecraft.item.Item;
 
-public class SimpleRancherFood extends ItemFood implements FlavorText {
 
-    private String name;
-    private String flavorText;
+public class SimpleRancherItemBase extends Item implements FlavorText {
 
-    public SimpleRancherFood(int amount, float saturation, boolean isWoolfFood, String name){
+    protected String name;
+    protected String flavorText;
 
-        super(amount, saturation, isWoolfFood);
+    public SimpleRancherItemBase(String name){
+
         this.name = name;
-        this.flavorText = "So this is new...";
+        this.flavorText="So this is new...";
 
         setUnlocalizedName(name);
         setRegistryName(name);
+
         setCreativeTab(SimpleRancher.CREATIVE_TAB);
 
     }
 
-    public SimpleRancherFood(int amount, float saturation, boolean isWoolfFood, String name, String flavorText){
+    public SimpleRancherItemBase(String name, String flavorText){
 
-        super(amount, saturation, isWoolfFood);
         this.name = name;
         this.flavorText = flavorText;
-
         setUnlocalizedName(name);
         setRegistryName(name);
+
         setCreativeTab(SimpleRancher.CREATIVE_TAB);
 
     }
-
 
     public String getFlavorText(){
         return flavorText;
     }
 
     public void registerItemModel(){
-
         SimpleRancher.proxy.registerItemRenderer(this, 0, name);
     }
 
+
+    /*
+    @Override
+    public SimpleRancherItemBase setCreativeTab(CreativeTabs tab){
+        super.setCreativeTab(tab);
+        return this;
+    }
+    */
 }

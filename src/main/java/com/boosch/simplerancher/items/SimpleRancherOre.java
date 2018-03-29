@@ -2,7 +2,7 @@ package com.boosch.simplerancher.items;
 
 import net.minecraftforge.oredict.OreDictionary;
 
-public class SimpleRancherOre extends SimpleRancherBase {
+public class SimpleRancherOre extends SimpleRancherItemBase {
 
     //for OreDict
     private String oreName;
