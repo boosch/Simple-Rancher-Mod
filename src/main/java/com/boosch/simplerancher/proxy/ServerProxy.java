@@ -1,5 +1,6 @@
 package com.boosch.simplerancher.proxy;
 
+import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.TreeFell.util.handlers.TreeHandler;
 import com.boosch.simplerancher.items.ItemQuartzEdgedAxe;
 import net.minecraft.block.Block;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -23,10 +25,13 @@ import static net.minecraft.block.Block.getBlockFromName;
 //indicates code that should only ever be run on a server
 public class ServerProxy extends CommonProxy {
 
+    /**
+     * Not necessary since mod doesn't branch from server at init
+     *
     @Override
     public void init() {
-
     }
+    */
 
     @Override
     public void preInit() {
@@ -43,16 +48,6 @@ public class ServerProxy extends CommonProxy {
 
     }
 
-
-    /**
-     * TreeFell stuff!
-     *
-     *
-     * Everything below here should be literally 100% from Client Proxy
-     *
-     *
-     *
-     */
 
     @Override
     /**
@@ -72,8 +67,6 @@ public class ServerProxy extends CommonProxy {
             ItemStack tool = p.getHeldItemMainhand();
 
             if (tool.getItem() instanceof ItemQuartzEdgedAxe) { //let's be sure they're using our axe!
-
-                event.getEntityPlayer().sendMessage(new TextComponentString("[SERVER?]... Sweet axe!"));
 
                 int axeCurrentDurability = tool.getMaxDamage() - tool.getItemDamage();
                 UUID pid = p.getPersistentID();

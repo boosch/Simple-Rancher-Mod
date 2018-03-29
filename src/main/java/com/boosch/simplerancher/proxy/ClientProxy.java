@@ -29,11 +29,14 @@ import static net.minecraft.block.Block.getBlockFromName;
 public class ClientProxy extends CommonProxy {
 
 
+    /**
+     * Not necessary since mod does not branch from server during init
     @Override
     public void init() {
 
         MinecraftForge.EVENT_BUS.register(SimpleRancher.proxy);
     }
+    **/
 
     @Override
     public void preInit() {

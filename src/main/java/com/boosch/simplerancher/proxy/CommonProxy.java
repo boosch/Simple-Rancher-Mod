@@ -1,5 +1,6 @@
 package com.boosch.simplerancher.proxy;
 
+import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.TreeFell.util.handlers.TreeHandler;
 import com.boosch.simplerancher.items.ItemQuartzEdgedAxe;
 import net.minecraft.block.Block;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -22,7 +24,9 @@ import static net.minecraft.block.Block.getBlockFromName;
 
 public abstract class CommonProxy {
 
-    public abstract void init();
+    public void init(){
+        MinecraftForge.EVENT_BUS.register(SimpleRancher.proxy);
+    }
     public abstract void preInit();
     public abstract void postInit();
     public abstract void registerItemRenderer(Item item, int meta, String id);
@@ -135,6 +139,8 @@ public abstract class CommonProxy {
      */
     public void breakingWoodBlock(PlayerEvent.BreakSpeed speed){
         UUID pid = speed.getEntityPlayer().getPersistentID();
+        System.out.println("we're beating on a "+speed.getState().getBlock().getLocalizedName());
+
         if(tf_PlayerData.containsKey(pid)){
 
             BlockPos pos = tf_PlayerData.get(pid).pos;
@@ -153,6 +159,8 @@ public abstract class CommonProxy {
     public void destroyWoodBlock(BlockEvent.BreakEvent event){
 
         EntityPlayer p = event.getPlayer();
+
+        System.out.println("we're gonna try to destroy a tree!");
 
         if( tf_PlayerData.containsKey(p.getPersistentID())){
             BlockPos pos = tf_PlayerData.get(p.getPersistentID()).pos;
