@@ -2,6 +2,7 @@ package com.boosch.simplerancher.proxy;
 
 import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.TreeFell.util.handlers.TreeHandler;
+import com.boosch.simplerancher.items.ItemGnocchi;
 import com.boosch.simplerancher.items.ItemQuartzEdgedAxe;
 import com.boosch.simplerancher.items.ItemReinforcedBoots;
 import com.boosch.simplerancher.util.Reference;
@@ -68,6 +69,9 @@ public class ClientProxy extends CommonProxy {
         if(event.getItemStack().getItem() instanceof ItemReinforcedBoots){
             insertToolTipFlavorText(event, "Sturdy boots for workers who need to hustle.");
         }
+        if(event.getItemStack().getItem() instanceof ItemGnocchi){
+            insertToolTipFlavorText(event, "Wait... How did this even get cooked?");
+        }
     }
 
     /**
@@ -79,17 +83,7 @@ public class ClientProxy extends CommonProxy {
 
         if(event.getToolTip().contains(flavorText)){ return;}
 
-        List<String> newTooltip = new LinkedList<>();
-        newTooltip.add(event.getToolTip().get(0));
-        event.getToolTip().remove(0);
-        newTooltip.add(TextFormatting.DARK_PURPLE + "" + TextFormatting.ITALIC +flavorText);
-
-        for(String str : event.getToolTip()){
-            newTooltip.add(str);
-        }
-
-        event.getToolTip().clear();
-        event.getToolTip().addAll(newTooltip);
+        event.getToolTip().add(1, TextFormatting.BLUE + "" + TextFormatting.ITALIC +flavorText);
     }
 
 
