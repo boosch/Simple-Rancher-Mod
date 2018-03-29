@@ -31,23 +31,23 @@ public class ModItems {
 
         @ArmorMaterial DONE reinforced_leather - a tougher version of leather armor made by adding straps to leather armor. Slightly stronger than leather, with 1 toughness
         @Armor DONE Reinforced Leather Boots - +armor, +movement speed
-        @TODO @Armor Reinforced Leather Cap
-        @TODO @Armor Reinforced Leather Leggings
-        @TODO @Armor Reinforced Leather Chestpiece
+        TODO @Armor Reinforced Leather Cap
+        TODO @Armor Reinforced Leather Leggings
+        TODO @Armor Reinforced Leather Chestpiece
 
 
-        @TODO @Tool treefellingaxe - cuts whole trees down!
+        @Tool quartz_edged_axe - cuts whole trees down!
+            @ToolMaterial DONE Quartz_edged - repair with quartz
+            TODO update tooltip for quartz_edged_axe
 
         @Laquer
-        @TODO add a concept of laquers - dye equivelents for iron armors; parity function with leather dye
-            @TODO @Item laquer - dye for metallic items
-            @TODO @??? Make Iron Armor dye-able
+            TODO add a concept of laquers - dye equivelents for iron armors; parity function with leather dye
+            TODO @Item laquer - dye for metallic items
+            TODO @??? Make Iron Armor dye-able
 
         @Block&Ores
             @Item DONE QUARTZ_CRYSTAL
             @Block DONE quartzOre
-            @BlockItem (?) QUARTZ_CRYSTAL
-            @TODO remove QUARTZ_CRYSTAL
 
         @Food
              DONE Flour - Wheat processes into flour

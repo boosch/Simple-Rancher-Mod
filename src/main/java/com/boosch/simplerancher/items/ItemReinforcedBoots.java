@@ -59,7 +59,6 @@ public class ItemReinforcedBoots extends SimpleRancherItemArmor {
             //UUID from EntityCreature UUID.fromString("E199AD21-BA8A-4C53-8D13-6182D5C69D3A")
             //multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), EntityCreature.FLEEING_SPEED_MODIFIER);
             multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), SIMPLE_RANCHER_REINFORCED_LEATHER_BOOTS_MOVESPEED_MOD);
-
         }
 
         return multimap;
