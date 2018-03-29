@@ -1,25 +1,34 @@
 package com.boosch.simplerancher.proxy;
 
 
+
+import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.util.Reference;
 
+
+import com.boosch.simplerancher.util.handlers.TooltipHandler;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
+
 
 //indicates code that should only ever be run on the client
 public class ClientProxy extends CommonProxy {
 
 
-    /**
-     * Not necessary since mod does not branch from server during init
+
+
     @Override
     public void init() {
 
         MinecraftForge.EVENT_BUS.register(SimpleRancher.proxy);
+
+        TooltipHandler tth = new TooltipHandler();
+        MinecraftForge.EVENT_BUS.register(tth);
     }
-    **/
+
 
     @Override
     public void preInit() {
