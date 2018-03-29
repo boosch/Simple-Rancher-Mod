@@ -1,5 +1,6 @@
 package com.boosch.simplerancher.proxy;
 
+import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.TreeFell.util.handlers.TreeHandler;
 import com.boosch.simplerancher.items.ItemQuartzEdgedAxe;
 
@@ -7,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.UUID;
@@ -17,11 +19,15 @@ public class ServerProxy extends CommonProxy {
 
     /**
      * Not necessary since mod doesn't branch from server at init
-     *
+     */
+
+    /*
     @Override
     public void init() {
+        MinecraftForge.EVENT_BUS.register(SimpleRancher.proxy);
+        System.out.println("HEY WE LOADED THE EVENT BUSSES IN THE SERVER THINGY");
     }
-    */
+*/
 
     @Override
     public void preInit() {

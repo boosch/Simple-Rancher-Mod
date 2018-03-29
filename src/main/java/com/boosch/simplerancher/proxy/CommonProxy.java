@@ -2,6 +2,7 @@ package com.boosch.simplerancher.proxy;
 
 import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.TreeFell.util.handlers.TreeHandler;
+import com.boosch.simplerancher.items.FlavorText;
 import com.boosch.simplerancher.items.ItemQuartzEdgedAxe;
 
 import net.minecraft.block.Block;
@@ -9,9 +10,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -31,6 +34,8 @@ public abstract class CommonProxy {
     public abstract void preInit();
     public abstract void postInit();
     public abstract void registerItemRenderer(Item item, int meta, String id);
+
+
 
     /**
      *

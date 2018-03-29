@@ -6,6 +6,7 @@ import com.boosch.simplerancher.init.ModRecipes;
 import com.boosch.simplerancher.proxy.CommonProxy;
 
 import com.boosch.simplerancher.util.Reference;
+import com.boosch.simplerancher.util.handlers.TooltipHandler;
 import com.boosch.simplerancher.world.ModWorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
@@ -25,6 +26,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * http://shadowfacts.net/tutorials/forge-modding-112/basic-items/
