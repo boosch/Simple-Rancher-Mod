@@ -42,29 +42,6 @@ public class ClientProxy extends CommonProxy {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(Reference.MOD_ID+":"+id, "inventory"));
     }
 
-    /**
-     * used to override a tooltip on the fly
-     * @param event
-     */
-    @SubscribeEvent
-    public void modItemsTooltipInjector(ItemTooltipEvent event) {
-
-        if (event.getItemStack().getItem() instanceof FlavorText) {
-            insertToolTipFlavorText(event, ((FlavorText) event.getItemStack().getItem()).getFlavorText());
-        }
-    }
-
-    /**
-     * Insert a tooltip for an item
-     * @param event
-     * @param flavorText
-     */
-    private void insertToolTipFlavorText(ItemTooltipEvent event, String flavorText){
-
-        if(event.getToolTip().contains(flavorText)){ return;}
-
-        event.getToolTip().add(1, TextFormatting.BLUE + "" + TextFormatting.ITALIC +flavorText);
-    }
 
 
 }
