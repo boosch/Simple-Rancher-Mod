@@ -53,6 +53,7 @@ public class ModItems {
              DONE Dough - Flour + Egg = 2x Dough
              DONE Bread - Cook Dough
              DONE Gnocci - Potato, Flour, Egg, Bowl (better than steak!)
+             DONE Sugary Horse Treat -
 
         @Stretch
         Add magic to the world. Based on Thaumcraft. Stretch goals include...

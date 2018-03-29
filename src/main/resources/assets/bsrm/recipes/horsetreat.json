@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SAS"
+  ],
+  "key": {
+    "S": {
+      "item": "bsrm:sugar"
+    },
+    "A": {
+      "item": "minecraft:apple"
+    }
+  },
+  "result": {
+    "item": "bsrm:horsetreat"
+  }
+}
