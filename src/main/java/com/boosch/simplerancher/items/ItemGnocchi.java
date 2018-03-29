@@ -1,20 +1,15 @@
 package com.boosch.simplerancher.items;
 
-import com.boosch.simplerancher.SimpleRancher;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemSoup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
-public class ItemGnocchi extends SimpleRancherItemFood{
+public class ItemGnocchi extends SimpleRancherFood {
 
-    public ItemGnocchi (){
-        super(18, 0.18F, false, "gnocchi");
+    public ItemGnocchi(){
+        super(18, 0.18F, false, "gnocchi", "Wait... How did this even get cooked?");
 
     }
 

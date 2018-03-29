@@ -93,21 +93,21 @@ public class ModItems {
 
 
     //tools and materials
-    public static SimpleRancherItemBase IRON_BUCKLE = new SimpleRancherItemBase("ironbuckle");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
-    public static SimpleRancherItemBase LEATHER_STRIP = new SimpleRancherItemBase("leatherstrip");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
-    public static SimpleRancherItemBase BUCKLED_STRAP = new SimpleRancherItemBase("buckledstrap");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
+    public static SimpleRancherBase IRON_BUCKLE = new SimpleRancherBase("ironbuckle");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
+    public static SimpleRancherBase LEATHER_STRIP = new SimpleRancherBase("leatherstrip");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
+    public static SimpleRancherBase BUCKLED_STRAP = new SimpleRancherBase("buckledstrap");//.setCreativeTab(SimpleRancher.CREATIVE_TAB);
     public static ItemQuartzEdgedAxe QUARTZ_EDGED_AXE = new ItemQuartzEdgedAxe();
 
     //armor pieces
     public static ItemReinforcedBoots REINFORCED_BOOTS = new ItemReinforcedBoots(SimpleRancher.ARMORMAT_REINFORCED_LEATHER, "reinforced_leather_boots");
 
     //ores
-    //public static SimpleRancherItemOre QUARTZ_CRYSTAL = new SimpleRancherItemOre("quartzcrystal", "gemQuartz");
+    //public static SimpleRancherOre QUARTZ_CRYSTAL = new SimpleRancherOre("quartzcrystal", "gemQuartz");
 
 
     //food-ingredients
-    public static SimpleRancherItemBase RAW_DOUGH = new SimpleRancherItemBase("rawdough");
-    public static SimpleRancherItemBase FLOUR = new SimpleRancherItemBase("flour");
+    public static SimpleRancherBase RAW_DOUGH = new SimpleRancherBase("rawdough");
+    public static SimpleRancherBase FLOUR = new SimpleRancherBase("flour");
 
     //foods
     public static ItemGnocchi GNOCCHI = new ItemGnocchi();

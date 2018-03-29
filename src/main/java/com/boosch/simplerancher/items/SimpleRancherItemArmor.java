@@ -7,6 +7,7 @@ import net.minecraft.item.ItemArmor;
 public class SimpleRancherItemArmor extends ItemArmor {
 
     private String name;
+    private String flavorText;
 
     public SimpleRancherItemArmor(ArmorMaterial material, EntityEquipmentSlot slot, String name){
         super(material, 0, slot);
@@ -17,6 +18,20 @@ public class SimpleRancherItemArmor extends ItemArmor {
         setCreativeTab(SimpleRancher.CREATIVE_TAB);
 
         this.name = name;
+        this.flavorText = "So this is new...";
+    }
+
+
+    public SimpleRancherItemArmor(ArmorMaterial material, EntityEquipmentSlot slot, String name, String flavorText){
+        super(material, 0, slot);
+
+        setRegistryName(name);
+        setUnlocalizedName(name);
+
+        setCreativeTab(SimpleRancher.CREATIVE_TAB);
+
+        this.name = name;
+        this.flavorText = flavorText;
     }
 
     public void registerItemModel(){

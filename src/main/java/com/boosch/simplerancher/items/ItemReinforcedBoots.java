@@ -23,7 +23,7 @@ public class ItemReinforcedBoots extends SimpleRancherItemArmor {
 
     public ItemReinforcedBoots(ArmorMaterial material,  String name){
 
-        super(material, EntityEquipmentSlot.FEET, name);
+        super(material, EntityEquipmentSlot.FEET, name, "Sturdy boots for workers who need to hustle.");
 
     }
 
