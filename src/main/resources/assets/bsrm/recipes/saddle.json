@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "group": "saddle",
   "pattern": [
-    "SBS",
-    "TLT",
-    "SBS"
+    "BLB",
+    "S S",
+    "I I"
   ],
   "key": {
     "S": {
@@ -16,8 +16,8 @@
     "L": {
       "item": "minecraft:leather"
     },
-    "T": {
-      "item": "bsrm:leatherstrip"
+    "I": {
+      "item": "bsrm:iron_ingot"
     }
   },
   "result": {

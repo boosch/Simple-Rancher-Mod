@@ -3,13 +3,14 @@ package com.boosch.simplerancher.proxy;
 import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.TreeFell.util.handlers.TreeHandler;
 import com.boosch.simplerancher.items.ItemQuartzEdgedAxe;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -36,7 +37,7 @@ public abstract class CommonProxy {
      *
      *
      *
-     * TreeFell Stuff is here
+     * TreeFell Stuff is here below
      *
      *
      *
@@ -139,7 +140,7 @@ public abstract class CommonProxy {
      */
     public void breakingWoodBlock(PlayerEvent.BreakSpeed speed){
         UUID pid = speed.getEntityPlayer().getPersistentID();
-        System.out.println("we're beating on a "+speed.getState().getBlock().getLocalizedName());
+        //System.out.println("we're beating on a "+speed.getState().getBlock().getLocalizedName());
 
         if(tf_PlayerData.containsKey(pid)){
 
@@ -160,7 +161,7 @@ public abstract class CommonProxy {
 
         EntityPlayer p = event.getPlayer();
 
-        System.out.println("we're gonna try to destroy a tree!");
+        //System.out.println("we're gonna try to destroy a tree!");
 
         if( tf_PlayerData.containsKey(p.getPersistentID())){
             BlockPos pos = tf_PlayerData.get(p.getPersistentID()).pos;
@@ -197,7 +198,7 @@ public abstract class CommonProxy {
      *
      * @param world - the world that the block exists in
      * @param blockPos - the position of the block in question
-     * @return
+     * @return whether or not the block was a match
      */
     protected static boolean isWoodenBlock(World world, BlockPos blockPos){
 

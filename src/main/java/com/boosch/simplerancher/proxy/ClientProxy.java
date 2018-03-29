@@ -1,17 +1,12 @@
 package com.boosch.simplerancher.proxy;
 
-import com.boosch.simplerancher.items.FlavorText;
-import com.boosch.simplerancher.items.ItemGnocchi;
-import com.boosch.simplerancher.items.ItemQuartzEdgedAxe;
-import com.boosch.simplerancher.items.ItemReinforcedBoots;
+
 import com.boosch.simplerancher.util.Reference;
-import jline.TerminalFactory;
+
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraft.util.text.TextFormatting;
+
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 //indicates code that should only ever be run on the client
 public class ClientProxy extends CommonProxy {

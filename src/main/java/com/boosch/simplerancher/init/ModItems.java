@@ -110,6 +110,7 @@ public class ModItems {
 
     //foods
     public static ItemGnocchi GNOCCHI = new ItemGnocchi();
+    public static ItemHorseTreat HORSETREAT = new ItemHorseTreat();
 
     public static void register(IForgeRegistry<Item> registry){
         registry.registerAll(
@@ -124,6 +125,7 @@ public class ModItems {
                 RAW_DOUGH,
                 FLOUR,
                 GNOCCHI,
+                HORSETREAT,
 
                 QUARTZ_EDGED_AXE
         );
@@ -142,6 +144,7 @@ public class ModItems {
         RAW_DOUGH.registerItemModel();
         FLOUR.registerItemModel();
         GNOCCHI.registerItemModel();
+        HORSETREAT.registerItemModel();
 
         QUARTZ_EDGED_AXE.registerItemModel();
     }
