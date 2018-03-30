@@ -15,10 +15,13 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 
 //indicates code that should only ever be run on the client
+@Mod.EventBusSubscriber(value= Side.CLIENT, modid=Reference.MOD_ID)
 public class ClientProxy extends CommonProxy {
 
 
@@ -49,8 +52,6 @@ public class ClientProxy extends CommonProxy {
 
     @SubscribeEvent
     public static void modItemsTooltipInjector(ItemTooltipEvent event) {
-
-        System.out.println("Hey, the tooltip thing fired!");
         if (event.getItemStack().getItem() instanceof FlavorText) {
             insertToolTipFlavorText(event, ((FlavorText) event.getItemStack().getItem()).getFlavorText());
         }
