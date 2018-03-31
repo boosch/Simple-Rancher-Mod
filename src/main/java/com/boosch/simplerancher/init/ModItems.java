@@ -121,6 +121,9 @@ public class ModItems {
     public static ItemGnocchi GNOCCHI = new ItemGnocchi();
     public static ItemHorseTreat HORSETREAT = new ItemHorseTreat();
 
+    //golems
+    public static ItemGolem GOLEM_STRAW = new ItemGolem("golem_straw","straw", "You should probably put him down");
+
     public static void register(IForgeRegistry<Item> registry){
         registry.registerAll(
                 IRON_BUCKLE,
@@ -136,7 +139,9 @@ public class ModItems {
                 GNOCCHI,
                 HORSETREAT,
 
-                QUARTZ_EDGED_AXE
+                QUARTZ_EDGED_AXE,
+
+                GOLEM_STRAW
         );
 
     }
@@ -156,6 +161,8 @@ public class ModItems {
         HORSETREAT.registerItemModel();
 
         QUARTZ_EDGED_AXE.registerItemModel();
+
+        GOLEM_STRAW.registerItemModel();
     }
 
 }
