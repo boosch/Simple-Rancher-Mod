@@ -43,7 +43,7 @@ public class SimpleRancher {
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
 
-///
+
     //these run before, during and after game load
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
