@@ -36,8 +36,14 @@ public class ModItems {
         TODO @Armor Reinforced Leather Chestpiece
 
 
+
+        @ToolMaterial DONE Quartz_edged - repair with quartz
         @Tool quartz_edged_axe - cuts whole trees down!
-            @ToolMaterial DONE Quartz_edged - repair with quartz
+
+        @Tool quartz_edged_pickaxe - +50% ore gains
+
+
+
 
         @Laquer
             TODO add a concept of laquers - dye equivelents for iron armors; parity function with leather dye
@@ -53,7 +59,9 @@ public class ModItems {
              DONE Dough - Flour + Egg = 2x Dough
              DONE Bread - Cook Dough
              DONE Gnocci - Potato, Flour, Egg, Bowl (better than steak!)
-             DONE Sugary Horse Treat -
+             DONE Sugary Horse Treat - breeds horses
+
+        @
 
         @Stretch
         Add magic to the world. Based on Thaumcraft. Stretch goals include...

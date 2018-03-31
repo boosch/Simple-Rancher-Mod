@@ -2,18 +2,15 @@ package com.boosch.simplerancher.proxy;
 
 
 
-import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.items.FlavorText;
 import com.boosch.simplerancher.util.Reference;
 
 
-import com.boosch.simplerancher.util.handlers.TooltipHandler;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

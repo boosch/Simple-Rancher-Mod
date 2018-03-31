@@ -1,33 +1,23 @@
 package com.boosch.simplerancher;
 
-import com.boosch.simplerancher.init.ModBlocks;
-import com.boosch.simplerancher.init.ModItems;
 import com.boosch.simplerancher.init.ModRecipes;
 import com.boosch.simplerancher.proxy.CommonProxy;
 
 import com.boosch.simplerancher.util.Reference;
-import com.boosch.simplerancher.util.handlers.TooltipHandler;
 import com.boosch.simplerancher.world.ModWorldGen;
-import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
-import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * http://shadowfacts.net/tutorials/forge-modding-112/basic-items/
