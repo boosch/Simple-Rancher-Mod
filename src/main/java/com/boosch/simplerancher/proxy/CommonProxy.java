@@ -2,6 +2,7 @@ package com.boosch.simplerancher.proxy;
 
 import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.TreeFell.util.handlers.TreeHandler;
+import com.boosch.simplerancher.init.ModEntities;
 import com.boosch.simplerancher.items.FlavorText;
 import com.boosch.simplerancher.items.ItemQuartzEdgedAxe;
 
@@ -28,10 +29,14 @@ import static net.minecraft.block.Block.getBlockFromName;
 
 public abstract class CommonProxy {
 
+
+    public abstract void preInit();
+
     public void init(){
+
         MinecraftForge.EVENT_BUS.register(SimpleRancher.proxy);
     }
-    public abstract void preInit();
+
     public abstract void postInit();
     public abstract void registerItemRenderer(Item item, int meta, String id);
 

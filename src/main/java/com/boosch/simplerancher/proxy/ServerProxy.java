@@ -2,6 +2,7 @@ package com.boosch.simplerancher.proxy;
 
 import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.TreeFell.util.handlers.TreeHandler;
+import com.boosch.simplerancher.init.ModEntities;
 import com.boosch.simplerancher.items.ItemQuartzEdgedAxe;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +32,7 @@ public class ServerProxy extends CommonProxy {
 
     @Override
     public void preInit() {
-
+        ModEntities.init();
     }
 
     @Override

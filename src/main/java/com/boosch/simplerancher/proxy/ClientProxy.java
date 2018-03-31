@@ -2,6 +2,7 @@ package com.boosch.simplerancher.proxy;
 
 
 
+import com.boosch.simplerancher.init.ModEntities;
 import com.boosch.simplerancher.items.FlavorText;
 import com.boosch.simplerancher.util.Reference;
 
@@ -32,6 +33,8 @@ public class ClientProxy extends CommonProxy {
 */
     @Override
     public void preInit() {
+        ModEntities.init();
+        ModEntities.initModels();
     }
 
     @Override
