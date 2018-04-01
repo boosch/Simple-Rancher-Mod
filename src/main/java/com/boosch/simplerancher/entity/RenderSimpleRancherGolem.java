@@ -1,10 +1,13 @@
 package com.boosch.simplerancher.entity;
 
+import com.boosch.simplerancher.entity.model.ModelSimpleRancherGolem;
 import com.boosch.simplerancher.util.Reference;
 import net.minecraft.client.model.ModelIronGolem;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.monster.EntityGiantZombie;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
@@ -19,7 +22,7 @@ public class RenderSimpleRancherGolem extends RenderLiving<EntitySimpleRancherGo
     public RenderSimpleRancherGolem(RenderManager renderManagerIn){
 
         //we use the vanilla golem model here and we simply retecture it
-        super(renderManagerIn, new ModelIronGolem(), 0.1F);
+        super(renderManagerIn, new ModelSimpleRancherGolem(), .3F);
     }
 
     @Override
@@ -27,6 +30,19 @@ public class RenderSimpleRancherGolem extends RenderLiving<EntitySimpleRancherGo
     protected ResourceLocation getEntityTexture(@Nonnull EntitySimpleRancherGolem entity){
         return mobTexture;
     }
+
+    @Override
+    protected void preRenderCallback(EntitySimpleRancherGolem entitylivingbaseIn, float partialTickTime)
+    {
+        preRencderCallbackSimpleRancherGolem((EntitySimpleRancherGolem)entitylivingbaseIn, partialTickTime);
+    }
+
+    protected void preRencderCallbackSimpleRancherGolem(EntitySimpleRancherGolem golem, float f){
+
+        GlStateManager.scale(golem.getScale(), golem.getScale(), golem.getScale() );
+    }
+
+
 
 
     public static class Factory implements IRenderFactory<EntitySimpleRancherGolem>{

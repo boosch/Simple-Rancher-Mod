@@ -35,14 +35,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
+public abstract class EntitySimpleRancherGolem extends EntityGolem {
 
     protected String type;
     protected BlockPos home;
-
-    public static final ResourceLocation LOOT = new ResourceLocation(Reference.MOD_ID, "entities/base_golemn");
-
-
+    protected final float scale;
+    public static final ResourceLocation LOOT = new ResourceLocation(Reference.MOD_ID, "entities/base_golem");
     protected static final DataParameter<Byte> PLAYER_CREATED = EntityDataManager.<Byte>createKey(EntityIronGolem.class, DataSerializers.BYTE);
     /**
      * deincrements, and a distance-to-home check is done at 0
@@ -60,7 +58,8 @@ public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
         this.type = "straw";
 
         this.setPlayerCreated(true);
-        this.setSize(.25F, .25F);
+        this.setSize(.36F, .75F);
+        this.scale = .3F;
     }
 
     public EntitySimpleRancherGolem(World worldIn, String type, BlockPos home) {
@@ -70,44 +69,51 @@ public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
         this.home = home;
 
         this.setPlayerCreated(true);
-        this.setSize(.25F, .25F);
+        this.setSize(.36F, .75F);
+        this.scale = .3F;
     }
 
-    @Override
+    public float getScale() {
+        return scale;
+    }
+
+
     protected void initEntityAI() {
-        //this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
         this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
         //this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
-        //this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
+        this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
         //this.tasks.addTask(5, new EntityAILookAtVillager(this));
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 0.6D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         //this.targetTasks.addTask(1, new EntityAIDefendVillage(this));
         this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false, new Class[0]));
-        /*this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, false, true, new Predicate<EntityLiving>()
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, false, true, new Predicate<EntityLiving>()
         {
             public boolean apply(@Nullable EntityLiving p_apply_1_)
             {
                 return p_apply_1_ != null && IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper);
             }
         }));
-        */
+
     }
 
-    @Override
+
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(PLAYER_CREATED, Byte.valueOf((byte) 0));
+        System.out.println("A new "+this.type+"_golem has been created!");
     }
 
-    @Override
+
     protected void updateAITasks() {
         if (--this.homeCheckTimer <= 0) {
             this.homeCheckTimer = 70 + this.rand.nextInt(50);
-            this.village = this.world.getVillageCollection().getNearestVillage(new BlockPos(this), 32);
 
-            if (this.village == null) {
+            //this.village = this.world.getVillageCollection().getNearestVillage(new BlockPos(this), 32);
+
+            if (home == null) {
                 this.detachHome();
             } else {
                 //reset his home and give a radius of 5
@@ -119,7 +125,16 @@ public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
         super.updateAITasks();
     }
 
+    /**
+     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
+     * prevent them from trampling crops
+     */
     @Override
+    protected boolean canTriggerWalking()
+    {
+        return false;
+    }
+
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
@@ -130,12 +145,12 @@ public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
     /**
      * Decrements the entity's air supply when underwater
      */
-    @Override
+
     protected int decreaseAirSupply(int air) {
         return air;
     }
 
-    @Override
+
     protected void collideWithEntity(Entity entityIn) {
         /*
         if (entityIn instanceof IMob && !(entityIn instanceof EntityCreeper) && this.getRNG().nextInt(20) == 0)
@@ -150,7 +165,7 @@ public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
-    @Override
+
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
@@ -183,7 +198,7 @@ public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
     /**
      * Returns true if this entity can attack entities of the specified class.
      */
-    @Override
+
     public boolean canAttackClass(Class<? extends EntityLivingBase> cls) {
         if (this.isPlayerCreated() && EntityPlayer.class.isAssignableFrom(cls)) {
             return false;
@@ -200,7 +215,7 @@ public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    @Override
+
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
@@ -210,14 +225,14 @@ public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    @Override
+
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
         this.setPlayerCreated(compound.getBoolean("PlayerCreated"));
     }
 
-    @Override
+
     public boolean attackEntityAsMob(Entity entityIn)
     {
         this.attackTimer = 5;
@@ -237,7 +252,7 @@ public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
     /**
      * Handler for {@link World#setEntityState}
      */
-    @Override
+
     @SideOnly(Side.CLIENT)
     public void handleStatusUpdate(byte id)
     {
@@ -246,30 +261,31 @@ public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
             this.attackTimer = 5;
             this.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.5F);
         }
-        else if (id == 11)
+       /* else if (id == 11)
         {
             this.holdRoseTick = 400;
         }
         else if (id == 34)
         {
             this.holdRoseTick = 0;
-        }
+        }*/
         else
         {
             super.handleStatusUpdate(id);
         }
     }
 
-    @Override
+
     @SideOnly(Side.CLIENT)
     public int getAttackTimer()
     {
         return this.attackTimer;
     }
 
-    @Override
+
     public void setHoldingRose(boolean p_70851_1_)
     {
+        /*
         if (p_70851_1_)
         {
             this.holdRoseTick = 400;
@@ -280,24 +296,25 @@ public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
             this.holdRoseTick = 0;
             this.world.setEntityState(this, (byte)34);
         }
+        */
     }
 
-    @Override
+
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)
     {
         return SoundEvents.ENTITY_IRONGOLEM_HURT;
     }
 
-    @Override
+
     protected SoundEvent getDeathSound()
     {
         return SoundEvents.ENTITY_IRONGOLEM_DEATH;
     }
 
-    @Override
+
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
-        this.playSound(SoundEvents.ENTITY_IRONGOLEM_STEP, 1.0F, 1.0F);
+        this.playSound(SoundEvents.ENTITY_IRONGOLEM_STEP, 1.0F, 2.0F);
     }
 
     @Nullable
@@ -306,19 +323,19 @@ public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
         return LootTableList.ENTITIES_VILLAGER;
     }
 
-    @Override
+
     public int getHoldRoseTick()
     {
         return this.holdRoseTick;
     }
 
-    @Override
+
     public boolean isPlayerCreated()
     {
         return (((Byte)this.dataManager.get(PLAYER_CREATED)).byteValue() & 1) != 0;
     }
 
-    @Override
+
     public void setPlayerCreated(boolean playerCreated)
     {
         byte b0 = ((Byte)this.dataManager.get(PLAYER_CREATED)).byteValue();
@@ -336,14 +353,15 @@ public abstract class EntitySimpleRancherGolem extends EntityIronGolem {
     /**
      * Called when the mob's health reaches 0.
      */
-    @Override
+
     public void onDeath(DamageSource cause)
     {
+        /*
         if (!this.isPlayerCreated() && this.attackingPlayer != null && this.village != null)
         {
             this.village.modifyPlayerReputation(this.attackingPlayer.getUniqueID(), -5);
         }
-
+        */
         super.onDeath(cause);
     }
 
