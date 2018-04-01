@@ -13,6 +13,8 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 //@Mod.EventBusSubscriber
 public class ItemGolem extends SimpleRancherItemBase implements FlavorText {
@@ -55,11 +57,12 @@ public class ItemGolem extends SimpleRancherItemBase implements FlavorText {
             return EnumActionResult.FAIL;
         }
         else{
-
-            EntitySimpleRancherGolem newGolem = new EntitySimpleRancherGolem(worldIn);
-            newGolem.setLocationAndAngles(pos.getX(), pos.getY()+1, pos.getZ(), 0.0F, 0.0F);
-            worldIn.spawnEntity(newGolem);
-            player.getHeldItemMainhand().shrink(1);
+            if(!worldIn.isRemote) {
+                EntitySimpleRancherGolem newGolem = new EntitySimpleRancherGolem(worldIn);
+                newGolem.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), 0.0F, 0.0F);
+                worldIn.spawnEntity(newGolem);
+                player.getHeldItemMainhand().shrink(1);
+            }
             return EnumActionResult.SUCCESS;
         }
 
