@@ -1,7 +1,7 @@
 package com.boosch.simplerancher.entity;
 
 import com.boosch.simplerancher.util.Reference;
-import com.google.common.base.Predicate;
+import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -13,17 +13,16 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -34,10 +33,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.Set;
 
-public abstract class EntitySimpleRancherGolem extends EntityGolem {
+public class EntitySimpleRancherGolem extends EntityGolem {
 
     protected String type;
+    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, Items.STRING);
     protected BlockPos home;
     protected final float scale;
     public static final ResourceLocation LOOT = new ResourceLocation(Reference.MOD_ID, "entities/base_golem");
@@ -60,6 +61,7 @@ public abstract class EntitySimpleRancherGolem extends EntityGolem {
         this.setPlayerCreated(true);
         this.setSize(.36F, .75F);
         this.scale = .3F;
+        this.homeCheckTimer = 30;
     }
 
     public EntitySimpleRancherGolem(World worldIn, String type, BlockPos home) {
@@ -71,6 +73,7 @@ public abstract class EntitySimpleRancherGolem extends EntityGolem {
         this.setPlayerCreated(true);
         this.setSize(.36F, .75F);
         this.scale = .3F;
+        this.homeCheckTimer=30;
     }
 
     public float getScale() {
@@ -79,23 +82,30 @@ public abstract class EntitySimpleRancherGolem extends EntityGolem {
 
 
     protected void initEntityAI() {
-        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
-        this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+        //this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
+        //this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+
         //this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
-        this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
+        //this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
         //this.tasks.addTask(5, new EntityAILookAtVillager(this));
-        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 0.6D));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
+
+        this.tasks.addTask(1, new EntityAIWanderAvoidWater(this, 0.6D));
+        this.tasks.addTask(1, new EntityAIPanic(this, 1.4D));
+        this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(3, new EntityAITempt(this, 1.0D, false, TEMPTATION_ITEMS));//make him follow  you
+        this.tasks.addTask(4, new EntityAILookIdle(this));
+
         //this.targetTasks.addTask(1, new EntityAIDefendVillage(this));
-        this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false, new Class[0]));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, false, true, new Predicate<EntityLiving>()
+
+        //this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
+        /*this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, false, true, new Predicate<EntityLiving>()
         {
             public boolean apply(@Nullable EntityLiving p_apply_1_)
             {
                 return p_apply_1_ != null && IMob.VISIBLE_MOB_SELECTOR.apply(p_apply_1_) && !(p_apply_1_ instanceof EntityCreeper);
             }
         }));
+        */
 
     }
 
@@ -109,7 +119,7 @@ public abstract class EntitySimpleRancherGolem extends EntityGolem {
 
     protected void updateAITasks() {
         if (--this.homeCheckTimer <= 0) {
-            this.homeCheckTimer = 70 + this.rand.nextInt(50);
+            this.homeCheckTimer = 30 + this.rand.nextInt(50);
 
             //this.village = this.world.getVillageCollection().getNearestVillage(new BlockPos(this), 32);
 
@@ -135,9 +145,23 @@ public abstract class EntitySimpleRancherGolem extends EntityGolem {
         return false;
     }
 
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    {
+        if (!super.processInteract(player, hand)) {
+            ItemStack itemstack = player.getHeldItem(hand);
+
+            if (itemstack.getItem() == Items.NAME_TAG) {
+                itemstack.interactWithEntity(player, this, hand);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
@@ -314,7 +338,8 @@ public abstract class EntitySimpleRancherGolem extends EntityGolem {
 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
-        this.playSound(SoundEvents.ENTITY_IRONGOLEM_STEP, 1.0F, 2.0F);
+        this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.25F, 1.0F);
+        //this.playSound(SoundEvents.ENTITY_IRONGOLEM_STEP, 1.0F, 2.0F);
     }
 
     @Nullable

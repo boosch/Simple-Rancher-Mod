@@ -8,6 +8,7 @@ public class EntityStrawGolem extends EntitySimpleRancherGolem {
     public EntityStrawGolem(World worldIn){
         super(worldIn);
     }
+
     public EntityStrawGolem(World worldIn, BlockPos home){
         super(worldIn, "straw", home);
     }

@@ -22,7 +22,7 @@ public class ModEntities {
         //every entity in our mod has an id local to this mod
         int id = 1;
 
-        EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, "straw_golem"), EntitySimpleRancherGolem.class, "BaseGolem", id++, SimpleRancher.instance, 64, 3, true, 0x99600, 0x00ff00);
+        EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, "straw_golem"), EntitySimpleRancherGolem.class, "basegolem", id++, SimpleRancher.instance, 64, 3, true, 0x99600, 0x00ff00);
 
         //if it could spawn, we'd add something like this
         //EntityRegistry.addSpawn(EntitySimpleRancherGolem.class, 100, 3, 3, EnumCreatureType.AMBIENT, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU, Biomes.PLAINS);
