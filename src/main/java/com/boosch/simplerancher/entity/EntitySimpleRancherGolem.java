@@ -52,7 +52,7 @@ public class EntitySimpleRancherGolem extends EntityGolem {
 
     protected boolean golemCanPickup;
     protected final InventoryBasic golemInventory;
-    protected static Set<Item> GOLEM_PICKUP_ITEMS = Sets.newHashSet(Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS, Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.NETHER_WART);//Items.WHEAT, Items.WHEAT_SEEDS, Items.POTATO, Items.CARROT, Items.BEETROOT_SEEDS, Items.BEETROOT, Items.PUMPKIN_SEEDS);
+    protected static Set<Item> GOLEM_PICKUP_ITEMS = Sets.newHashSet(Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS, Items.WHEAT_SEEDS, Items.MELON_SEEDS);//, Items.NETHER_WART);//Items.WHEAT, Items.WHEAT_SEEDS, Items.POTATO, Items.CARROT, Items.BEETROOT_SEEDS, Items.BEETROOT, Items.PUMPKIN_SEEDS);
     protected static Set<Item> GOLEM_PICKUP_TOOLS = Sets.newHashSet();//Items.WOODEN_HOE);
 
     /**
@@ -273,17 +273,6 @@ public class EntitySimpleRancherGolem extends EntityGolem {
 
     protected int decreaseAirSupply(int air) {
         return air;
-    }
-
-
-    protected void collideWithEntity(Entity entityIn) {
-        /*
-        if (entityIn instanceof IMob && !(entityIn instanceof EntityCreeper) && this.getRNG().nextInt(20) == 0)
-        {
-            this.setAttackTarget((EntityLivingBase)entityIn);
-        }
-        */
-        super.collideWithEntity(entityIn);
     }
 
     /**

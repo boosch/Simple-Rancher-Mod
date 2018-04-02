@@ -10,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -126,13 +127,32 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
             IBlockState iblockstate = world.getBlockState(blockpos);
             Block block = iblockstate.getBlock();
 
+            /**
+             * 0 = harvesting, 1 = planting
+             */
             if (this.currentTask == 0 )
             {
+                /**
+                 * First, genercal crop handling
+                 */
                 if((block instanceof BlockCrops && ((BlockCrops)block).isMaxAge(iblockstate))) {
-                    world.destroyBlock(blockpos, true);
+
+                    if(block == Blocks.WHEAT || block == Blocks.BEETROOTS ){
+                        world.destroyBlock(blockpos, true);
+                    }
+                    else{ //we have to assume that whatever this is, it doesn't have seeds
+                        processSeedlessCropDrops(world, blockpos, iblockstate);
+                        world.destroyBlock(blockpos, false);
+                    }
                 }
+                /**
+                 * We cant just break the netherwart - like potatoes and carrots we have to break it, collect the drops, assign some to the golem, and world-drop the rest
+                 * This is because it does not have a seed item.
+                 */
                 if((block instanceof BlockNetherWart && ((BlockNetherWart)block).getMetaFromState(iblockstate)>=3)){
-                    world.destroyBlock(blockpos, true);
+
+                    processSeedlessCropDrops(world, blockpos, iblockstate);
+                    world.destroyBlock(blockpos, false);
                 }
                 if(block instanceof BlockReed){
                     world.destroyBlock(blockpos.up(), true);
@@ -201,6 +221,29 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
 
             this.currentTask = -1;
             this.runDelay = 1;
+        }
+    }
+
+    protected void processSeedlessCropDrops(World world, BlockPos cropPos, IBlockState cropBS){
+        NonNullList<ItemStack> drops = NonNullList.create();
+
+        cropBS.getBlock().getDrops(drops, world, cropPos, cropBS, 0);
+
+        if(!drops.isEmpty()) {
+            //DEBUG System.out.println("This netherblock should drop ["+drops.size()+"]");
+            for (ItemStack is : drops) {
+                if (true){//is.getItem() == Items.NETHER_WART) {
+                    harvestingGolem.getGolemInventory().addItem(is);
+                    drops.remove(is);
+                    break;
+                }
+                //DEBUG System.out.println("\t -"+is.getDisplayName()+" ("+is.getCount()+")");
+            }
+            if (!harvestingGolem.world.isRemote) {
+                for (ItemStack is : drops) {
+                    harvestingGolem.dropItem(is.getItem(), is.getCount());
+                }
+            }
         }
     }
 
