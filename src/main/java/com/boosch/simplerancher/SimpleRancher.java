@@ -1,5 +1,6 @@
 package com.boosch.simplerancher;
 
+import com.boosch.simplerancher.init.ModItems;
 import com.boosch.simplerancher.init.ModRecipes;
 import com.boosch.simplerancher.proxy.CommonProxy;
 
@@ -35,7 +36,7 @@ public class SimpleRancher {
     public static final SimpleRancherCreativeTab CREATIVE_TAB = new SimpleRancherCreativeTab();
 
     //armor materials
-    public static final ItemArmor.ArmorMaterial ARMORMAT_REINFORCED_LEATHER = EnumHelper.addArmorMaterial("REINFORCED_LEATHER", Reference.MOD_ID+":reinforced_leather", 7, new int[]{2, 3, 4, 1}, 9, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0F ).setRepairItem(new ItemStack(Items.LEATHER));
+    public static final ItemArmor.ArmorMaterial ARMORMAT_REINFORCED_LEATHER = EnumHelper.addArmorMaterial("REINFORCED_LEATHER", Reference.MOD_ID+":reinforced_leather", 7, new int[]{2, 3, 4, 1}, 9, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0F ).setRepairItem(new ItemStack(ModItems.BUCKLED_STRAP));
     public static final ItemTool.ToolMaterial TOOLMAT_QUARTZEDGED = EnumHelper.addToolMaterial("QUARTZ_EDGED", 2, 250, 6.0F, 2.0F, 14 ).setRepairItem(new ItemStack(Items.QUARTZ));
 
 

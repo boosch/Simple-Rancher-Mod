@@ -1,22 +1,87 @@
 This mod is intended to add simple ranching tools to Minecraft 1.12.2
-Unmarked entities (no DONE tag) are not yet implemented.
-
-        @Item DONE leatherstripg - component to saddle, buckledstrap,
-        @Item DONE ironbuckle - component to saddle, buckledstrap,
-        @Item DONE buckledstrap - component to saddle,
-
-        @Item toolshaft - component to pitchfork
-        @item pitchforkprongs - component to pitchfork
-
-        @Armor sturdyworkboots - +armor, +movement speed, +blockwalk
-
-        @Tool pitchfork - increases crop yield when used to break wheat; +dmg to zombies
-        @Tool treefellingaxe - cuts whole trees down!
 
 
+This mod contains the following conceptual changes
+
+        @Item  leatherstrip - component to saddle
+        @Item  IRON_BUCKLE - component to saddle
+        @Item  BUCKLED_STRAP - component to saddle
+
+        @Recipes for vanilla items
+             Saddle
+             Iron Horse Armor
+             Gold Horse Armor
+             Diamond Horse Armor
+
+        @ArmorMaterial  reinforced_leather - a tougher version of leather armor made by adding straps to leather armor. Slightly stronger than leather, with 1 toughness
+            - repair with Buckled Straps
+        @Armor  Reinforced Leather Boots - +armor, +movement speed
+        TODO @Armor Reinforced Leather Cap
+        TODO @Armor Reinforced Leather Leggings
+        TODO @Armor Reinforced Leather Chestpiece
 
 
 
+        @ToolMaterial DONE Quartz_edged - repair with quartz
+        @Tool quartz_edged_axe - cuts whole trees down!
+
+        @Tool quartz_edged_pickaxe - +50% ore gains
+
+
+
+
+        TODO @Laquer
+            TODO add a concept of laquers - dye equivelents for iron armors; parity function with leather dye
+            TODO @Item laquer - dye for metallic items
+            TODO @??? Make Iron Armor dye-able
+
+        @Block&Ores
+            @Item  QUARTZ_CRYSTAL
+            @Block  quartzOre
+
+        @Food
+              Flour - Wheat processes into flour
+              Dough - Flour + Egg = 2x Dough
+              Bread - Cook Dough
+              Gnocci - Potato, Flour, Egg, Bowl (better than steak!)
+              Sugary Horse Treat - breeds horses
+
+
+        TODO @Stretch
+        TODO Add magic to the world. Based on Thaumcraft. Stretch goals include...
+        TODO Every item in the game consists of materia
+        TODO @MateriaCommon
+        TODO @MateriaRare
+        TODO @MateriaSpecial
+
+        TODO @AlchemyFurnace - consume fuel & Items to create materia
+        TODO @AlchemyPipe - move materia from source to target
+
+        TODO @AlchemyJarCommon - store materia of a specifc type; pipe interaction
+        TODO @AlchemyJarRare - store rare materia; pipe interaction
+        TODO @AlchemyJarSpecial - store special materia; pipe interaction
+
+        TODO @AlchemyInfuser - restore item durability via materia consumption; pipe fed
+        TODO @AlchemyDuplicator - generates clone of item at cost of materia; pipe fed
+        TODO @AlchemyRefiner - generates one tier higher of materia at cost of materia; pipe interaction
+
+        TODO @HungryChest - consumes any item that touches it, large inventory
+        TODO @MateriaFurnace - consumes items through input, spits out cooked result
+
+        TODO @MommetEnhancer - consume mommet, material, materia to upgrade a mommet
+
+        TODO @MommetInanimate - ITEM ONLY - a craftable companion that can be given a specific task
+        TODO             - Wheat, string, eyes, bones
+ INPROGRESS @GolemBase - infuse a MommetInanimate with Common Materia
+        TODO @MommetClay - infuse a MommetBase with Clay and Common Materia
+ INPROGRESS @GolemFarm - MommetBase - give hoe, seeds
+        TODO @MommetGatherer - MommetBase - assign to drop location
+        TODO @MommetChopper - MommetBase - give axe
+        TODO @MommetRitualist - MommetClay - give ??? - generates materia
+        TODO @MommetRitualistRare - Mommet??? - give ??? - generates materiaRare
+        TODO @MommetRitualistSpecial - Mommet??? - give ??? - generates materiaSpecial
+
+     **/
 
 
 
