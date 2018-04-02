@@ -70,7 +70,7 @@ This mod contains the following conceptual changes
 
         TODO @MommetEnhancer - consume mommet, material, materia to upgrade a mommet
 
-        TODO @MommetInanimate - ITEM ONLY - a craftable companion that can be given a specific task
+ INPROGRESS @ItemGolem - ITEM ONLY - a craftable companion that can be given a specific task
         TODO             - Wheat, string, eyes, bones
  INPROGRESS @GolemBase - infuse a MommetInanimate with Common Materia
         TODO @MommetClay - infuse a MommetBase with Clay and Common Materia
