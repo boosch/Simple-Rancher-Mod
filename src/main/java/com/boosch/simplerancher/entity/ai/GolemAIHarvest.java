@@ -1,8 +1,7 @@
 package com.boosch.simplerancher.entity.ai;
 
 import com.boosch.simplerancher.entity.EntitySimpleRancherGolem;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCrops;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.ai.EntityAIMoveToBlock;
@@ -20,6 +19,7 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
     /** Villager that is harvesting */
     private final EntitySimpleRancherGolem harvestingGolem;
     private boolean hasFarmItem;
+    private boolean hasNetherFarmItem;
     private boolean wantsToReapStuff;
     /** 0 => harvest, 1 => replant, -1 => none */
     private int currentTask;
@@ -47,11 +47,60 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
 
             this.currentTask = -1;
             this.hasFarmItem = this.harvestingGolem.isFarmItemInInventory();
+            this.hasNetherFarmItem = this.harvestingGolem.isNetherFarmItemInInventory();
             this.wantsToReapStuff = true;//this.harvestingGolem.wantsMoreFood();
         }
 
-        return super.shouldExecute();
+        if (this.runDelay > 0)
+        {
+            --this.runDelay;
+            return false;
+        }
+        else
+        {
+            this.runDelay = 10;//00 + this.harvestingGolem.getRNG().nextInt(200);
+            return searchForDestination();
+        }
+
+        //return super.shouldExecute();
     }
+
+
+    /**
+     * Searches and sets new destination block and returns true if a suitable block (specified in {@link
+     * net.minecraft.entity.ai.EntityAIMoveToBlock#shouldMoveTo(World, BlockPos) EntityAIMoveToBlock#shouldMoveTo(World,
+     * BlockPos)}) can be found.
+     */
+    private boolean searchForDestination()
+    {
+        int i = 16; //super.searchLength
+        int j = 1;
+        BlockPos blockpos = new BlockPos(this.harvestingGolem);
+
+        for (int k = 0; k <= 1; k = k > 0 ? -k : 1 - k)
+        {
+            for (int l = 0; l < i; ++l)
+            {
+                for (int i1 = 0; i1 <= l; i1 = i1 > 0 ? -i1 : 1 - i1)
+                {
+                    for (int j1 = i1 < l && i1 > -l ? l : 0; j1 <= l; j1 = j1 > 0 ? -j1 : 1 - j1)
+                    {
+                        BlockPos blockpos1 = blockpos.add(i1, k - 1, j1);
+
+                        if (this.harvestingGolem.isWithinHomeDistanceFromPosition(blockpos1) && this.shouldMoveTo(this.harvestingGolem.world, blockpos1))
+                        {
+                            this.destinationBlock = blockpos1;
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+
 
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
@@ -72,13 +121,22 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
         if (this.getIsAboveDestination())
         {
             World world = this.harvestingGolem.world;
-            BlockPos blockpos = this.destinationBlock.up();
+            BlockPos blockpos = this.destinationBlock.up(); //the crop
+            BlockPos soilPos = this.destinationBlock; //the soil of the destination
             IBlockState iblockstate = world.getBlockState(blockpos);
             Block block = iblockstate.getBlock();
 
-            if (this.currentTask == 0 && block instanceof BlockCrops && ((BlockCrops)block).isMaxAge(iblockstate))
+            if (this.currentTask == 0 )
             {
-                world.destroyBlock(blockpos, true);
+                if((block instanceof BlockCrops && ((BlockCrops)block).isMaxAge(iblockstate))) {
+                    world.destroyBlock(blockpos, true);
+                }
+                if((block instanceof BlockNetherWart && ((BlockNetherWart)block).getMetaFromState(iblockstate)>=3)){
+                    world.destroyBlock(blockpos, true);
+                }
+                if(block instanceof BlockReed){
+                    world.destroyBlock(blockpos.up(), true);
+                }
             }
             else if (this.currentTask == 1 && iblockstate.getMaterial() == Material.AIR)
             {
@@ -87,33 +145,46 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
                 for (int i = 0; i < inventorybasic.getSizeInventory(); ++i)
                 {
                     ItemStack itemstack = inventorybasic.getStackInSlot(i);
-                    boolean flag = false;
 
-                    if (!itemstack.isEmpty())
-                    {
-                        if (itemstack.getItem() == Items.WHEAT_SEEDS)
-                        {
-                            world.setBlockState(blockpos, Blocks.WHEAT.getDefaultState(), 3);
-                            flag = true;
-                        }
-                        else if (itemstack.getItem() == Items.POTATO)
-                        {
-                            world.setBlockState(blockpos, Blocks.POTATOES.getDefaultState(), 3);
-                            flag = true;
-                        }
-                        else if (itemstack.getItem() == Items.CARROT)
-                        {
-                            world.setBlockState(blockpos, Blocks.CARROTS.getDefaultState(), 3);
-                            flag = true;
-                        }
-                        else if (itemstack.getItem() == Items.BEETROOT_SEEDS)
-                        {
-                            world.setBlockState(blockpos, Blocks.BEETROOTS.getDefaultState(), 3);
-                            flag = true;
+                    //enable infini-farmer
+                   if(!itemstack.isEmpty() && itemstack.getCount()>10){
+                       itemstack.setCount(10);
+                   }
+
+                    boolean plantedCrop = false;
+
+                    //basic crops
+                    if(world.getBlockState(soilPos).getBlock() instanceof BlockFarmland) {
+                        if (!itemstack.isEmpty()) {
+                            if (itemstack.getItem() == Items.WHEAT_SEEDS) {
+                                world.setBlockState(blockpos, Blocks.WHEAT.getDefaultState(), 3);
+                                plantedCrop = true;
+                            } else if (itemstack.getItem() == Items.POTATO) {
+                                world.setBlockState(blockpos, Blocks.POTATOES.getDefaultState(), 3);
+                                plantedCrop = true;
+                            } else if (itemstack.getItem() == Items.CARROT) {
+                                world.setBlockState(blockpos, Blocks.CARROTS.getDefaultState(), 3);
+                                plantedCrop = true;
+                            } else if (itemstack.getItem() == Items.BEETROOT_SEEDS) {
+                                world.setBlockState(blockpos, Blocks.BEETROOTS.getDefaultState(), 3);
+                                plantedCrop = true;
+                            }
                         }
                     }
 
-                    if (flag)
+                    //netherwart
+                    if(world.getBlockState(soilPos).getBlock() instanceof BlockSoulSand){
+                        if (!itemstack.isEmpty()) {
+                            if (itemstack.getItem() == Items.NETHER_WART) {
+                                world.setBlockState(blockpos, Blocks.NETHER_WART.getDefaultState(), 3);
+                                plantedCrop = true;
+                            }
+                        }
+                    }
+
+                    //sugarcane - unnecessary - simply don't break the base-block of sugarcane.
+
+                    if (plantedCrop)
                     {
                         itemstack.shrink(1);
 
@@ -158,6 +229,36 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
                 return true;
             }
         }
+
+        if(block == Blocks.SOUL_SAND){
+
+            pos=pos.up();
+            IBlockState ibs = worldIn.getBlockState(pos);
+            block = ibs.getBlock();
+
+            if(block instanceof BlockNetherWart && ((BlockNetherWart)block).getMetaFromState(ibs)>=3 && this.wantsToReapStuff &&(this.currentTask==0 || this.currentTask<0)){
+
+                this.currentTask=0;
+                return true;
+            }
+
+            if (ibs.getMaterial() == Material.AIR && this.hasNetherFarmItem && (this.currentTask == 1 || this.currentTask < 0))
+            {
+                this.currentTask = 1;
+                return true;
+            }
+        }
+
+        Block plant = worldIn.getBlockState(pos.up()).getBlock();
+        if(plant instanceof BlockReed){
+            Block plant2ndLevel = worldIn.getBlockState(pos.up().up()).getBlock();
+            if(plant2ndLevel instanceof BlockReed){
+                this.currentTask=0;
+                return true;
+            }
+        }
+
+
 
         return false;
     }

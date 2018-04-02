@@ -107,6 +107,8 @@ public class ModelSimpleRancherGolem extends ModelBase
         }
         else
         {
+
+
             /*
             int j = entitygolem.getHoldRoseTick();
 

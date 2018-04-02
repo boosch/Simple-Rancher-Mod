@@ -2,11 +2,8 @@ package com.boosch.simplerancher.init;
 
 import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.entity.EntitySimpleRancherGolem;
-import com.boosch.simplerancher.entity.EntityStrawGolem;
-import com.boosch.simplerancher.entity.RenderSimpleRancherGolem;
+import com.boosch.simplerancher.entity.renderers.RenderSimpleRancherGolem;
 import com.boosch.simplerancher.util.Reference;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;

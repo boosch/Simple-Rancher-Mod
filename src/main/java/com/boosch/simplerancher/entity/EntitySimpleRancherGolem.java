@@ -42,7 +42,7 @@ import java.util.Set;
 
 public class EntitySimpleRancherGolem extends EntityGolem {
 
-    protected String type;
+    public String type;
     //private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, Items.STRING);
 
     protected final float scale;
@@ -52,7 +52,7 @@ public class EntitySimpleRancherGolem extends EntityGolem {
 
     protected boolean golemCanPickup;
     protected final InventoryBasic golemInventory;
-    protected static Set<Item> GOLEM_PICKUP_ITEMS = Sets.newHashSet(Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS, Items.WHEAT_SEEDS, Items.MELON_SEEDS);//Items.WHEAT, Items.WHEAT_SEEDS, Items.POTATO, Items.CARROT, Items.BEETROOT_SEEDS, Items.BEETROOT, Items.PUMPKIN_SEEDS);
+    protected static Set<Item> GOLEM_PICKUP_ITEMS = Sets.newHashSet(Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS, Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.NETHER_WART);//Items.WHEAT, Items.WHEAT_SEEDS, Items.POTATO, Items.CARROT, Items.BEETROOT_SEEDS, Items.BEETROOT, Items.PUMPKIN_SEEDS);
     protected static Set<Item> GOLEM_PICKUP_TOOLS = Sets.newHashSet();//Items.WOODEN_HOE);
 
     /**
@@ -145,9 +145,10 @@ public class EntitySimpleRancherGolem extends EntityGolem {
         this.tasks.addTask(1, new GolemAIHarvest(this, 1D));
         this.tasks.addTask(2, new GolemAIReturnHome(this, 1D));
         this.tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(3, new EntityAIWatchClosest(this, EntitySimpleRancherGolem.class, 4.0F));
         //this.tasks.addTask(3, new EntityAITempt(this, 1.0D, false, TEMPTATION_ITEMS));//make him follow  you
         //this.tasks.addTask(4, new EntityAIWanderAvoidWater(this, 0.6D));
-        //this.tasks.addTask(5, new EntityAILookIdle(this));
+        this.tasks.addTask(4, new EntityAILookIdle(this));
 
     }
 
@@ -253,7 +254,7 @@ public class EntitySimpleRancherGolem extends EntityGolem {
                     return true;
                 }
             }
-             */
+             /**/
         }
         return false;
     }
@@ -626,7 +627,7 @@ public class EntitySimpleRancherGolem extends EntityGolem {
     }
 
     /**
-     * Returns true if villager has seeds, potatoes or carrots in inventory
+     * Returns true if golem has seeds, potatoes or carrots in inventory
      */
     public boolean isFarmItemInInventory()
     {
@@ -642,6 +643,25 @@ public class EntitySimpleRancherGolem extends EntityGolem {
 
         return false;
     }
+
+    /**
+     * Returns true if golem has netherwart in inventory
+     */
+    public boolean isNetherFarmItemInInventory()
+    {
+        for (int i = 0; i < this.golemInventory.getSizeInventory(); ++i)
+        {
+            ItemStack itemstack = this.golemInventory.getStackInSlot(i);
+
+            if (!itemstack.isEmpty() && (itemstack.getItem() == Items.NETHER_WART))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     /**
      * I have no idea what this is for - EntityVillager

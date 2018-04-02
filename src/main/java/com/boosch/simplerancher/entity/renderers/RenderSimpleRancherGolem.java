@@ -1,15 +1,12 @@
-package com.boosch.simplerancher.entity;
+package com.boosch.simplerancher.entity.renderers;
 
-import com.boosch.simplerancher.entity.layers.LayerSimpleRancherGolemHoldItem;
+import com.boosch.simplerancher.entity.EntitySimpleRancherGolem;
 import com.boosch.simplerancher.entity.model.ModelSimpleRancherGolem;
 import com.boosch.simplerancher.util.Reference;
-import net.minecraft.client.model.ModelIronGolem;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.layers.LayerIronGolemFlower;
-import net.minecraft.entity.monster.EntityGiantZombie;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
@@ -35,7 +32,8 @@ public class RenderSimpleRancherGolem extends RenderLiving<EntitySimpleRancherGo
     @Nonnull
     protected ResourceLocation getEntityTexture(@Nonnull EntitySimpleRancherGolem entity){
 
-        String suffix = defaultMobTextureSuffix;
+        String suffix = strawMobTextureSuffix;//defaultMobTextureSuffix;
+        /*
         switch(entity.type){
             case "straw":
                 suffix = strawMobTextureSuffix;
@@ -43,6 +41,7 @@ public class RenderSimpleRancherGolem extends RenderLiving<EntitySimpleRancherGo
             default:
                 break;
         }
+        */
         return new ResourceLocation(Reference.MOD_ID+suffix);
     }
 

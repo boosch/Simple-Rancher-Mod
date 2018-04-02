@@ -34,7 +34,7 @@ public class GolemAIReturnHome extends EntityAIMoveToBlock{
             if( new BlockPos(this.golem) == this.golem.getHomePosition()){ return false; }
 
             if(this.golem.getHomePosition()!=null) {
-                this.runDelay = 2;//this.golem.getRNG().nextInt(10);
+                this.runDelay = 10;//this.golem.getRNG().nextInt(10);
                 this.destinationBlock = this.golem.getHomePosition();
                 return true;
             }
