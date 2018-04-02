@@ -1,5 +1,6 @@
 package com.boosch.simplerancher.entity;
 
+import com.boosch.simplerancher.entity.layers.LayerSimpleRancherGolemHoldItem;
 import com.boosch.simplerancher.entity.model.ModelSimpleRancherGolem;
 import com.boosch.simplerancher.util.Reference;
 import net.minecraft.client.model.ModelIronGolem;
@@ -7,6 +8,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerIronGolemFlower;
 import net.minecraft.entity.monster.EntityGiantZombie;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -26,6 +28,7 @@ public class RenderSimpleRancherGolem extends RenderLiving<EntitySimpleRancherGo
 
         //we use the vanilla golem model here and we simply retecture it
         super(renderManagerIn, new ModelSimpleRancherGolem(), .3F);
+        //this.addLayer(new LayerSimpleRancherGolemHoldItem(this));
     }
 
     @Override

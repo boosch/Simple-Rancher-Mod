@@ -7,10 +7,7 @@ import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -31,8 +28,10 @@ import net.minecraft.util.*;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -44,7 +43,7 @@ import java.util.Set;
 public class EntitySimpleRancherGolem extends EntityGolem {
 
     protected String type;
-    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, Items.STRING);
+    //private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, Items.STRING);
 
     protected final float scale;
     public static final ResourceLocation LOOT = new ResourceLocation(Reference.MOD_ID, "entities/base_golem");
@@ -53,8 +52,8 @@ public class EntitySimpleRancherGolem extends EntityGolem {
 
     protected boolean golemCanPickup;
     protected final InventoryBasic golemInventory;
-    protected static Set<Item> GOLEM_PICKUP_ITEMS = Sets.newHashSet(Items.WHEAT, Items.WHEAT_SEEDS, Items.POTATO, Items.CARROT, Items.BEETROOT_SEEDS, Items.BEETROOT, Items.PUMPKIN_SEEDS);
-    protected static Set<Item> GOLEM_PICKUP_TOOLS = Sets.newHashSet(Items.WOODEN_HOE);
+    protected static Set<Item> GOLEM_PICKUP_ITEMS = Sets.newHashSet(Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS, Items.WHEAT_SEEDS, Items.MELON_SEEDS);//Items.WHEAT, Items.WHEAT_SEEDS, Items.POTATO, Items.CARROT, Items.BEETROOT_SEEDS, Items.BEETROOT, Items.PUMPKIN_SEEDS);
+    protected static Set<Item> GOLEM_PICKUP_TOOLS = Sets.newHashSet();//Items.WOODEN_HOE);
 
     /**
      * deincrements, and a distance-to-home check is done at 0
@@ -175,6 +174,36 @@ public class EntitySimpleRancherGolem extends EntityGolem {
         super.updateAITasks();
     }
 
+
+    /**
+     * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
+     * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
+     */
+    @Nullable
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
+    {
+        return this.finalizeMobSpawn(difficulty, livingdata, true);
+    }
+
+    public IEntityLivingData finalizeMobSpawn(DifficultyInstance p_190672_1_, @Nullable IEntityLivingData p_190672_2_, boolean p_190672_3_)
+    {
+        /*
+        p_190672_2_ = super.onInitialSpawn(p_190672_1_, p_190672_2_);
+
+        if (p_190672_3_)
+        {
+            net.minecraftforge.fml.common.registry.VillagerRegistry.setRandomProfession(this, this.world.rand);
+        }
+
+        this.setAdditionalAItasks();
+        this.populateBuyingList();
+        return p_190672_2_;
+        */
+        return p_190672_2_;
+    }
+
+
+
     /**
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
@@ -194,6 +223,37 @@ public class EntitySimpleRancherGolem extends EntityGolem {
                 itemstack.interactWithEntity(player, this, hand);
                 return true;
             }
+
+            /**
+             * give him an item, or slap it out of his hands.
+             *
+             *
+            if(this.type == "base"){
+                if(player.getHeldItemMainhand() != ItemStack.EMPTY &&
+                        this.getHeldItemMainhand() == ItemStack.EMPTY){
+                    this.setHeldItem(EnumHand.MAIN_HAND, itemstack);
+                    player.getHeldItemMainhand().shrink(1);
+                    this.type = "straw";
+                    if(!player.world.isRemote){
+                        this.entityDropItem(this.getHeldItemMainhand(), 1f);
+                        player.applyPlayerInteraction(player, null, EnumHand.MAIN_HAND);
+                    }
+                    return true;
+                }
+            }
+            else{
+                if(player.getHeldItemMainhand() == ItemStack.EMPTY){
+                    this.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
+                    if(!player.world.isRemote){
+                        this.entityDropItem(this.getHeldItemMainhand(), 1f);
+                        player.applyPlayerInteraction(player, null, EnumHand.MAIN_HAND);
+                    }
+                    this.type="base";
+
+                    return true;
+                }
+            }
+             */
         }
         return false;
     }
