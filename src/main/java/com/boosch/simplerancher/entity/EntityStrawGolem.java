@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 public class EntityStrawGolem extends EntitySimpleRancherGolem {
 
     public EntityStrawGolem(World worldIn){
-        super(worldIn);
+        super(worldIn,"straw");
     }
 
     public EntityStrawGolem(World worldIn, BlockPos home){

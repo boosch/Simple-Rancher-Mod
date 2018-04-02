@@ -107,6 +107,7 @@ public class ModelSimpleRancherGolem extends ModelBase
         }
         else
         {
+            /*
             int j = entitygolem.getHoldRoseTick();
 
             if (j > 0)
@@ -119,6 +120,7 @@ public class ModelSimpleRancherGolem extends ModelBase
                 this.simpleRancherGolemRightArm.rotateAngleX = (-0.2F + 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
                 this.simpleRancherGolemLeftArm.rotateAngleX = (-0.2F - 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
             }
+            */
         }
     }
 

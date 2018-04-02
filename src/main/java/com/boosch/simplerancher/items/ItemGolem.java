@@ -46,8 +46,6 @@ public class ItemGolem extends SimpleRancherItemBase implements FlavorText {
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
-        System.out.println("ItemGolem was used");
-
         if(worldIn.getBlockState(pos).getMaterial().equals(Material.AIR) ||
                 worldIn.getBlockState(pos).getMaterial().equals(Material.WATER)||
                 worldIn.getBlockState(pos).getMaterial().equals(Material.LAVA)||
@@ -58,7 +56,7 @@ public class ItemGolem extends SimpleRancherItemBase implements FlavorText {
         }
         else{
             if(!worldIn.isRemote) {
-                EntitySimpleRancherGolem newGolem = new EntitySimpleRancherGolem(worldIn);
+                EntitySimpleRancherGolem newGolem = new EntitySimpleRancherGolem(worldIn, "base", pos);
                 newGolem.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), 0.0F, 0.0F);
                 worldIn.spawnEntity(newGolem);
                 player.getHeldItemMainhand().shrink(1);

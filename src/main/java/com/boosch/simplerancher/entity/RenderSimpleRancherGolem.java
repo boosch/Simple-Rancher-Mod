@@ -15,7 +15,10 @@ import javax.annotation.Nonnull;
 
 public class RenderSimpleRancherGolem extends RenderLiving<EntitySimpleRancherGolem> {
 
-    private ResourceLocation mobTexture = new ResourceLocation(Reference.MOD_ID+":textures/entity/entity_straw_golem.png");
+    //private ResourceLocation mobTexture = new ResourceLocation(Reference.MOD_ID+":textures/entity/entity_straw_golem.png");
+    private String strawMobTextureSuffix = ":textures/entity/entity_straw_golem.png";
+    private String defaultMobTextureSuffix = ":textures/entity/entity_base_golem.png";
+
 
     public static final Factory FACTORY = new Factory();
 
@@ -28,7 +31,16 @@ public class RenderSimpleRancherGolem extends RenderLiving<EntitySimpleRancherGo
     @Override
     @Nonnull
     protected ResourceLocation getEntityTexture(@Nonnull EntitySimpleRancherGolem entity){
-        return mobTexture;
+
+        String suffix = defaultMobTextureSuffix;
+        switch(entity.type){
+            case "straw":
+                suffix = strawMobTextureSuffix;
+                break;
+            default:
+                break;
+        }
+        return new ResourceLocation(Reference.MOD_ID+suffix);
     }
 
     @Override
