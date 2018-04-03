@@ -225,36 +225,6 @@ public class EntitySimpleRancherGolem extends EntityGolem {
                 return true;
             }
 
-            /**
-             * give him an item, or slap it out of his hands.
-             *
-             *
-            if(this.type == "base"){
-                if(player.getHeldItemMainhand() != ItemStack.EMPTY &&
-                        this.getHeldItemMainhand() == ItemStack.EMPTY){
-                    this.setHeldItem(EnumHand.MAIN_HAND, itemstack);
-                    player.getHeldItemMainhand().shrink(1);
-                    this.type = "straw";
-                    if(!player.world.isRemote){
-                        this.entityDropItem(this.getHeldItemMainhand(), 1f);
-                        player.applyPlayerInteraction(player, null, EnumHand.MAIN_HAND);
-                    }
-                    return true;
-                }
-            }
-            else{
-                if(player.getHeldItemMainhand() == ItemStack.EMPTY){
-                    this.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
-                    if(!player.world.isRemote){
-                        this.entityDropItem(this.getHeldItemMainhand(), 1f);
-                        player.applyPlayerInteraction(player, null, EnumHand.MAIN_HAND);
-                    }
-                    this.type="base";
-
-                    return true;
-                }
-            }
-             /**/
         }
         return false;
     }

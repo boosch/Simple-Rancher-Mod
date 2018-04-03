@@ -2,6 +2,7 @@ package com.boosch.simplerancher.init;
 
 import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.block.SimpleRancherBlockOre;
+import com.boosch.simplerancher.block.TestCounter.BlockCounter;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -14,23 +15,29 @@ public class ModBlocks {
     //my own personal quartz replacement. Unfortunately it does not seem to ordict properly...
     public static SimpleRancherBlockOre QUARTZ_CRYSTAL_ORE = new SimpleRancherBlockOre("ore_quartzcrystal", "oreQuartz", "This looks like it should be smelted").setCreativeTab(SimpleRancher.CREATIVE_TAB);
 
+    //example counter materials
+    public static BlockCounter BLOCK_COUNTER = new BlockCounter();
+
 
     public static void register(IForgeRegistry<Block> registry){
 
         registry.registerAll(
-                QUARTZ_CRYSTAL_ORE
+                QUARTZ_CRYSTAL_ORE,
+                BLOCK_COUNTER
         );
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry){
 
         registry.registerAll(
-                QUARTZ_CRYSTAL_ORE.createItemBlock()
+                QUARTZ_CRYSTAL_ORE.createItemBlock(),
+                BLOCK_COUNTER.createItemBlock()
         );
     }
 
 
     public static void registerModels(){
         QUARTZ_CRYSTAL_ORE.registerItemModel(Item.getItemFromBlock(QUARTZ_CRYSTAL_ORE));
+        BLOCK_COUNTER.registerItemModel(Item.getItemFromBlock(BLOCK_COUNTER));
     }
 }
