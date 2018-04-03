@@ -1,6 +1,7 @@
 package com.boosch.simplerancher.init;
 
 import com.boosch.simplerancher.SimpleRancher;
+import com.boosch.simplerancher.block.Pedestal.BlockPedestal;
 import com.boosch.simplerancher.block.SimpleRancherBlockOre;
 import com.boosch.simplerancher.block.TestCounter.BlockCounter;
 import net.minecraft.block.Block;
@@ -18,12 +19,16 @@ public class ModBlocks {
     //example counter materials
     public static BlockCounter BLOCK_COUNTER = new BlockCounter();
 
+    //example pedestal
+    public static BlockPedestal BLOCK_PEDESTAL = new BlockPedestal();
+
 
     public static void register(IForgeRegistry<Block> registry){
 
         registry.registerAll(
                 QUARTZ_CRYSTAL_ORE,
-                BLOCK_COUNTER
+                BLOCK_COUNTER,
+                BLOCK_PEDESTAL
         );
     }
 
@@ -31,7 +36,8 @@ public class ModBlocks {
 
         registry.registerAll(
                 QUARTZ_CRYSTAL_ORE.createItemBlock(),
-                BLOCK_COUNTER.createItemBlock()
+                BLOCK_COUNTER.createItemBlock(),
+                BLOCK_PEDESTAL.createItemBlock()
         );
     }
 
@@ -39,5 +45,6 @@ public class ModBlocks {
     public static void registerModels(){
         QUARTZ_CRYSTAL_ORE.registerItemModel(Item.getItemFromBlock(QUARTZ_CRYSTAL_ORE));
         BLOCK_COUNTER.registerItemModel(Item.getItemFromBlock(BLOCK_COUNTER));
+        BLOCK_PEDESTAL.registerItemModel(Item.getItemFromBlock(BLOCK_PEDESTAL));
     }
 }

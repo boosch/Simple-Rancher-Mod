@@ -5,6 +5,7 @@ itemGroup.bsrm=Simple Rancher
 
 # Blocks
 tile.ore_quartzcrystal.name=Quartz Ore
+tile.pedestal.name=Display Pedestal
 
 # Items
 item.ironbuckle.name=Iron Buckle
