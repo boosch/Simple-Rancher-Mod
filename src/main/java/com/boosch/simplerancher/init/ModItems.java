@@ -19,7 +19,7 @@ public class ModItems {
     public static ItemReinforcedBoots REINFORCED_BOOTS = new ItemReinforcedBoots(SimpleRancher.ARMORMAT_REINFORCED_LEATHER, "reinforced_leather_boots");
 
     //ores
-    //public static SimpleRancherOre QUARTZ_CRYSTAL = new SimpleRancherOre("quartzcrystal", "gemQuartz");
+    //public static SimpleRancherItemOre QUARTZ_CRYSTAL = new SimpleRancherItemOre("quartzcrystal", "gemQuartz");
 
 
     //food-ingredients

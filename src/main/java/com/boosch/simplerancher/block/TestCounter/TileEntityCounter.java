@@ -3,6 +3,11 @@ package com.boosch.simplerancher.block.TestCounter;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
+/**
+ * This is part of the Counter block tutorial- which creates a block, then a tile-entity for that block
+ * We then add a listener to the block such that multiple counter tile-entities can remember their scores
+ * This has no additional function
+ */
 public class TileEntityCounter extends TileEntity {
 
     private int count;

@@ -13,6 +13,12 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
+
+/**
+ * This is part of the Counter block tutorial- which creates a block, then a tile-entity for that block
+ * We then add a listener to the block such that multiple counter tile-entities can remember their scores
+ * This has no additional function
+ */
 public class BlockCounter extends SimpleRancherBlockTileEntity {
 
     public BlockCounter() {
