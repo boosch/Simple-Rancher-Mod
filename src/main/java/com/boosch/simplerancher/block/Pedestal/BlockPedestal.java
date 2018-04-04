@@ -21,7 +21,7 @@ public class BlockPedestal extends SimpleRancherBlockBase implements FlavorText{
     protected String flavortext;
 
     public BlockPedestal(){
-        super(Material.ROCK, "pedestal", "Perfect for showing off your tools.");
+        super(Material.WOOD, "pedestal", "Perfect for showing off your tools.");
     }
 
     public String getFlavorText(){
@@ -42,15 +42,15 @@ public class BlockPedestal extends SimpleRancherBlockBase implements FlavorText{
         return (face == EnumFacing.UP || face == EnumFacing.DOWN);
     }*/
 
-    //@Override
+    @Override
     @Deprecated
-    public boolean isOpaqueCube(){
+    public boolean isOpaqueCube(IBlockState state){
         return false;
     }
 
-    //@Override
+    @Override
     @Deprecated
-    public boolean isFullCube(){
+    public boolean isFullCube(IBlockState state){
         return false;
     }
 
