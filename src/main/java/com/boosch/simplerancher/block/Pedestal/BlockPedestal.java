@@ -1,10 +1,12 @@
 package com.boosch.simplerancher.block.Pedestal;
 
+import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.block.SimpleRancherBlockBase;
 import com.boosch.simplerancher.block.SimpleRancherBlockTileEntity;
 import com.boosch.simplerancher.items.FlavorText;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -88,29 +90,50 @@ public class BlockPedestal extends SimpleRancherBlockTileEntity implements Flavo
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 
         if(!world.isRemote){
-            TileEntityPedestal tile = world.getTileEntity(pos);
+            TileEntityPedestal tile = (TileEntityPedestal)world.getTileEntity(pos);
             IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
 
             if(!player.isSneaking()){
                 if(player.getHeldItem(hand) == ItemStack.EMPTY){
                     player.setHeldItem(hand, itemHandler.extractItem(0, 64, false));
                 }else{
-                    itemHandler.insertItem(0, 64, false);
-
+                    itemHandler.insertItem(0, player.getHeldItem(hand), false);
+                    player.setHeldItem(hand, ItemStack.EMPTY);
                 }
                 tile.markDirty();
             }
             else {
                 ItemStack stack = itemHandler.getStackInSlot(0);
                 if (!stack.isEmpty()) {
-                    String localized = TutorialMod.proxy.localize(stack.getUnlocalizedName() + ".name");
+                    String localized = stack.getDisplayName();
                     player.sendMessage(new TextComponentString(stack.getCount() + "x " + localized));
                 } else {
-                    player.sendMessage(new TextComponentString("Empty"));
+                    //note - refer to shadowfacts tutorial https://shadowfacts.net/tutorials/forge-modding-112/tile-entities-inventory/ regarding localization instead of using getDisplay Name
+                    player.sendMessage(new TextComponentString("(The "+world.getTileEntity(pos).getDisplayName()+" is Empty)"));
                 }
             }
         }
+    return true;
+    }
 
+    /**
+     * Used to ensure that the inventory of the pedestal is dropped in the event of a break.
+     * @param world
+     * @param pos
+     * @param state
+     */
+    @Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        TileEntityPedestal tile = (TileEntityPedestal)getTileEntity(world, pos);
+        IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+        ItemStack stack = itemHandler.getStackInSlot(0);
+        if (!stack.isEmpty()) {
+            EntityItem item = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+
+            //should this work?
+            world.spawnEntity(item);
+        }
+        super.breakBlock(world, pos, state);
     }
 
 

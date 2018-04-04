@@ -2,10 +2,12 @@ package com.boosch.simplerancher.init;
 
 import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.block.Pedestal.BlockPedestal;
+import com.boosch.simplerancher.block.Pedestal.TileEntityPedestal;
 import com.boosch.simplerancher.block.SimpleRancherBlockOre;
 import com.boosch.simplerancher.block.TestCounter.BlockCounter;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModBlocks {
@@ -21,6 +23,7 @@ public class ModBlocks {
 
     //example pedestal
     public static BlockPedestal BLOCK_PEDESTAL = new BlockPedestal();
+        //public static TileEntityPedestal TILE_ENTITY_PEDESTAL = new TileEntityPedestal();
 
 
     public static void register(IForgeRegistry<Block> registry){
@@ -30,6 +33,10 @@ public class ModBlocks {
                 BLOCK_COUNTER,
                 BLOCK_PEDESTAL
         );
+
+        //I do not know why we do this differently.
+        GameRegistry.registerTileEntity(BLOCK_PEDESTAL.getTileEntityClass(), BLOCK_PEDESTAL.getRegistryName().toString());
+
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry){
