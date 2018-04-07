@@ -97,12 +97,14 @@ public class BlockPedestal extends SimpleRancherBlockTileEntity implements Flavo
             IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
 
             if(!player.isSneaking()){
+
                 if(player.getHeldItem(hand) == ItemStack.EMPTY){
                     player.setHeldItem(hand, itemHandler.extractItem(0, 64, false));
                 }else{
                     itemHandler.insertItem(0, player.getHeldItem(hand), false);
                     player.setHeldItem(hand, ItemStack.EMPTY);
                 }
+
                 tile.markDirty();
             }
             else {

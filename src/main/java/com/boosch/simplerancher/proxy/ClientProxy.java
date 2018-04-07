@@ -2,6 +2,8 @@ package com.boosch.simplerancher.proxy;
 
 
 
+import com.boosch.simplerancher.block.Pedestal.TileEntityPedestal;
+import com.boosch.simplerancher.block.Pedestal.TileEntitySpecialRendererPedestal;
 import com.boosch.simplerancher.init.ModEntities;
 import com.boosch.simplerancher.items.FlavorText;
 import com.boosch.simplerancher.util.Reference;
@@ -13,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -35,6 +38,7 @@ public class ClientProxy extends CommonProxy {
     public void preInit() {
         ModEntities.init();
         ModEntities.initModels();
+        registerRenderers();
     }
 
     @Override
@@ -46,6 +50,15 @@ public class ClientProxy extends CommonProxy {
     public void registerItemRenderer(Item item, int meta, String id) {
 
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(Reference.MOD_ID+":"+id, "inventory"));
+    }
+
+    /**
+     * handles binding of special renderers
+     */
+
+    @Override
+    public void registerRenderers(){
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestal.class, new TileEntitySpecialRendererPedestal());
     }
 
     //TODO Fix the tooltip handler running on both server and client...

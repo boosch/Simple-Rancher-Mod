@@ -29,6 +29,8 @@ public class ServerProxy extends CommonProxy {
         System.out.println("HEY WE LOADED THE EVENT BUSSES IN THE SERVER THINGY");
     }
 */
+    @Override
+    public void registerRenderers(){}
 
     @Override
     public void preInit() {
