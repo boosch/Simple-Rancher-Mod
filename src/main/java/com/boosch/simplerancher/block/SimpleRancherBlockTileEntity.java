@@ -1,5 +1,6 @@
 package com.boosch.simplerancher.block;
 
+import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.items.FlavorText;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -18,12 +19,13 @@ public abstract class SimpleRancherBlockTileEntity<TE extends TileEntity> extend
 
     public SimpleRancherBlockTileEntity(Material material, String name){
         super(material, name);
+        setCreativeTab(SimpleRancher.CREATIVE_TAB);
 
     }
 
     public SimpleRancherBlockTileEntity(Material material, String name, String flavortext){
         super(material, name, flavortext);
-
+        setCreativeTab(SimpleRancher.CREATIVE_TAB);
     }
 
     public abstract Class<TE> getTileEntityClass();

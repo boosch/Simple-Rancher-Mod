@@ -4,6 +4,7 @@ import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.block.SimpleRancherBlockBase;
 import com.boosch.simplerancher.block.SimpleRancherBlockTileEntity;
 import com.boosch.simplerancher.items.FlavorText;
+import com.boosch.simplerancher.util.handlers.ModGuiHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -37,7 +38,9 @@ public class BlockPedestal extends SimpleRancherBlockTileEntity implements Flavo
     protected String flavortext;
 
     public BlockPedestal(){
+
         super(Material.WOOD, "pedestal", "Perfect for showing off your tools.");
+        setCreativeTab(SimpleRancher.CREATIVE_TAB);
     }
 
     public String getFlavorText(){
@@ -85,7 +88,7 @@ public class BlockPedestal extends SimpleRancherBlockTileEntity implements Flavo
     /**
      * if the player is not sneaking and has no item, attempt to take the item out of the pedestal
      * if the player is not sneaking and is holding an item, attempt to insert it
-     * if the player is sneaking, then tell them what's in the item
+     * if the player is sneaking, then open the inventory of the block || tell them what's in the item
      */
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 
@@ -104,6 +107,11 @@ public class BlockPedestal extends SimpleRancherBlockTileEntity implements Flavo
             }
             else {
                 ItemStack stack = itemHandler.getStackInSlot(0);
+                player.openGui(SimpleRancher.instance, ModGuiHandler.PEDESTAL, world, pos.getX(), pos.getY(), pos.getZ());
+
+                /**
+                 * This code is replaced by our adding a GUI element
+                 *
                 if (!stack.isEmpty()) {
                     String localized = stack.getDisplayName();
                     player.sendMessage(new TextComponentString(stack.getCount() + "x " + localized));
@@ -111,6 +119,7 @@ public class BlockPedestal extends SimpleRancherBlockTileEntity implements Flavo
                     //note - refer to shadowfacts tutorial https://shadowfacts.net/tutorials/forge-modding-112/tile-entities-inventory/ regarding localization instead of using getDisplay Name
                     player.sendMessage(new TextComponentString("(The "+world.getTileEntity(pos).getDisplayName()+" is Empty)"));
                 }
+                */
             }
         }
     return true;

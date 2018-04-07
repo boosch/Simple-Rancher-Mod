@@ -5,6 +5,7 @@ import com.boosch.simplerancher.init.ModRecipes;
 import com.boosch.simplerancher.proxy.CommonProxy;
 
 import com.boosch.simplerancher.util.Reference;
+import com.boosch.simplerancher.util.handlers.ModGuiHandler;
 import com.boosch.simplerancher.world.ModWorldGen;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
@@ -53,6 +55,9 @@ public class SimpleRancher {
         proxy.preInit();
 
         GameRegistry.registerWorldGenerator(new ModWorldGen(),3);
+
+        //this registers our GUI handler for all GUIs in the mod
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new ModGuiHandler());
     }
 
     @Mod.EventHandler

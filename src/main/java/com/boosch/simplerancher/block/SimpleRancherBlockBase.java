@@ -21,6 +21,8 @@ public class SimpleRancherBlockBase extends Block implements FlavorText{
 
         setUnlocalizedName(name);
         setRegistryName(name);
+        setCreativeTab(SimpleRancher.CREATIVE_TAB);
+
     }
 
     public SimpleRancherBlockBase(Material material, String name, String flavortext){
