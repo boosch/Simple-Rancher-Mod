@@ -1,7 +1,7 @@
-package com.boosch.simplerancher.entity.renderers;
+package com.boosch.simplerancher.entity.golem.renderers;
 
-import com.boosch.simplerancher.entity.EntitySimpleRancherGolem;
-import com.boosch.simplerancher.entity.model.ModelSimpleRancherGolem;
+import com.boosch.simplerancher.entity.golem.EntitySimpleRancherGolem;
+import com.boosch.simplerancher.entity.golem.model.ModelSimpleRancherGolem;
 import com.boosch.simplerancher.util.Reference;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

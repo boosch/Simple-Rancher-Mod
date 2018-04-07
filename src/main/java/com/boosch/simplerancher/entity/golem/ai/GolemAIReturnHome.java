@@ -1,6 +1,6 @@
-package com.boosch.simplerancher.entity.ai;
+package com.boosch.simplerancher.entity.golem.ai;
 
-import com.boosch.simplerancher.entity.EntitySimpleRancherGolem;
+import com.boosch.simplerancher.entity.golem.EntitySimpleRancherGolem;
 
 import net.minecraft.entity.ai.EntityAIMoveToBlock;
 

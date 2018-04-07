@@ -1,8 +1,7 @@
 package com.boosch.simplerancher.items;
 
 
-import com.boosch.simplerancher.entity.EntitySimpleRancherGolem;
-import com.boosch.simplerancher.entity.EntityStrawGolem;
+import com.boosch.simplerancher.entity.golem.EntitySimpleRancherGolem;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumActionResult;
@@ -12,9 +11,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 //@Mod.EventBusSubscriber
 public class ItemGolem extends SimpleRancherItemBase implements FlavorText {

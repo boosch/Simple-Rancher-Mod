@@ -1,8 +1,8 @@
 package com.boosch.simplerancher.init;
 
 import com.boosch.simplerancher.SimpleRancher;
-import com.boosch.simplerancher.entity.EntitySimpleRancherGolem;
-import com.boosch.simplerancher.entity.renderers.RenderSimpleRancherGolem;
+import com.boosch.simplerancher.entity.golem.EntitySimpleRancherGolem;
+import com.boosch.simplerancher.entity.golem.renderers.RenderSimpleRancherGolem;
 import com.boosch.simplerancher.util.Reference;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTableList;

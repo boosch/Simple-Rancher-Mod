@@ -39,6 +39,9 @@ This mod contains the following conceptual changes
             @Item  QUARTZ_CRYSTAL
             @Block  quartzOre
 
+        @Blocks / TileEntities
+            @Block Display Pedestal
+
         @Food
               Flour - Wheat processes into flour
               Dough - Flour + Egg = 2x Dough

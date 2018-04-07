@@ -1,7 +1,7 @@
-package com.boosch.simplerancher.entity.layers;
+package com.boosch.simplerancher.entity.golem.layers;
 
-import com.boosch.simplerancher.entity.EntitySimpleRancherGolem;
-import com.boosch.simplerancher.entity.renderers.RenderSimpleRancherGolem;
+import com.boosch.simplerancher.entity.golem.EntitySimpleRancherGolem;
+import com.boosch.simplerancher.entity.golem.renderers.RenderSimpleRancherGolem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelIronGolem;
 import net.minecraft.client.renderer.BlockRendererDispatcher;

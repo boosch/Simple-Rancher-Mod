@@ -1,7 +1,7 @@
-package com.boosch.simplerancher.entity;
+package com.boosch.simplerancher.entity.golem;
 
-import com.boosch.simplerancher.entity.ai.GolemAIHarvest;
-import com.boosch.simplerancher.entity.ai.GolemAIReturnHome;
+import com.boosch.simplerancher.entity.golem.ai.GolemAIHarvest;
+import com.boosch.simplerancher.entity.golem.ai.GolemAIReturnHome;
 import com.boosch.simplerancher.util.Reference;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
@@ -31,7 +31,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -77,22 +76,7 @@ public class EntitySimpleRancherGolem extends EntityGolem {
         this.golemCanPickup = true;
         this.setCanPickUpLoot(golemCanPickup);
     }
-/*
-    public EntitySimpleRancherGolem(World worldIn, BlockPos home) {
-        super(worldIn);
 
-        this.type = "base";
-        this.setHomePosAndDistance(home, 20);
-
-        this.setPlayerCreated(true);
-        this.setSize(.36F, .75F);
-        this.scale = .3F;
-        this.homeCheckTimer=30;
-        this.golemInventory = new InventoryBasic("Items", false, 8);
-        this.golemCanPickup = true;
-        this.setCanPickUpLoot(golemCanPickup);
-    }
-  */
     public EntitySimpleRancherGolem(World worldIn, String type) {
         super(worldIn);
 

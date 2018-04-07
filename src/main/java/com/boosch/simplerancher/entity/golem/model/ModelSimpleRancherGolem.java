@@ -1,11 +1,10 @@
-package com.boosch.simplerancher.entity.model;
+package com.boosch.simplerancher.entity.golem.model;
 
-import com.boosch.simplerancher.entity.EntitySimpleRancherGolem;
+import com.boosch.simplerancher.entity.golem.EntitySimpleRancherGolem;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

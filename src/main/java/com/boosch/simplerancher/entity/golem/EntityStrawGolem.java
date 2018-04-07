@@ -1,4 +1,4 @@
-package com.boosch.simplerancher.entity;
+package com.boosch.simplerancher.entity.golem;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

@@ -1,11 +1,10 @@
-package com.boosch.simplerancher.entity.ai;
+package com.boosch.simplerancher.entity.golem.ai;
 
-import com.boosch.simplerancher.entity.EntitySimpleRancherGolem;
+import com.boosch.simplerancher.entity.golem.EntitySimpleRancherGolem;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.ai.EntityAIMoveToBlock;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryBasic;
