@@ -57,7 +57,7 @@ public class ItemGolem extends SimpleRancherItemBase implements FlavorText {
         else{
             if(!worldIn.isRemote) {
                 EntitySimpleRancherGolem newGolem = new EntitySimpleRancherGolem(worldIn, "straw", pos);
-                newGolem.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), 0.0F, 0.0F);
+                newGolem.setLocationAndAngles(pos.getX()+.5, pos.getY() + 1, pos.getZ()+.5, 0.0F, 0.0F);
                 worldIn.spawnEntity(newGolem);
                 player.getHeldItemMainhand().shrink(1);
             }
