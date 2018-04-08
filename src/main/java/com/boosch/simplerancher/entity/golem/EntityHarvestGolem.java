@@ -26,6 +26,12 @@ public class EntityHarvestGolem extends EntitySimpleRancherGolem {
         this.setCanPickUpLoot(golemCanPickup);
     }
 
+    public EntityHarvestGolem(EntitySimpleRancherGolem baseGolem){
+        super(baseGolem.world, baseGolem.type, baseGolem.getHomePosition());
+        this.golemCanPickup = true;
+        this.setCanPickUpLoot(golemCanPickup);
+    }
+
     @Override
     protected void initEntityAI() {
 

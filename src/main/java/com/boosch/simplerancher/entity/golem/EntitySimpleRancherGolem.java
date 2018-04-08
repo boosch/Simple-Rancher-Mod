@@ -126,6 +126,18 @@ public class EntitySimpleRancherGolem extends EntityGolem {
         //this.setCanPickUpLoot(golemCanPickup);
     }
 
+    public EntitySimpleRancherGolem(EntitySimpleRancherGolem oddGolem){
+
+        super(oddGolem.world);
+        this.type = oddGolem.type;
+        this.setHomePosAndDistance(oddGolem.getHomePosition(), 20);
+        this.setPlayerCreated(true);
+        this.setSize(.36F, .75F);
+        this.scale = .3F;
+        this.homeCheckTimer=30;
+        this.golemInventory = oddGolem.getGolemInventory();
+    }
+
     public float getScale() {
         return scale;
     }
@@ -225,6 +237,19 @@ public class EntitySimpleRancherGolem extends EntityGolem {
         /**
          * debug for toggling types of golem
          */
+
+        if((ItemStack)player.getHeldItem(hand) == ItemStack.EMPTY &&
+                player.isSneaking()){
+            System.out.println("DebugAction: sneak empty click on "+this.getEntityString());
+
+            if(this instanceof EntityHarvestGolem){
+
+            }
+            else{
+
+            }
+            return false;
+        }
 
         if (!super.processInteract(player, hand)) {
             ItemStack itemstack = player.getHeldItem(hand);
