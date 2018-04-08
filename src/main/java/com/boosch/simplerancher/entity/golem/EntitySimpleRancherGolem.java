@@ -17,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -38,7 +39,19 @@ import javax.annotation.Nullable;
 import java.util.Set;
 
 
-
+/**
+ * Goal: split golems into different jobs, based on given items
+ * The jobs get different AI and capabilities
+ * Ideally, each golem should render their tool on their chest or just over their head
+ * Jobs:
+ *      Harvester
+ *      Logger
+ *      Gatherer
+ *      Defender
+ *      Miner
+ *
+ *
+ */
 public class EntitySimpleRancherGolem extends EntityGolem {
 
     public String type;
@@ -51,6 +64,7 @@ public class EntitySimpleRancherGolem extends EntityGolem {
 
     protected boolean golemCanPickup;
     protected final InventoryBasic golemInventory;
+
     protected static Set<Item> GOLEM_PICKUP_ITEMS = Sets.newHashSet(Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS, Items.WHEAT_SEEDS, Items.MELON_SEEDS);//, Items.NETHER_WART);//Items.WHEAT, Items.WHEAT_SEEDS, Items.POTATO, Items.CARROT, Items.BEETROOT_SEEDS, Items.BEETROOT, Items.PUMPKIN_SEEDS);
     protected static Set<Item> GOLEM_PICKUP_TOOLS = Sets.newHashSet();//Items.WOODEN_HOE);
 
@@ -73,8 +87,10 @@ public class EntitySimpleRancherGolem extends EntityGolem {
         this.scale = .3F;
         this.homeCheckTimer = 30;
         this.golemInventory = new InventoryBasic("Items", false, 8);
-        this.golemCanPickup = true;
-        this.setCanPickUpLoot(golemCanPickup);
+
+        //BEHAVIORS
+        //this.golemCanPickup = true;
+        //this.setCanPickUpLoot(golemCanPickup);
     }
 
     public EntitySimpleRancherGolem(World worldIn, String type) {
@@ -87,8 +103,10 @@ public class EntitySimpleRancherGolem extends EntityGolem {
         this.scale = .3F;
         this.homeCheckTimer = 30;
         this.golemInventory = new InventoryBasic("Items", false, 8);
-        this.golemCanPickup = true;
-        this.setCanPickUpLoot(golemCanPickup);
+
+        //BEHAVIORS
+        //this.golemCanPickup = true;
+        //this.setCanPickUpLoot(golemCanPickup);
     }
 
     public EntitySimpleRancherGolem(World worldIn, String type, BlockPos home) {
@@ -102,8 +120,10 @@ public class EntitySimpleRancherGolem extends EntityGolem {
         this.scale = .3F;
         this.homeCheckTimer=30;
         this.golemInventory = new InventoryBasic("Items", false, 8);
-        this.golemCanPickup = true;
-        this.setCanPickUpLoot(golemCanPickup);
+
+        //BEHAVIORS
+        //this.golemCanPickup = true;
+        //this.setCanPickUpLoot(golemCanPickup);
     }
 
     public float getScale() {
@@ -126,7 +146,7 @@ public class EntitySimpleRancherGolem extends EntityGolem {
         }));*/
         //this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
 
-        this.tasks.addTask(1, new GolemAIHarvest(this, 1D));
+        //this.tasks.addTask(1, new GolemAIHarvest(this, 1D));
         this.tasks.addTask(2, new GolemAIReturnHome(this, 1D));
         this.tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(3, new EntityAIWatchClosest(this, EntitySimpleRancherGolem.class, 4.0F));
@@ -201,6 +221,11 @@ public class EntitySimpleRancherGolem extends EntityGolem {
 
     public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
+
+        /**
+         * debug for toggling types of golem
+         */
+
         if (!super.processInteract(player, hand)) {
             ItemStack itemstack = player.getHeldItem(hand);
 
@@ -331,7 +356,7 @@ public class EntitySimpleRancherGolem extends EntityGolem {
             }
         }
 
-        this.setCanPickUpLoot(true);
+        //this.setCanPickUpLoot(true);
     }
 
 
@@ -363,10 +388,11 @@ public class EntitySimpleRancherGolem extends EntityGolem {
             this.attackTimer = 5;
             this.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.5F);
         }
-       /* else if (id == 11)
+        /*else if (id == 11)
         {
             this.holdRoseTick = 400;
         }
+
         else if (id == 34)
         {
             this.holdRoseTick = 0;
@@ -514,124 +540,6 @@ public class EntitySimpleRancherGolem extends EntityGolem {
                 itemIn == Items.WHEAT_SEEDS ||
                 itemIn == Items.BEETROOT ||
                 itemIn == Items.BEETROOT_SEEDS; */
-    }
-
-    /*
-    public boolean hasEnoughFoodToBreed()
-    {
-        return this.hasEnoughItems(1);
-    }
-
-    public boolean canAbondonItems()
-    {
-        return this.hasEnoughItems(2);
-    }
-
-    public boolean wantsMoreFood()
-    {
-        boolean flag = this.getProfession() == 0;
-
-        if (flag)
-        {
-            return !this.hasEnoughItems(5);
-        }
-        else
-        {
-            return !this.hasEnoughItems(1);
-        }
-    }
-    */
-    /**
-     * Returns true if villager has enough items in inventory
-     */
-    private boolean hasEnoughItems(int multiplier)
-    {
-        //boolean flag = this.getProfession() == 0;
-
-        for (int i = 0; i < this.golemInventory.getSizeInventory(); ++i)
-        {
-            ItemStack itemstack = this.golemInventory.getStackInSlot(i);
-
-            if (!itemstack.isEmpty())
-            {
-                if (itemstack.getItem() == Items.POTATO && itemstack.getCount() >= 12 * multiplier || itemstack.getItem() == Items.CARROT && itemstack.getCount() >= 12 * multiplier || itemstack.getItem() == Items.BEETROOT && itemstack.getCount() >= 12 * multiplier)
-                {
-                    return true;
-                }
-
-                if (/*flag && */itemstack.getItem() == Items.WHEAT && itemstack.getCount() >= 9 * multiplier)
-                {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Returns true if golem has seeds, potatoes or carrots in inventory
-     */
-    public boolean isFarmItemInInventory()
-    {
-        for (int i = 0; i < this.golemInventory.getSizeInventory(); ++i)
-        {
-            ItemStack itemstack = this.golemInventory.getStackInSlot(i);
-
-            if (!itemstack.isEmpty() && (itemstack.getItem() == Items.WHEAT_SEEDS || itemstack.getItem() == Items.POTATO || itemstack.getItem() == Items.CARROT || itemstack.getItem() == Items.BEETROOT_SEEDS))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Returns true if golem has netherwart in inventory
-     */
-    public boolean isNetherFarmItemInInventory()
-    {
-        for (int i = 0; i < this.golemInventory.getSizeInventory(); ++i)
-        {
-            ItemStack itemstack = this.golemInventory.getStackInSlot(i);
-
-            if (!itemstack.isEmpty() && (itemstack.getItem() == Items.NETHER_WART))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
-    /**
-     * I have no idea what this is for - EntityVillager
-     * @param inventorySlot
-     * @param itemStackIn
-     * @return
-     */
-    public boolean replaceItemInInventory(int inventorySlot, ItemStack itemStackIn)
-    {
-        if (super.replaceItemInInventory(inventorySlot, itemStackIn))
-        {
-            return true;
-        }
-        else
-        {
-            int i = inventorySlot - 300;
-
-            if (i >= 0 && i < this.golemInventory.getSizeInventory())
-            {
-                this.golemInventory.setInventorySlotContents(i, itemStackIn);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.boosch.simplerancher.entity.golem.ai;
 
+import com.boosch.simplerancher.entity.golem.EntityHarvestGolem;
 import com.boosch.simplerancher.entity.golem.EntitySimpleRancherGolem;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -17,14 +18,14 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
 
 
     /** Villager that is harvesting */
-    private final EntitySimpleRancherGolem harvestingGolem;
+    private final EntityHarvestGolem harvestingGolem;
     private boolean hasFarmItem;
     private boolean hasNetherFarmItem;
     private boolean wantsToReapStuff;
     /** 0 => harvest, 1 => replant, -1 => none */
     private int currentTask;
 
-    public GolemAIHarvest(EntitySimpleRancherGolem harvestingGolemIn, double speedIn)
+    public GolemAIHarvest(EntityHarvestGolem harvestingGolemIn, double speedIn)
     {
         super(harvestingGolemIn, speedIn, 16);
         this.harvestingGolem = harvestingGolemIn;
