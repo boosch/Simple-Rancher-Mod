@@ -231,6 +231,13 @@ public class EntitySimpleRancherGolem extends EntityGolem {
         return false;
     }
 
+
+    /**
+     * Note this is called once PER HAND
+     * @param player
+     * @param hand
+     * @return
+     */
     public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
 
@@ -238,26 +245,27 @@ public class EntitySimpleRancherGolem extends EntityGolem {
          * debug for toggling types of golem
          */
 
-        if((ItemStack)player.getHeldItem(hand) == ItemStack.EMPTY &&
+        if(player.swingingHand == hand &&
+                player.getHeldItem(hand) == ItemStack.EMPTY &&
                 player.isSneaking()){
-            System.out.println("DebugAction: sneak empty click on "+this.getEntityString());
-            System.out.println("Detected interaction with a "+this.getClass().getSimpleName()+" beginning operation...");
-            if(this instanceof EntityHarvestGolem ){
-                if(!player.world.isRemote) {
+
+            if (!player.world.isRemote) {
+                System.out.println("Detected interaction with a "+this.getClass().getSimpleName()+" ("+this.getEntityString()+") beginning operation...");
+                if (this instanceof EntityHarvestGolem) {
+
                     System.out.println("Counted as a Harvest Golem");
                     EntitySimpleRancherGolem newGolem = new EntitySimpleRancherGolem(this);
                     newGolem.setLocationAndAngles(this.getHomePosition().getX() + .5, this.getHomePosition().getY() + 1, this.getHomePosition().getZ() + .5, 0.0F, 0.0F);
                     this.world.spawnEntity(newGolem);
                     this.world.removeEntity(this);
-                }
-            }
-            else{
-                if(!player.world.isRemote) {
+
+                } else {
+
                     System.out.println("Did not count as a Harvest Golem");
                     EntityHarvestGolem newGolem = new EntityHarvestGolem(this);
-                    System.out.println("   > created golem "+newGolem.getClass().getSimpleName());
+                    System.out.println("   > created golem " + newGolem.getClass().getSimpleName());
                     newGolem.setLocationAndAngles(this.getHomePosition().getX() + .5, this.getHomePosition().getY() + 1, this.getHomePosition().getZ() + .5, 0.0F, 0.0F);
-                    System.out.println("   > golem home set to x"+newGolem.getHomePosition().getX()+", y"+newGolem.getHomePosition().getY()+", z"+newGolem.getHomePosition().getZ()+"");
+                    System.out.println("   > golem home set to x" + newGolem.getHomePosition().getX() + ", y" + newGolem.getHomePosition().getY() + ", z" + newGolem.getHomePosition().getZ() + "");
                     this.world.spawnEntity(newGolem);
                     this.world.removeEntity(this);
                 }
