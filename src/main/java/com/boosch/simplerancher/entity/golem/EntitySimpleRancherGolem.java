@@ -242,7 +242,7 @@ public class EntitySimpleRancherGolem extends EntityGolem {
                 player.isSneaking()){
             System.out.println("DebugAction: sneak empty click on "+this.getEntityString());
             System.out.println("Detected interaction with a "+this.getClass().getSimpleName()+" beginning operation...");
-            if(this instanceof EntityHarvestGolem){
+            if(this instanceof EntityHarvestGolem ){
                 if(!player.world.isRemote) {
                     System.out.println("Counted as a Harvest Golem");
                     EntitySimpleRancherGolem newGolem = new EntitySimpleRancherGolem(this);
@@ -255,12 +255,14 @@ public class EntitySimpleRancherGolem extends EntityGolem {
                 if(!player.world.isRemote) {
                     System.out.println("Did not count as a Harvest Golem");
                     EntityHarvestGolem newGolem = new EntityHarvestGolem(this);
+                    System.out.println("   > created golem "+newGolem.getClass().getSimpleName());
                     newGolem.setLocationAndAngles(this.getHomePosition().getX() + .5, this.getHomePosition().getY() + 1, this.getHomePosition().getZ() + .5, 0.0F, 0.0F);
+                    System.out.println("   > golem home set to x"+newGolem.getHomePosition().getX()+", y"+newGolem.getHomePosition().getY()+", z"+newGolem.getHomePosition().getZ()+"");
                     this.world.spawnEntity(newGolem);
                     this.world.removeEntity(this);
                 }
             }
-            return false;
+            return true;
         }
 
         if (!super.processInteract(player, hand)) {

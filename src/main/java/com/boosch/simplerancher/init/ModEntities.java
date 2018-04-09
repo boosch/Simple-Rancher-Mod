@@ -1,6 +1,7 @@
 package com.boosch.simplerancher.init;
 
 import com.boosch.simplerancher.SimpleRancher;
+import com.boosch.simplerancher.entity.golem.EntityHarvestGolem;
 import com.boosch.simplerancher.entity.golem.EntitySimpleRancherGolem;
 import com.boosch.simplerancher.entity.golem.renderers.RenderSimpleRancherGolem;
 import com.boosch.simplerancher.util.Reference;
@@ -19,7 +20,9 @@ public class ModEntities {
         //every entity in our mod has an id local to this mod
         int id = 1;
 
-        EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, "straw_golem"), EntitySimpleRancherGolem.class, "basegolem", id++, SimpleRancher.instance, 64, 3, true, 0x99600, 0x00ff00);
+        EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, "base_golem"), EntitySimpleRancherGolem.class, "basegolem", id++, SimpleRancher.instance, 64, 3, true, 0x99600, 0x00ff00);
+        EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, "straw_golem"), EntityHarvestGolem.class, "strawgolem", id++, SimpleRancher.instance, 64, 3, true, 0x99600, 0x00ff00);
+
 
         //if it could spawn, we'd add something like this
         //EntityRegistry.addSpawn(EntitySimpleRancherGolem.class, 100, 3, 3, EnumCreatureType.AMBIENT, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU, Biomes.PLAINS);
@@ -31,5 +34,6 @@ public class ModEntities {
     @SideOnly(Side.CLIENT)
     public static void initModels(){
         RenderingRegistry.registerEntityRenderingHandler(EntitySimpleRancherGolem.class, RenderSimpleRancherGolem.FACTORY);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHarvestGolem.class, RenderSimpleRancherGolem.FACTORY);
     }
 }

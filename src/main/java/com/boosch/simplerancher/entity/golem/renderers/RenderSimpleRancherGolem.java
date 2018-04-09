@@ -1,5 +1,6 @@
 package com.boosch.simplerancher.entity.golem.renderers;
 
+import com.boosch.simplerancher.entity.golem.EntityHarvestGolem;
 import com.boosch.simplerancher.entity.golem.EntitySimpleRancherGolem;
 import com.boosch.simplerancher.entity.golem.model.ModelSimpleRancherGolem;
 import com.boosch.simplerancher.util.Reference;
@@ -33,15 +34,12 @@ public class RenderSimpleRancherGolem extends RenderLiving<EntitySimpleRancherGo
     protected ResourceLocation getEntityTexture(@Nonnull EntitySimpleRancherGolem entity){
 
         String suffix = strawMobTextureSuffix;//defaultMobTextureSuffix;
-        /*
-        switch(entity.type){
-            case "straw":
-                suffix = strawMobTextureSuffix;
-                break;
-            default:
-                break;
+        if(entity instanceof EntityHarvestGolem){
+            suffix = strawMobTextureSuffix;
         }
-        */
+        else{
+          suffix = defaultMobTextureSuffix;
+        }
         return new ResourceLocation(Reference.MOD_ID+suffix);
     }
 
