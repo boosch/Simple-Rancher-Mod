@@ -303,20 +303,33 @@ public class EntitySimpleRancherGolem extends EntityGolem {
             IBlockState iblockstate = this.world.getBlockState(new BlockPos(i, j, k));
 
             //block shatter beneath his feet
-            /*if (iblockstate.getMaterial() != Material.AIR) {
-                this.world.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D, Block.getStateId(iblockstate));
-            }*/
-
-            //magic cause he's moving!
-            this.world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE ,//EXPLOSION_NORMAL,
-                    this.posX +((double) this.rand.nextFloat() - 0.75D) * (double) this.width,
-                    this.getEntityBoundingBox().minY + 0.75D,
-                    this.posZ + ((double) this.rand.nextFloat() - 0.75D) * (double) this.width,
-                    6.0D * ((double) this.rand.nextFloat() - 0.5D),
-                    0.5D,
-                    6.0D * ((double) this.rand.nextFloat() - 0.5D) );
+            if (iblockstate.getMaterial() != Material.AIR) {
+                this.world.spawnParticle(EnumParticleTypes.BLOCK_CRACK,
+                this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width,
+                this.getEntityBoundingBox().minY + 0.1D,
+                this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width,
+                4.0D * ((double) this.rand.nextFloat() - 0.5D),
+                0.5D,
+                ((double) this.rand.nextFloat() - 0.5D) * 4.0D,
+                Block.getStateId(iblockstate));
+            }
         }
+        //magic cause he's moving!
+        /*
+        this.getHorizontalFacing();
+        double dx = (double)((float)this.posX +.1D+ rand.nextFloat() * 0.2F);
+        double dy = (double)((float)this.getEntityBoundingBox().minY + 0.5F + rand.nextFloat() * 0.2F);
+        double dz = (double)((float)this.posZ + .1D+ rand.nextFloat() * 0.2F);
+        //worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 
+        this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
+                dx,
+                dy,
+                dz,
+                0D,
+                0D,
+                0D );
+        */
 
     }
 
