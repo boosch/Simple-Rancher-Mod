@@ -13,14 +13,14 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 //@Mod.EventBusSubscriber
-public class ItemGolem extends SimpleRancherItemBase implements FlavorText {
+public class ItemGolemBase extends SimpleRancherItemBase implements FlavorText {
 
 
     protected String name;
     protected String type;
     protected String flavorText;
 
-    public ItemGolem(String name, String type, String flavorText){
+    public ItemGolemBase(String name, String type, String flavorText){
 
         super(name);
         this.name = name;

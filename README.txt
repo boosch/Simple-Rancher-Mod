@@ -75,16 +75,15 @@ This mod contains the following conceptual changes
 
  INPROGRESS @ItemGolem - ITEM ONLY - a craftable companion that can be given a specific task
         TODO             - Wheat, string, eyes, bones
- INPROGRESS @GolemBase - infuse a MommetInanimate with Common Materia
-        TODO @MommetClay - infuse a MommetBase with Clay and Common Materia
- INPROGRESS @GolemFarm - MommetBase - give hoe, seeds
-        TODO @MommetGatherer - MommetBase - assign to drop location
-        TODO @MommetChopper - MommetBase - give axe
-        TODO @MommetRitualist - MommetClay - give ??? - generates materia
-        TODO @MommetRitualistRare - Mommet??? - give ??? - generates materiaRare
-        TODO @MommetRitualistSpecial - Mommet??? - give ??? - generates materiaSpecial
+ INPROGRESS @GolemBase - infuse a GolemInanimate with Common Materia
+        TODO @GolemClay - infuse a GolemBase with Clay and Common Materia
+ INPROGRESS @GolemHarvest - GolemBase - give hoe, seeds
+        TODO @GolemGatherer - GolemBase - assign to drop location
+        TODO @GolemChopper - GolemBase - give axe
+        TODO @GolemRitualist - GolemClay - give ??? - generates materia
+        TODO @GolemRitualistRare - Golem??? - give ??? - generates materiaRare
+        TODO @GolemRitualistSpecial - Golem??? - give ??? - generates materiaSpecial
 
-     **/
 
 
 

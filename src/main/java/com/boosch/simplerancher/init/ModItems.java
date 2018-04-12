@@ -31,7 +31,10 @@ public class ModItems {
     public static ItemHorseTreat HORSETREAT = new ItemHorseTreat();
 
     //golems
-    public static ItemGolem GOLEM_STRAW = new ItemGolem("golem_straw","straw", "You should probably put him down");
+    public static ItemGolemHarvest GOLEM_STRAW = new ItemGolemHarvest("golem_straw","straw", "He's looking hungrily at the nearby plants");
+    public static ItemGolemBase GOLEM_BASE = new ItemGolemBase("golem_base","straw", "You should probably put him down");
+
+
 
     public static void register(IForgeRegistry<Item> registry){
         registry.registerAll(
@@ -50,7 +53,8 @@ public class ModItems {
 
                 QUARTZ_EDGED_AXE,
 
-                GOLEM_STRAW
+                GOLEM_STRAW,
+                GOLEM_BASE
         );
 
     }
@@ -72,6 +76,7 @@ public class ModItems {
         QUARTZ_EDGED_AXE.registerItemModel();
 
         GOLEM_STRAW.registerItemModel();
+        GOLEM_BASE.registerItemModel();
     }
 
 }

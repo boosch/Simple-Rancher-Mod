@@ -18,4 +18,5 @@ item.flour.name=Wheat Flour
 item.gnocchi.name=Bowl of Gnocchi
 item.quartz_edged_axe.name=Quartz-edged Axe
 item.horsetreat.name=Sugary Horse Treat
-item.golem_straw.name=Straw Golem
+item.golem_straw.name=Harvest Golem
+item.golem_base.name=Inanimate Golem

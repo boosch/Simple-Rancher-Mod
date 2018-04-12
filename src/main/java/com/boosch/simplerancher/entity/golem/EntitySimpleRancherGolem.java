@@ -227,10 +227,13 @@ public class EntitySimpleRancherGolem extends EntityGolem {
         /**
          * This allows a manual swapping of types of a golem
          */
+        //System.out.println("GOLEM Interaction CAPTURED");
+
         if(player.isSneaking() &&
                 player.swingingHand == hand &&
                 player.getHeldItem(hand) == ItemStack.EMPTY &&
                 !player.world.isRemote){
+            //System.out.println(" - GOLEM Interaction PROCESSING");
             boolean changedType = false;
             EntitySimpleRancherGolem newGolem=new EntitySimpleRancherGolem(this.world);
 
@@ -238,16 +241,19 @@ public class EntitySimpleRancherGolem extends EntityGolem {
 
                 newGolem = new EntityHarvestGolem(this);
                 changedType=true;
+                //System.out.println("    - GOLEM Interaction BASE>HARVEST");
             }
 
             if(this instanceof EntityHarvestGolem){
 
                 newGolem = new EntitySimpleRancherGolem((EntityHarvestGolem)this);
                 changedType = true;
+                //System.out.println("    - GOLEM Interaction HARVEST>BASE");
             }
 
             if(changedType) {
 
+                //System.out.println("    - GOLEM Spawning");
                 newGolem.setLocationAndAngles(this.getHomePosition().getX()+ .5, this.getHomePosition().getY()+1, this.getHomePosition().getZ()+.5, 0.0F, 0.0F);
                 this.world.spawnEntity(newGolem);
                 this.world.removeEntity(this);
