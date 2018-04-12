@@ -302,10 +302,22 @@ public class EntitySimpleRancherGolem extends EntityGolem {
             int k = MathHelper.floor(this.posZ);
             IBlockState iblockstate = this.world.getBlockState(new BlockPos(i, j, k));
 
-            if (iblockstate.getMaterial() != Material.AIR) {
+            //block shatter beneath his feet
+            /*if (iblockstate.getMaterial() != Material.AIR) {
                 this.world.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D, Block.getStateId(iblockstate));
-            }
+            }*/
+
+            //magic cause he's moving!
+            this.world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE ,//EXPLOSION_NORMAL,
+                    this.posX +((double) this.rand.nextFloat() - 0.75D) * (double) this.width,
+                    this.getEntityBoundingBox().minY + 0.75D,
+                    this.posZ + ((double) this.rand.nextFloat() - 0.75D) * (double) this.width,
+                    6.0D * ((double) this.rand.nextFloat() - 0.5D),
+                    0.5D,
+                    6.0D * ((double) this.rand.nextFloat() - 0.5D) );
         }
+
+
     }
 
     /**
