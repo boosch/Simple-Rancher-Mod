@@ -32,26 +32,27 @@ public class RenderSimpleRancherGolem extends RenderLiving<EntitySimpleRancherGo
     @Nonnull
     protected ResourceLocation getEntityTexture(@Nonnull EntitySimpleRancherGolem entity){
 
-        String suffix = strawMobTextureSuffix;//defaultMobTextureSuffix;
-        /*
+        String suffix;// = defaultMobTextureSuffix;
+
         switch(entity.type){
             case "straw":
                 suffix = strawMobTextureSuffix;
                 break;
             default:
+                suffix = defaultMobTextureSuffix;
                 break;
         }
-        */
+
         return new ResourceLocation(Reference.MOD_ID+suffix);
     }
 
     @Override
     protected void preRenderCallback(EntitySimpleRancherGolem entitylivingbaseIn, float partialTickTime)
     {
-        preRencderCallbackSimpleRancherGolem((EntitySimpleRancherGolem)entitylivingbaseIn, partialTickTime);
+        preRenderCallbackSimpleRancherGolem((EntitySimpleRancherGolem)entitylivingbaseIn, partialTickTime);
     }
 
-    protected void preRencderCallbackSimpleRancherGolem(EntitySimpleRancherGolem golem, float f){
+    protected void preRenderCallbackSimpleRancherGolem(EntitySimpleRancherGolem golem, float f){
 
         GlStateManager.scale(golem.getScale(), golem.getScale(), golem.getScale() );
     }
