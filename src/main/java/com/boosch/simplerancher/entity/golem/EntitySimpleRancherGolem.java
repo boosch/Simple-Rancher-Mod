@@ -225,9 +225,29 @@ public class EntitySimpleRancherGolem extends EntityGolem {
     public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         /**
+         * Structure of hte interaction
+         */
+        /*
+        System.out.println("\nGOLEM Interaction CAPTURED: "+ (player.world.isRemote ? "CLIENT" : "SERVER")+
+                " Sneak["+player.isSneaking()+
+                "] SwingHand["+(player.swingingHand)+
+                "] CurrentlySwinging["+(player.swingingHand==hand)+
+                "] Equip["+player.getHeldItem(hand).getDisplayName()+
+                "] EmptyHand["+(player.getHeldItem(hand)==ItemStack.EMPTY)+"]");
+        */
+
+        /**
          * This allows a manual swapping of types of a golem
          */
-        //System.out.println("GOLEM Interaction CAPTURED");
+
+        if(!player.isSneaking() &&
+                (player.swingingHand == hand) &&
+                player.getHeldItem(hand).isEmpty() &&
+                player.world.isRemote) {
+            this.addToAttackTimer(5);
+            System.out.println("AttackTimer added to [" + this.attackTimer + "]");
+        }
+
 
         if(player.isSneaking() &&
                 player.swingingHand == hand &&
@@ -257,7 +277,6 @@ public class EntitySimpleRancherGolem extends EntityGolem {
                 newGolem.setLocationAndAngles(this.getHomePosition().getX()+ .5, this.getHomePosition().getY()+1, this.getHomePosition().getZ()+.5, 0.0F, 0.0F);
                 this.world.spawnEntity(newGolem);
                 this.world.removeEntity(this);
-
                 return changedType;
             }
         }
@@ -451,6 +470,16 @@ public class EntitySimpleRancherGolem extends EntityGolem {
     public int getAttackTimer()
     {
         return this.attackTimer;
+    }
+
+    @SideOnly(Side.CLIENT)
+    protected void addToAttackTimer(int mod){
+        this.attackTimer+=5;
+    }
+
+    //@SideOnly(Side.CLIENT)
+    public void playAttackAnimation(){
+        this.attackTimer = this.attackTimer>0 ? this.attackTimer : 5;
     }
 
 

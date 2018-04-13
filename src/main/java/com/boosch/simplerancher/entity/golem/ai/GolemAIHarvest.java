@@ -133,7 +133,7 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
             if (this.currentTask == 0 )
             {
                 /**
-                 * First, genercal crop handling
+                 * First, general crop handling
                  */
                 if((block instanceof BlockCrops && ((BlockCrops)block).isMaxAge(iblockstate))) {
 
@@ -144,6 +144,8 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
                         processSeedlessCropDrops(world, blockpos, iblockstate);
                         world.destroyBlock(blockpos, false);
                     }
+
+                    this.harvestingGolem.playAttackAnimation();
                 }
                 /**
                  * We cant just break the netherwart - like potatoes and carrots we have to break it, collect the drops, assign some to the golem, and world-drop the rest
@@ -157,6 +159,8 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
                 if(block instanceof BlockReed){
                     world.destroyBlock(blockpos.up(), true);
                 }
+
+                this.harvestingGolem.playAttackAnimation();
             }
             else if (this.currentTask == 1 && iblockstate.getMaterial() == Material.AIR)
             {
@@ -212,8 +216,7 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
                         {
                             inventorybasic.setInventorySlotContents(i, ItemStack.EMPTY);
                         }
-
-                        break;
+                        this.harvestingGolem.playAttackAnimation();
                     }
                 }
             }
