@@ -4,6 +4,7 @@ import com.boosch.simplerancher.init.ModItems;
 import com.boosch.simplerancher.init.ModRecipes;
 import com.boosch.simplerancher.network.PacketRequestUpdatePedestal;
 import com.boosch.simplerancher.network.PacketUpdatePedestal;
+import com.boosch.simplerancher.network.PacketUpdateSimpleRancherGolem;
 import com.boosch.simplerancher.proxy.CommonProxy;
 
 import com.boosch.simplerancher.util.Reference;
@@ -73,6 +74,10 @@ public class SimpleRancher {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID);
         network.registerMessage(new PacketUpdatePedestal.Handler(), PacketUpdatePedestal.class, 0, Side.CLIENT);
         network.registerMessage(new PacketRequestUpdatePedestal.Handler(), PacketRequestUpdatePedestal.class, 1, Side.SERVER);
+
+        //this packet will represent AI needing to tell a golem to swing his arms
+        network.registerMessage(new PacketUpdateSimpleRancherGolem.Handler(), PacketUpdateSimpleRancherGolem.class, 0, Side.CLIENT);
+
     }
 
     @Mod.EventHandler

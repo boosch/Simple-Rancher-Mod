@@ -1,7 +1,9 @@
 package com.boosch.simplerancher.entity.golem.ai;
 
+import com.boosch.simplerancher.SimpleRancher;
 import com.boosch.simplerancher.entity.golem.EntityHarvestGolem;
 import com.boosch.simplerancher.entity.golem.EntitySimpleRancherGolem;
+import com.boosch.simplerancher.network.PacketUpdateSimpleRancherGolem;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -13,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class GolemAIHarvest extends EntityAIMoveToBlock {
 
@@ -145,7 +148,8 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
                         world.destroyBlock(blockpos, false);
                     }
 
-                    this.harvestingGolem.playAttackAnimation();
+                    //this.harvestingGolem.playAttackAnimation();
+                    SimpleRancher.network.sendToAllAround(new PacketUpdateSimpleRancherGolem(this.harvestingGolem),  new NetworkRegistry.TargetPoint(world.provider.getDimension(), this.harvestingGolem.getPosition().getX(), this.harvestingGolem.getPosition().getY(), this.harvestingGolem.getPosition().getZ(), 64));
                 }
                 /**
                  * We cant just break the netherwart - like potatoes and carrots we have to break it, collect the drops, assign some to the golem, and world-drop the rest
@@ -160,7 +164,9 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
                     world.destroyBlock(blockpos.up(), true);
                 }
 
-                this.harvestingGolem.playAttackAnimation();
+                //this.harvestingGolem.playAttackAnimation();
+                SimpleRancher.network.sendToAllAround(new PacketUpdateSimpleRancherGolem(this.harvestingGolem),  new NetworkRegistry.TargetPoint(world.provider.getDimension(), this.harvestingGolem.getPosition().getX(), this.harvestingGolem.getPosition().getY(), this.harvestingGolem.getPosition().getZ(), 64));
+
             }
             else if (this.currentTask == 1 && iblockstate.getMaterial() == Material.AIR)
             {
@@ -216,7 +222,9 @@ public class GolemAIHarvest extends EntityAIMoveToBlock {
                         {
                             inventorybasic.setInventorySlotContents(i, ItemStack.EMPTY);
                         }
-                        this.harvestingGolem.playAttackAnimation();
+                        //this.harvestingGolem.playAttackAnimation();
+                        SimpleRancher.network.sendToAllAround(new PacketUpdateSimpleRancherGolem(this.harvestingGolem),  new NetworkRegistry.TargetPoint(world.provider.getDimension(), this.harvestingGolem.getPosition().getX(), this.harvestingGolem.getPosition().getY(), this.harvestingGolem.getPosition().getZ(), 64));
+
                     }
                 }
             }

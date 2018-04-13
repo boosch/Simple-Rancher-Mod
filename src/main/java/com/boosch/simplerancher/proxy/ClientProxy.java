@@ -80,7 +80,7 @@ public class ClientProxy extends CommonProxy {
 
         if(event.getToolTip().contains(flavorText)){ return;}
 
-        event.getToolTip().add(1, TextFormatting.BLUE + "" + TextFormatting.ITALIC +flavorText);
+        event.getToolTip().add(1, TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC +flavorText);
     }
 
 
