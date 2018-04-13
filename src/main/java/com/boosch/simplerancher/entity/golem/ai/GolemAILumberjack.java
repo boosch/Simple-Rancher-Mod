@@ -7,14 +7,13 @@ import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.ai.EntityAIMoveToBlock;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+
+import static net.minecraft.block.Block.getBlockFromName;
 
 public class GolemAILumberjack extends EntityAIMoveToBlock {
 
@@ -27,6 +26,8 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
 
     /** 0 => harvest, 1 => replant, -1 => none */
     private int currentTask;
+    private boolean isChopping;
+
 
     public GolemAILumberjack(EntityHarvestGolem harvestingGolemIn, double speedIn)
     {
@@ -50,6 +51,7 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
             }*/
 
             this.currentTask = -1;
+            this.isChopping = false;
         }
 
         if (this.runDelay > 0)
@@ -111,6 +113,41 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
         return this.currentTask >= 0 && super.shouldContinueExecuting();
     }
 
+
+    public boolean getIsAdjascentToDestination(){
+        //first, move the target up one
+        //BlockPos targ = destinationBlock;//.up();
+
+        //next, check if we're ordinally adjascent to our block
+        int gx = this.harvestingGolem.getPosition().getX();
+        int gy = this.harvestingGolem.getPosition().getY();
+        int gz = this.harvestingGolem.getPosition().getZ();
+
+        System.out.println("evaluating destination [x"+destinationBlock.getX()+",z"+destinationBlock.getZ()+",y"+destinationBlock.getY()+"] against position [x"+gx+",z"+gz+",y"+gy+"]");
+
+        if(destinationBlock.getDistance(gx, gy, gz)<=1 && gy == destinationBlock.getY()){
+            System.out.println("|_shortcircuit true");
+            return true;
+        }
+
+        if(gy != destinationBlock.getY()) return false; // we're not on the same level as the destination
+
+        if(gz == destinationBlock.getZ() && // if we're within 1 block on the X axis...
+                (gx == destinationBlock.getX()||
+                gx == destinationBlock.getX()-1 ||
+                gx == destinationBlock.getX()+1)){
+            System.out.println("|_adjascent on Z true");
+            return true;
+        }
+        if(gx == destinationBlock.getX()&& //if we're within 1 block on the z axis
+                (gz == destinationBlock.getZ()||
+                        gz == destinationBlock.getZ()-1 ||
+                        gz == destinationBlock.getZ()+1)){
+            System.out.println("|_adjascent on X true");
+            return true;
+        }
+        return false;
+    }
     /**
      * Keep ticking a continuous task that has already been started
      */
@@ -122,7 +159,7 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
         /**
          * Need to adjust this so that we're adjascent to the destination, not above it
          */
-        if (this.getIsAboveDestination())
+        if (this.getIsAdjascentToDestination())//this.getIsAboveDestination())
         {
             World world = this.harvestingGolem.world;
             BlockPos blockpos = this.destinationBlock.up(); //the base-log
@@ -135,6 +172,10 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
              */
             if (this.currentTask == 0 )
             {
+
+                /**
+                 * For my tree, play the swing animation, kill the block, sleep, repeat
+                 */
 
                 /**
                  * We cant just break the netherwart - like potatoes and carrots we have to break it, collect the drops, assign some to the golem, and world-drop the rest
@@ -250,44 +291,57 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
     }
 
     /**
+     * Returns if a block is made of wood or not.
+     * @param world
+     * @param blockPos
+     * @return
+     */
+    protected boolean isWoodenBlock(World world, BlockPos blockPos){
+
+        //add any other woodlogblocks to this array to let the quartz-edged-axe chop the whole tree
+        Block[] woodblocks = {
+                getBlockFromName("log"),
+                getBlockFromName("log2")
+        };
+
+        Block ub = world.getBlockState(blockPos).getBlock();
+        for(Block b : woodblocks){
+            if( b == ub )
+                return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Return true to set given position as destination
+     * We want to find a block that is __next to__ a tree block
      */
     protected boolean shouldMoveTo(World worldIn, BlockPos pos)
     {
         Block block = worldIn.getBlockState(pos).getBlock();
 
-        if (block == Blocks.FARMLAND)
+        pos = pos.up();
+        IBlockState iblockstate = worldIn.getBlockState(pos);
+        block = iblockstate.getBlock();
+
+        if (isWoodenBlock(worldIn, pos) && (this.currentTask == 0 || this.currentTask < 0))
         {
-            pos = pos.up();
-            IBlockState iblockstate = worldIn.getBlockState(pos);
-            block = iblockstate.getBlock();
+            this.currentTask = 0;
 
-            if (block instanceof BlockCrops && ((BlockCrops)block).isMaxAge(iblockstate) && (this.currentTask == 0 || this.currentTask < 0))
-            {
-                this.currentTask = 0;
-                return true;
-            }
+            /**
+             * Build the tree here
+             */
 
-            if (iblockstate.getMaterial() == Material.AIR && (this.currentTask == 1 || this.currentTask < 0))
-            {
-                this.currentTask = 1;
-                return true;
-            }
-        }
-
-        /**
-         * Example code of checking if there's reeds at two levels.
-         */
-        Block plant = worldIn.getBlockState(pos.up()).getBlock();
-        if(plant instanceof BlockReed){
-            Block plant2ndLevel = worldIn.getBlockState(pos.up().up()).getBlock();
-            if(plant2ndLevel instanceof BlockReed){
-                this.currentTask=0;
-                return true;
-            }
+            return true;
         }
 
 
+        if (iblockstate.getMaterial() == Material.AIR && (this.currentTask == 1 || this.currentTask < 0))
+        {
+            this.currentTask = 1;
+            return true;
+        }
 
         return false;
     }
