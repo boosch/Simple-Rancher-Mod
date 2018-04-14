@@ -1,6 +1,8 @@
 package com.boosch.simplerancher.TreeFell.util.handlers;
 
 import com.boosch.simplerancher.TreeFell.Tree;
+import com.boosch.simplerancher.entity.golem.EntityHarvestGolem;
+import com.boosch.simplerancher.entity.golem.EntitySimpleRancherGolem;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +26,64 @@ public class TreeHandler {
      * @return the full count of logs that make up this tree
      */
     public int AnalyzeTree(World world, BlockPos pos, EntityPlayer p){
+
+        Queue<BlockPos> queuedBlocks = new LinkedList<>();
+        Set<BlockPos> tmpBlocks = new HashSet<>();
+        Set<BlockPos> checkedBlocks = new HashSet<>();
+
+        BlockPos currentPos = pos;
+        Block logType = world.getBlockState(pos).getBlock();
+
+        tree = new Tree();
+        tree.AddLog(pos);
+        queuedBlocks.add(pos);
+
+        /**
+         * Need to get a collection of what logs make up this tree.
+         * While we still haven't visited each block of this tree, keep adding log blocks to checkedBlocks
+         */
+        while(!queuedBlocks.isEmpty()){
+            currentPos = queuedBlocks.remove();
+            checkedBlocks.add(currentPos);
+
+            /**
+             * navigate the whole tree of blocks of this type, creating a unique set of blocks in checkedBlocks
+             */
+            tmpBlocks.addAll(GetNeighbors(logType, currentPos, world, checkedBlocks));
+            queuedBlocks.addAll(tmpBlocks);
+            checkedBlocks.addAll(tmpBlocks);
+            tmpBlocks.clear();
+        }
+
+
+        Set<BlockPos> tmpLeaves = new HashSet<>();
+        tmpLeaves.addAll(tree.getTreeLeaves());
+
+        /**
+         * Need to get a collection of what *leaves* make up this tree.
+         * These leaves will get added to the blocks, in case we want to handle leaves differently from logs
+         * While we still haven't visited each block of this tree, keep adding log blocks to checkedBlocks
+         */
+        for(BlockPos bp : tmpLeaves){
+            checkedBlocks.add(bp);
+            GetNeighbors(null, bp, world, checkedBlocks);
+        }
+
+        tree.setCurrentPos(currentPos);
+        tf_Trees.put(p.getPersistentID(), tree);
+
+        return tree.getTreeLogs().size();
+
+    }
+
+    /**
+     * Duplicate of above to handle for a SimpleRancherGolem attacking a tree...
+     * @param world
+     * @param pos
+     * @param p
+     * @return
+     */
+    public int AnalyzeTree(World world, BlockPos pos, EntitySimpleRancherGolem p){
 
         Queue<BlockPos> queuedBlocks = new LinkedList<>();
         Set<BlockPos> tmpBlocks = new HashSet<>();
@@ -121,6 +181,40 @@ public class TreeHandler {
     }
 
     public void DestroyTree(World world, EntityPlayer p){
+
+        int soundReduced=0;
+
+        if(tf_Trees.containsKey(p.getPersistentID())){
+            Tree tmpTree = tf_Trees.get(p.getPersistentID());
+
+            /**
+             * break each block programatically, be sure to play only a subset of the blocksounds because it's too noisy otherwise
+             * soundReduced's check will determine how many block sounds we show (currently 1/2)
+             */
+            for(BlockPos pos : tmpTree.getTreeLogs()){
+
+                if(soundReduced<=1){
+                    world.destroyBlock(pos, true);
+                }
+                else{
+                    world.getBlockState(pos).getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos), 1);
+                }
+
+                world.setBlockToAir(pos);
+                soundReduced++;
+            }
+
+            //TODO if we're going to do leaves, then we'd process the leaves here...
+
+        }
+    }
+
+    /**
+     * Duplicate of above to handle for golems
+     * @param world
+     * @param p
+     */
+    public void DestroyTree(World world, EntitySimpleRancherGolem p){
 
         int soundReduced=0;
 

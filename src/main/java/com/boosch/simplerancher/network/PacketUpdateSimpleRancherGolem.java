@@ -39,11 +39,7 @@ public class PacketUpdateSimpleRancherGolem implements IMessage{
                 Minecraft.getMinecraft().addScheduledTask(() -> {
 
                     EntitySimpleRancherGolem golem = (EntitySimpleRancherGolem) Minecraft.getMinecraft().world.getEntityByID(message.golemID);
-                    //System.out.println("Client packet received for golem ID ["+message.golemID+"] to play animation");
-                    //TileEntityPedestal te = (TileEntityPedestal)Minecraft.getMinecraft().world.getTileEntity(message.pos);
                     if(golem != null && golem.getEntityWorld()!= null && golem.getEntityWorld().isRemote)golem.playAttackAnimation();
-                    //te.inventory.setStackInSlot(0,message.stack);
-                    //te.setLastChangeTime(message.lastChangeTime);
                 });
             }catch(Exception e){
                 System.err.println("Handled an exception in the SimpleRancherGolem MessageHandler: "+e.getLocalizedMessage()+"\n"+e.getStackTrace());

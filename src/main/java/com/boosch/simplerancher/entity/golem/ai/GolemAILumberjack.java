@@ -1,17 +1,24 @@
 package com.boosch.simplerancher.entity.golem.ai;
 
 import com.boosch.simplerancher.SimpleRancher;
+import com.boosch.simplerancher.TreeFell.util.handlers.TreeHandler;
 import com.boosch.simplerancher.entity.golem.EntityHarvestGolem;
+import com.boosch.simplerancher.entity.golem.EntitySimpleRancherGolem;
 import com.boosch.simplerancher.network.PacketUpdateSimpleRancherGolem;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.ai.EntityAIMoveToBlock;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import static net.minecraft.block.Block.getBlockFromName;
 
@@ -19,17 +26,39 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
 
 
     /** Villager that is harvesting */
-    private final EntityHarvestGolem harvestingGolem;
-    //private boolean hasFarmItem;
-    //private boolean hasNetherFarmItem;
-    //private boolean wantsToReapStuff;
+    private final EntitySimpleRancherGolem harvestingGolem;
 
     /** 0 => harvest, 1 => replant, -1 => none */
     private int currentTask;
     private boolean isChopping;
 
 
-    public GolemAILumberjack(EntityHarvestGolem harvestingGolemIn, double speedIn)
+    /**
+     * utilized for tree identification
+     */
+    public static Map<UUID, Boolean> tf_GolemPrintNames = new HashMap<>();
+    protected static Map<UUID, GolemAILumberjack.GolemInteractionSession> tf_GolemData = new HashMap<>();
+    protected TreeHandler treeHandler;
+
+    /**
+     * inner class for keeping track of which golems have tapped which trees
+     */
+    class GolemInteractionSession{
+        public BlockPos pos;
+        public float logCount;
+
+        /**
+         *
+         * @param pos - the position of the block of the interaction
+         * @param logCount - the number of logs to be broken by this interaction
+         */
+        public GolemInteractionSession(BlockPos pos, float logCount){
+            this.pos = pos;
+            this.logCount=logCount;
+        }
+    }
+
+    public GolemAILumberjack(EntitySimpleRancherGolem harvestingGolemIn, double speedIn)
     {
         super(harvestingGolemIn, speedIn, 16);
         this.harvestingGolem = harvestingGolemIn;
@@ -176,23 +205,16 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
                 /**
                  * For my tree, play the swing animation, kill the block, sleep, repeat
                  */
+                if( tf_GolemData.containsKey(this.harvestingGolem.getPersistentID())) {
+                    BlockPos pos = tf_GolemData.get(this.harvestingGolem.getPersistentID()).pos;
 
-                /**
-                 * We cant just break the netherwart - like potatoes and carrots we have to break it, collect the drops, assign some to the golem, and world-drop the rest
-                 * This is because it does not have a seed item.
-                 */
-                if((block instanceof BlockNetherWart && ((BlockNetherWart)block).getMetaFromState(iblockstate)>=3)){
+                    if (pos.equals(blockpos)) {
 
-                    processSeedlessCropDrops(world, blockpos, iblockstate);
-                    world.destroyBlock(blockpos, false);
+                        treeHandler.DestroyTree(this.harvestingGolem.world, this.harvestingGolem);
+                        SimpleRancher.network.sendToAllAround(new PacketUpdateSimpleRancherGolem(this.harvestingGolem),  new NetworkRegistry.TargetPoint(world.provider.getDimension(), this.harvestingGolem.getPosition().getX(), this.harvestingGolem.getPosition().getY(), this.harvestingGolem.getPosition().getZ(), 64));
+
+                    }
                 }
-                if(block instanceof BlockReed){
-                    world.destroyBlock(blockpos.up(), true);
-                }
-
-                //this.harvestingGolem.playAttackAnimation();
-                SimpleRancher.network.sendToAllAround(new PacketUpdateSimpleRancherGolem(this.harvestingGolem),  new NetworkRegistry.TargetPoint(world.provider.getDimension(), this.harvestingGolem.getPosition().getX(), this.harvestingGolem.getPosition().getY(), this.harvestingGolem.getPosition().getZ(), 64));
-
             }
             else if (this.currentTask == 1 && iblockstate.getMaterial() == Material.AIR) // checking to see fi we killed the tree...
             {
@@ -200,6 +222,14 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
                  * This code should only be used if we want to naturally re-plant the tree.
                  * If we're going to cheat, then we don't need this code and should replace it with simpler code.
                  */
+
+                world.setBlockState(blockpos, Blocks.SAPLING.getDefaultState(), 3);
+                boolean plantedCrop = true;
+
+                if (plantedCrop)
+                {
+                    SimpleRancher.network.sendToAllAround(new PacketUpdateSimpleRancherGolem(this.harvestingGolem),  new NetworkRegistry.TargetPoint(world.provider.getDimension(), this.harvestingGolem.getPosition().getX(), this.harvestingGolem.getPosition().getY(), this.harvestingGolem.getPosition().getZ(), 64));
+                }
                 /*
                 InventoryBasic inventorybasic = this.harvestingGolem.getGolemInventory();
 
@@ -333,6 +363,8 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
              * Build the tree here
              */
 
+            processGolemTreeInteraction(worldIn, pos);
+
             return true;
         }
 
@@ -345,4 +377,39 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
 
         return false;
     }
+
+    protected void processGolemTreeInteraction(World world, BlockPos logPos){
+
+        int logCount;
+        UUID pid = this.harvestingGolem.getPersistentID();
+
+        /**
+         * Check if this interaction already exists by vetting the PlayerInteractionSession against this current interaction
+         */
+        if(tf_GolemData.containsKey(pid) && //pid has an interaction
+                tf_GolemData.get(pid).pos.equals(logPos) ){//&& //the interaction pid has is at this log
+            //tf_GolemData.get(pid).axeDurability == axeCurrentDurability){ //the interaction pid has is still valid (axe durability hasn't changed)
+            return; // we already have an interaction AND it's this interaction!
+        }
+
+        //this is a new interaction!
+        treeHandler = new TreeHandler();
+        logCount = treeHandler.AnalyzeTree(world, logPos, this.harvestingGolem);
+
+        /**
+         * The player has successfully started a new interaction - add it to the hashSet
+         */
+        if(logCount>1){
+            tf_GolemData.put(this.harvestingGolem.getPersistentID(), new GolemAILumberjack.GolemInteractionSession(logPos, logCount));
+        }else{ //there's only one log, so there's no need to keep the Interaction session alive for this player
+            tf_GolemData.remove(this.harvestingGolem.getPersistentID());
+        }
+
+
+    }
+
 }
+
+
+
+

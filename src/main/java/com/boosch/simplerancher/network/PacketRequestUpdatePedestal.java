@@ -22,8 +22,8 @@ public class PacketRequestUpdatePedestal implements IMessage {
 
     private BlockPos pos;
     private int dimension;
-    //private ItemStack stack;
-    //private long lastChangeTime;
+    private ItemStack stack;
+    private long lastChangeTime;
 
     /**
      * Once again three constructors - one base, one convenience, and one becuase of how Forge's SimpleImpl works

@@ -1,6 +1,7 @@
 package com.boosch.simplerancher.entity.golem;
 
 import com.boosch.simplerancher.entity.golem.ai.GolemAIHarvest;
+import com.boosch.simplerancher.entity.golem.ai.GolemAILumberjack;
 import com.boosch.simplerancher.entity.golem.ai.GolemAIReturnHome;
 import com.boosch.simplerancher.util.Reference;
 import com.google.common.collect.Sets;
@@ -137,6 +138,7 @@ public class EntitySimpleRancherGolem extends EntityGolem {
 
         //this.tasks.addTask(1, new GolemAIHarvest(this, 1D));
         //this.tasks.addTask(2, new GolemAIReturnHome(this, 1D));
+        this.tasks.addTask(1, new GolemAILumberjack(this, 6.0F));
         this.tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(3, new EntityAIWatchClosest(this, EntitySimpleRancherGolem.class, 4.0F));
         //this.tasks.addTask(3, new EntityAITempt(this, 1.0D, false, TEMPTATION_ITEMS));//make him follow  you
