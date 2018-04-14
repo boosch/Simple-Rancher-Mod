@@ -376,11 +376,15 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
         }
 
 
+        /** planting is fucked up
+         *
+
         if (iblockstate.getMaterial() == Material.AIR && (this.currentTask == 1 || this.currentTask < 0))
         {
             this.currentTask = 1;
             return true;
         }
+        */
 
         return false;
     }
