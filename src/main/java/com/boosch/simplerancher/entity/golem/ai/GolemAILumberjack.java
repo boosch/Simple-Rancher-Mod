@@ -144,8 +144,6 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
 
 
     public boolean getIsAdjascentToDestination(){
-        //first, move the target up one
-        //BlockPos targ = destinationBlock;//.up();
 
         //next, check if we're ordinally adjascent to our block
         int gx = this.harvestingGolem.getPosition().getX();
@@ -154,10 +152,16 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
 
         System.out.println("evaluating destination [x"+destinationBlock.getX()+",z"+destinationBlock.getZ()+",y"+destinationBlock.getY()+"] against position [x"+gx+",z"+gz+",y"+gy+"]");
 
-        if(destinationBlock.getDistance(gx, gy, gz)<=1 && gy == destinationBlock.getY()){
+        if(this.harvestingGolem.getDistanceSq(destinationBlock) <1){
             System.out.println("|_shortcircuit true");
             return true;
         }
+
+        /*
+        if(destinationBlock.getDistance(gx, gy, gz)<=1 && gy == destinationBlock.getY()){
+            System.out.println("|_shortcircuit true");
+            return true;
+        }*/
 
         if(gy != destinationBlock.getY()) return false; // we're not on the same level as the destination
 
@@ -175,6 +179,8 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
             System.out.println("|_adjascent on X true");
             return true;
         }
+
+        System.out.println("evaluating destination [x"+destinationBlock.getX()+",z"+destinationBlock.getZ()+",y"+destinationBlock.getY()+"] against position [x"+gx+",z"+gz+",y"+gy+"] - ended in default");
         return false;
     }
     /**
@@ -188,7 +194,7 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
         /**
          * Need to adjust this so that we're adjascent to the destination, not above it
          */
-        if (this.getIsAdjascentToDestination())//this.getIsAboveDestination())
+        if (this.getIsAboveDestination())//this.getIsAdjascentToDestination())//this.getIsAboveDestination())
         {
             World world = this.harvestingGolem.world;
             BlockPos blockpos = this.destinationBlock.up(); //the base-log
@@ -350,7 +356,6 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
     protected boolean shouldMoveTo(World worldIn, BlockPos pos)
     {
         Block block = worldIn.getBlockState(pos).getBlock();
-
         pos = pos.up();
         IBlockState iblockstate = worldIn.getBlockState(pos);
         block = iblockstate.getBlock();
@@ -363,7 +368,9 @@ public class GolemAILumberjack extends EntityAIMoveToBlock {
              * Build the tree here
              */
 
+            System.out.println("beginning processing of tree at [x"+pos.getX()+" z"+pos.getZ()+" y"+pos.getY()+"]");
             processGolemTreeInteraction(worldIn, pos);
+            System.out.println("finished processing of tree at [x"+pos.getX()+" z"+pos.getZ()+" y"+pos.getY()+"]");
 
             return true;
         }

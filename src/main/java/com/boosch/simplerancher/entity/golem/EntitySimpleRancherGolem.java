@@ -137,8 +137,8 @@ public class EntitySimpleRancherGolem extends EntityGolem {
         //this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
 
         //this.tasks.addTask(1, new GolemAIHarvest(this, 1D));
-        //this.tasks.addTask(2, new GolemAIReturnHome(this, 1D));
         this.tasks.addTask(1, new GolemAILumberjack(this, 6.0F));
+        this.tasks.addTask(2, new GolemAIReturnHome(this, 1D));
         this.tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(3, new EntityAIWatchClosest(this, EntitySimpleRancherGolem.class, 4.0F));
         //this.tasks.addTask(3, new EntityAITempt(this, 1.0D, false, TEMPTATION_ITEMS));//make him follow  you
